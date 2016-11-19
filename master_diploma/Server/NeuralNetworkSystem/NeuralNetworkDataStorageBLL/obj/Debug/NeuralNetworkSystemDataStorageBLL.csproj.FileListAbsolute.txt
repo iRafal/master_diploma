@@ -1,0 +1,4 @@
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.pdb
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.pdb
