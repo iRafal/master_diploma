@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using NeuralNetworkSystemBLL.Interfaces;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 
@@ -29,7 +28,6 @@ namespace NeuralNetworkDataStorageBLL
         public Weight UpdateWeight(Weight updatedWeight)
         {
             var  weight = _repository[updatedWeight.InputLayerIndex][updatedWeight.InputNeuronIndex].Single(w => w.OutputNeuronIndex == updatedWeight.OutputNeuronIndex);
-            weight = updatedWeight;
             Console.WriteLine($"Weight on layer: {weight.InputLayerIndex} - {weight.InputNeuronIndex} - {weight.OutputNeuronIndex} with value: {weight.WeightValue} ->>>> {weight.NextIterationWeightValue}\n");
             return weight;
         }
@@ -55,21 +53,10 @@ namespace NeuralNetworkDataStorageBLL
 
                 foreach (var currentNeuron in neuronsArray)
                 {
-                    var weightList = new List<Weight>();
-
-                    foreach (var nextLayerNeuron in nextLayerNeuronsArray)
+                    var weightList = nextLayerNeuronsArray.Select(nextLayerNeuron => new Weight
                     {
-                        var newWeight = new Weight
-                        {
-                            InputLayerIndex = currentNeuron.LayerIndex,
-                            InputNeuronIndex = currentNeuron.ElementIndex,
-                            OutputLayerIndex = nextLayerNeuron.LayerIndex,
-                            OutputNeuronIndex = nextLayerNeuron.ElementIndex,
-                            WeightValue = _random.Next(-5,5)/10
-                        };
-
-                        weightList.Add(newWeight);
-                    }
+                        InputLayerIndex = currentNeuron.LayerIndex, InputNeuronIndex = currentNeuron.ElementIndex, OutputLayerIndex = nextLayerNeuron.LayerIndex, OutputNeuronIndex = nextLayerNeuron.ElementIndex, WeightValue = _random.Next(-5, 5)/10
+                    }).ToList();
 
                     _repository[i][currentNeuron.ElementIndex] = weightList;
                 }

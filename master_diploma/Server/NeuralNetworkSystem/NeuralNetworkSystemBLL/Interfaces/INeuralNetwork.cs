@@ -16,6 +16,8 @@ namespace NeuralNetworkSystemBLL.Interfaces
         ILayer GetInputLayer();
 
         void Calculate(ILayer inputLauer);
-        void LearnNetwork();
+        INeuralNetwork LearnNetwork();
+
+        int MaximumEpochCunt { get; set; }
     } 
 }

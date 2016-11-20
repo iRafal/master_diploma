@@ -18,8 +18,7 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions
 
         public double GetOutPutGradient(INeuron neuron)
         {
-           // var result = _slopeParameter * (neuron.Error - neuron.Value) * neuron.Value * (1 - neuron.Value);
-            var result = neuron.Error*_slopeParameter*neuron.Value*(1 - neuron.Value);
+            var result = neuron.Error * _slopeParameter * neuron.Value * (1 - neuron.Value);
             neuron.Gradient = result;
 
             return result;
@@ -27,19 +26,18 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions
 
         public double GetHiddenGradient(INeuron neuron, List<Weight> weights, List<INeuron> nextLyaerNeurons)
         {
-            double sum = 0;
+            var sum = (nextLyaerNeurons.Select
+            (
+                nextLayerNeuron => new
+                {
+                    nextLayerNeuron,
+                    neededWeight = weights
+                        .Single(
+                            w =>
+                                w.InputNeuronIndex == neuron.ElementIndex &&
+                                w.OutputNeuronIndex == nextLayerNeuron.ElementIndex)
+                }).Select(@t => @t.nextLayerNeuron.Gradient*@t.neededWeight.WeightValue)).Sum();
 
-            foreach (var nextLayerNeuron in nextLyaerNeurons)
-            {
-                var neededWeight =
-                    weights.Single(
-                        w =>
-                            w.InputNeuronIndex == neuron.ElementIndex &&
-                            w.OutputNeuronIndex == nextLayerNeuron.ElementIndex);
-
-                sum += nextLayerNeuron.Gradient * neededWeight.WeightValue;
-            }
-               
 
             var result = _slopeParameter * neuron.Value * (1 - neuron.Value) * sum;
 

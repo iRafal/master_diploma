@@ -21,24 +21,25 @@ namespace NeuralNetworkSystemConsoleApp
                 .WithLayerType(new NeuralLayer())
                 .WithActivationFunctionType(new SigmoidalActivationFunction())
                 .WithInductedFunctionType(new InductedLocalFieldFunction())
+                .WithLearningFunctionsType(new SigmoidalLearningFunctions())
                 .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
-                .WithInputCount(1)
-                .WithHiddenLayersCount(1)
-                .WithHiddenLayersLength(2)
+                .WithInputCount(2)
+                .WithHiddenLayersCount(2)
+                .WithHiddenLayersLength(3)
                 .WithOutputCount(2)
+                .WithMaximumEpochCount(3000)
                 .WithWeightRepositoryType(new WeightRepository())
                 .WithLearningSamplesRepositoryType(new MemoryLearningSamplesRepository())
-                .CreateNetwork(true);
-
-            neuralNetwork.LearningFunctions = new SigmoidalLearningFunctions();
-
-
-            neuralNetwork.LearnNetwork();
+                .CreateNetwork(true)
+                .LearnNetwork();
 
             while (true)
             {
                 Console.WriteLine("\nEnter firstNum: ");
                 var firstUm = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("\nEnter SecondNum: ");
+                var secondNUm = int.Parse(Console.ReadLine());
 
                 var layer = new NeuralLayer();
                 
@@ -58,8 +59,16 @@ namespace NeuralNetworkSystemConsoleApp
                     Value = firstUm
                 };
 
+                var neuron2 = new Neuron
+                {
+                    LayerIndex = 0,
+                    ElementIndex = 2,
+                    Value = secondNUm
+                };
+
                 neuronsList.Add(zeroNeuron);
                 neuronsList.Add(neuron1);
+                neuronsList.Add(neuron2);
 
                 layer.Neurons = neuronsList;
 
@@ -71,11 +80,11 @@ namespace NeuralNetworkSystemConsoleApp
 
                 if (output[0] > output[1])
                 {
-                    msg = "More that 10\n";
+                    msg = "Sum More that 10\n";
                 }
                 else
                 {
-                    msg = "less then 10\n";
+                    msg = "Sum less then 10\n";
                 }
 
                 Console.WriteLine(msg);

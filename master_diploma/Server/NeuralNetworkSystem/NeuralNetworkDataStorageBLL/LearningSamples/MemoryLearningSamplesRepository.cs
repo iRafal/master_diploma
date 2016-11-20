@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.Interfaces.Learning;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
@@ -17,7 +18,7 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples
             var learningSamples = new List<ILearningSample>();
             _random = new Random();
 
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 200; i++)
             {
                 var zeroNeuron = new Neuron
                 {
@@ -30,7 +31,14 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples
                 {
                     ElementIndex = 1,
                     LayerIndex = 0,
-                    Value = _random.Next(1, 30)
+                    Value = _random.Next(1, 20)
+                };
+
+                var secondInputNeuron = new Neuron
+                {
+                    ElementIndex = 2,
+                    LayerIndex = 0,
+                    Value = _random.Next(1, 20)
                 };
 
 
@@ -48,7 +56,9 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples
                     Value = 0
                 };
 
-                if (firstInputNeuron.Value >= 10)
+                var sum = firstInputNeuron.Value + secondInputNeuron.Value;
+
+                if (sum >= 10)
                 {
                     firstOutputNeuron.Value = 1;
                 }
@@ -64,7 +74,7 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples
                         IsInputLayer = true,
                         Neurons = new List<INeuron>
                         {
-                            zeroNeuron,firstInputNeuron
+                            zeroNeuron,firstInputNeuron,secondInputNeuron
                         }
                     },
                     OutputLayer = new NeuralLayer

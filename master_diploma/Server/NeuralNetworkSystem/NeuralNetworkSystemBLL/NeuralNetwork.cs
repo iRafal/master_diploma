@@ -16,6 +16,8 @@ namespace NeuralNetworkSystemBLL
         public List<ILayer> Layers { get; set; }
         public ILearningFunctions LearningFunctions { get; set; }
 
+        public int MaximumEpochCunt { get; set; }
+
         public ILayer GetOutputLayer()
         {
             return Layers.LastOrDefault();
@@ -26,7 +28,13 @@ namespace NeuralNetworkSystemBLL
             return Layers.FirstOrDefault();
         }
 
-        private Random _random;
+        private readonly Random _random;
+
+        public NeuralNetwork()
+        {
+            _random = new Random();
+        }
+
         public void Calculate(ILayer inputLauer)
         {
             if (inputLauer.Neurons.Count() != GetInputLayer().Neurons.Count())
@@ -51,7 +59,7 @@ namespace NeuralNetworkSystemBLL
             }
         }
 
-        public void LearnNetwork()
+        public INeuralNetwork LearnNetwork()
         {
            
             if (WeightRepository == null)
@@ -64,7 +72,7 @@ namespace NeuralNetworkSystemBLL
                 throw new NullReferenceException("Learning Samples repository are empty");
             }
 
-            for (int i = 0; i < 60; i++)
+            for (var i = 0; i < MaximumEpochCunt; i++)
             {
                 foreach (var sample in LeariningSamplesRepository.LearningSamples)
                 {
@@ -76,16 +84,15 @@ namespace NeuralNetworkSystemBLL
 
                 LeariningSamplesRepository.LearningSamples = ReorderSamples(LeariningSamplesRepository.LearningSamples);
             }
-            
 
+            return this;
         }
 
         private List<ILearningSample> ReorderSamples(List<ILearningSample> samples )
         {
-            _random = new Random();
             var samplesLenght = samples.Count();
 
-            for (int i = 0; i < samplesLenght; i++)
+            for (var i = 0; i < samplesLenght; i++)
             {
                 var source = _random.Next(0, samplesLenght - 1);
                 var target = _random.Next(0, samplesLenght - 1);
@@ -181,9 +188,7 @@ namespace NeuralNetworkSystemBLL
                         var delta = LearningFunctions.LearningSpeed * neuronsArray[j].Gradient * neuronValue;
                         previousWeights[k].NextIterationWeightValue = previousWeights[k].WeightValue + delta;
                         WeightRepository.UpdateWeight(previousWeights[k]);
-
                     }
-
                 }
             }
         }

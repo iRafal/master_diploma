@@ -16,6 +16,7 @@ namespace NeuralNetworkSystemBLL.Builders
         private INeuron _neuronType;
         private IActivationFunction _activationFunctionType;
         private IInductedLocalFieldFunction _inductedFunctionType;
+        private ILearningFunctions _learningFunctionsType;
         private ILayer _layerType;
         private IWeightRepository _weightRepository;
         private ILearningSamplesRepository _leariLearningSamplesRepository;
@@ -24,6 +25,8 @@ namespace NeuralNetworkSystemBLL.Builders
         private int _hiddenLayersCount;
         private int _hiddenLayerLength;
         private int _outputLength;
+        private int _maxEpochCount;
+
 
         public NeuralNetworkBuilder()
         {
@@ -45,6 +48,12 @@ namespace NeuralNetworkSystemBLL.Builders
         public INeuralNetworkBuilder<T> WithInductedFunctionType(IInductedLocalFieldFunction inductedFunctionType)
         {
             _inductedFunctionType = inductedFunctionType;
+            return this;
+        }
+
+        public INeuralNetworkBuilder<T> WithLearningFunctionsType(ILearningFunctions learningFunctionsFunctionType)
+        {
+            _learningFunctionsType = learningFunctionsFunctionType;
             return this;
         }
 
@@ -91,6 +100,12 @@ namespace NeuralNetworkSystemBLL.Builders
             return this;
         }
 
+        public INeuralNetworkBuilder<T> WithMaximumEpochCount(int maxEpochCount)
+        {
+            _maxEpochCount = maxEpochCount;
+            return this;
+        }
+
         public INeuralNetwork CreateNetwork(bool isNewWeights)
         {
             #region InputLayer
@@ -125,6 +140,13 @@ namespace NeuralNetworkSystemBLL.Builders
             }
 
             _neuralNetwork.WeightRepository = isNewWeights ? _weightRepository.CreateStartUpRepository(_neuralNetwork) : _weightRepository.PopulateRepository();
+
+            if (_learningFunctionsType != null)
+            {
+                _neuralNetwork.LearningFunctions = Activator.CreateInstance(_learningFunctionsType.GetType()) as ILearningFunctions;
+            }
+
+            _neuralNetwork.MaximumEpochCunt = _maxEpochCount;
 
             return _neuralNetwork;
         }
