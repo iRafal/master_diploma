@@ -1,4 +1,7 @@
-C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.dll
-C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.pdb
-C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.dll
-C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.pdb
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.pdb
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkSystemBLL.pdb
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkSystemDataStorageBLL.csprojResolveAssemblyReference.cache
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\OneDrive\Документи\Visual Studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.pdb

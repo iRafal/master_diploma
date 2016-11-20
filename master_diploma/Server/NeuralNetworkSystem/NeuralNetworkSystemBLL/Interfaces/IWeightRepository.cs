@@ -1,5 +1,4 @@
-﻿using NeuralNetworkSystemBLL.Interfaces.Components;
-using NeuralNetworkSystemBLL.NeuralNetworkComponents;
+﻿using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 
 namespace NeuralNetworkSystemBLL.Interfaces
 {
@@ -10,5 +9,7 @@ namespace NeuralNetworkSystemBLL.Interfaces
         IWeightRepository PopulateRepository();
 
         IWeightRepository CreateStartUpRepository(INeuralNetwork neuralNetwork);
+
+        void ChangeWeightsAfterIteration();
     }
 }

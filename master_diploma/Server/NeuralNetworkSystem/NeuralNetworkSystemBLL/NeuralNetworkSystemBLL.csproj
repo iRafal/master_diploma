@@ -48,17 +48,21 @@
     <Compile Include="Interfaces\Functions\IActivationFunction.cs" />
     <Compile Include="Interfaces\Functions\IInductedLocalFieldFunction.cs" />
     <Compile Include="Interfaces\Components\ILayer.cs" />
+    <Compile Include="Interfaces\Functions\ILearningFunctions.cs" />
+    <Compile Include="Interfaces\Learning\ILearningSample.cs" />
+    <Compile Include="Interfaces\Learning\ILearningSamplesRepository.cs" />
     <Compile Include="Interfaces\INeuralNetwork.cs" />
     <Compile Include="Interfaces\Components\INeuron.cs" />
     <Compile Include="Interfaces\IWeightRepository.cs" />
     <Compile Include="NeuralNetwork.cs" />
-    <Compile Include="NeuralNetworkComponents\Functions\ActivationFunction.cs" />
+    <Compile Include="NeuralNetworkComponents\Functions\ConstantsHelper.cs" />
+    <Compile Include="NeuralNetworkComponents\Functions\SigmoidalActivationFunction.cs" />
     <Compile Include="NeuralNetworkComponents\Functions\InductedLocalFieldFunction.cs" />
+    <Compile Include="NeuralNetworkComponents\Functions\SigmoidalLearningFunctions.cs" />
     <Compile Include="NeuralNetworkComponents\NeuralLayer.cs" />
     <Compile Include="NeuralNetworkComponents\Neuron.cs" />
     <Compile Include="NeuralNetworkComponents\Weight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeightRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,6 +6,8 @@ using NeuralNetworkSystemBLL.Builders;
 using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions;
+using NeuralNetworkDataStorageBLL;
+using NeuralNetworkDataStorageBLL.LearningSamples;
 
 namespace NeuralNetworkSystemConsoleApp
 {
@@ -17,41 +19,67 @@ namespace NeuralNetworkSystemConsoleApp
 
             var neuralNetwork = neuralNetworkBuilder
                 .WithLayerType(new NeuralLayer())
-                .WithActivationFunctionType(new ActivationFunction())
+                .WithActivationFunctionType(new SigmoidalActivationFunction())
                 .WithInductedFunctionType(new InductedLocalFieldFunction())
                 .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
-                .WithInputCount(2)
+                .WithInputCount(1)
                 .WithHiddenLayersCount(1)
-                .WithHiddenLayersLength(3)
+                .WithHiddenLayersLength(2)
                 .WithOutputCount(2)
                 .WithWeightRepositoryType(new WeightRepository())
+                .WithLearningSamplesRepositoryType(new MemoryLearningSamplesRepository())
                 .CreateNetwork(true);
 
+            neuralNetwork.LearningFunctions = new SigmoidalLearningFunctions();
 
-            var neuron1 = new Neuron
+
+            neuralNetwork.LearnNetwork();
+
+            while (true)
             {
-                LayerIndex = 0,
-                ElementIndex = 0,
-                Value = 50
-            };
+                Console.WriteLine("\nEnter firstNum: ");
+                var firstUm = int.Parse(Console.ReadLine());
 
-            var neuron2 = new Neuron
-            {
-                LayerIndex = 0,
-                ElementIndex = 1,
-                Value = 100
-            };
+                var layer = new NeuralLayer();
+                
+                var neuronsList = new List<INeuron>();
 
-            var neuronList = new List<INeuron> {neuron1, neuron2};
+                var zeroNeuron = new Neuron
+                {
+                    LayerIndex = 0,
+                    ElementIndex = 0,
+                    Value = 1
+                };
 
-            var layer = new NeuralLayer {Neurons = neuronList};
+                var neuron1 = new Neuron
+                {
+                    LayerIndex = 0,
+                    ElementIndex = 1,
+                    Value = firstUm
+                };
 
-            neuralNetwork.Calculate(layer);
-            var outputLayer = neuralNetwork.GetOutputLayer();
+                neuronsList.Add(zeroNeuron);
+                neuronsList.Add(neuron1);
 
-            Console.WriteLine($"Result is: 1 inducted field - {outputLayer.Neurons.ToArray()[0].InductedField}, output - {outputLayer.Neurons.ToArray()[0].Value}, 2 inducted field - {outputLayer.Neurons.ToArray()[1].InductedField}, output - {outputLayer.Neurons.ToArray()[1].Value}");
+                layer.Neurons = neuronsList;
 
+                neuralNetwork.Calculate(layer);
 
+                var output = neuralNetwork.GetOutputLayer().Neurons.Select(n => n.Value).ToList();
+                Console.WriteLine($"Output: {output[0]} - {output[1]}\n");
+                string msg = string.Empty;
+
+                if (output[0] > output[1])
+                {
+                    msg = "More that 10\n";
+                }
+                else
+                {
+                    msg = "less then 10\n";
+                }
+
+                Console.WriteLine(msg);
+            }
         }
     }
 }

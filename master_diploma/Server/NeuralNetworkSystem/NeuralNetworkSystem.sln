@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemBLL", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemConsoleApp", "NeuralNetworkSystemConsoleApp\NeuralNetworkSystemConsoleApp.csproj", "{C4687E01-F160-4136-84B7-C66906A43523}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemDataStorageBLL", "NeuralNetworkDataStorageBLL\NeuralNetworkSystemDataStorageBLL.csproj", "{EF5CF5CE-AE4F-49EF-9B46-BB33D84BCF24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C4687E01-F160-4136-84B7-C66906A43523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4687E01-F160-4136-84B7-C66906A43523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4687E01-F160-4136-84B7-C66906A43523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5CF5CE-AE4F-49EF-9B46-BB33D84BCF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5CF5CE-AE4F-49EF-9B46-BB33D84BCF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5CF5CE-AE4F-49EF-9B46-BB33D84BCF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5CF5CE-AE4F-49EF-9B46-BB33D84BCF24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

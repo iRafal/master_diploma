@@ -7,6 +7,6 @@ namespace NeuralNetworkSystemBLL.Interfaces.Functions
 {
     public interface IInductedLocalFieldFunction
     {
-        Func<IEnumerable<INeuron>,IEnumerable<Weight>,  float> GetInductedLocalFieldFunction();
+        Func<List<INeuron>,List<Weight>,  double> GetInductedLocalFieldFunction();
     }
 }

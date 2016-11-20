@@ -1,5 +1,6 @@
 ﻿using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.Interfaces.Functions;
+using NeuralNetworkSystemBLL.Interfaces.Learning;
 
 namespace NeuralNetworkSystemBLL.Interfaces.Builders
 {
@@ -10,6 +11,7 @@ namespace NeuralNetworkSystemBLL.Interfaces.Builders
         INeuralNetworkBuilder<T> WithInductedFunctionType(IInductedLocalFieldFunction inductedFunctionType);
         INeuralNetworkBuilder<T> WithNeuronBuilerType(INeuronBuilder neuronBuilderType, INeuron neuronType);
         INeuralNetworkBuilder<T> WithWeightRepositoryType(IWeightRepository repositoryType);
+        INeuralNetworkBuilder<T> WithLearningSamplesRepositoryType(ILearningSamplesRepository learningSamplesRepositoryrepositoryType);
 
         INeuralNetworkBuilder<T> WithInputCount(int inputCount);
         INeuralNetworkBuilder<T> WithHiddenLayersCount(int hiddenLayersCount);

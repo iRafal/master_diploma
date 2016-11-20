@@ -4,6 +4,8 @@ namespace NeuralNetworkSystemBLL.Interfaces.Functions
 {
     public interface IActivationFunction
     {
-        Func<float, float> GetActivationFunction();
+        Func<double, double> GetActivationFunction();
+        Func<double, double> GetActivationDerivativeFunction();
+
     }
 }

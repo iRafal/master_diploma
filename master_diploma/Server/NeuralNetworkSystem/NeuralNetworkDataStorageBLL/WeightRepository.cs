@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using NeuralNetworkSystemBLL.Interfaces;
-using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 
-namespace NeuralNetworkSystemBLL
+namespace NeuralNetworkDataStorageBLL
 {
     public class WeightRepository : IWeightRepository
     {
@@ -28,7 +28,10 @@ namespace NeuralNetworkSystemBLL
 
         public Weight UpdateWeight(Weight updatedWeight)
         {
-            throw new NotImplementedException();
+            var  weight = _repository[updatedWeight.InputLayerIndex][updatedWeight.InputNeuronIndex].Single(w => w.OutputNeuronIndex == updatedWeight.OutputNeuronIndex);
+            weight = updatedWeight;
+            Console.WriteLine($"Weight on layer: {weight.InputLayerIndex} - {weight.InputNeuronIndex} - {weight.OutputNeuronIndex} with value: {weight.WeightValue} ->>>> {weight.NextIterationWeightValue}\n");
+            return weight;
         }
 
         public IWeightRepository PopulateRepository()
@@ -40,7 +43,7 @@ namespace NeuralNetworkSystemBLL
         {
             var layersArray = neuralNetwork.Layers.ToArray();
             var layersCount = layersArray.Length;
-            
+
 
             for (var i = 0; i < layersCount - 1; i++)
             {
@@ -48,7 +51,7 @@ namespace NeuralNetworkSystemBLL
                 _repository[i] = new Dictionary<int, IEnumerable<Weight>>();
 
                 var neuronsArray = layersArray[i].Neurons.ToArray();
-                var nextLayerNeuronsArray = layersArray[i + 1].Neurons.ToArray();              
+                var nextLayerNeuronsArray = layersArray[i + 1].Neurons.ToArray().Where(n => !n.IsThreshold);
 
                 foreach (var currentNeuron in neuronsArray)
                 {
@@ -62,11 +65,10 @@ namespace NeuralNetworkSystemBLL
                             InputNeuronIndex = currentNeuron.ElementIndex,
                             OutputLayerIndex = nextLayerNeuron.LayerIndex,
                             OutputNeuronIndex = nextLayerNeuron.ElementIndex,
-                            WeightValue = _random.Next(1, 100)
-                        }; 
+                            WeightValue = _random.Next(-5,5)/10
+                        };
 
                         weightList.Add(newWeight);
-
                     }
 
                     _repository[i][currentNeuron.ElementIndex] = weightList;
@@ -74,6 +76,20 @@ namespace NeuralNetworkSystemBLL
             }
 
             return this;
+        }
+
+        public void ChangeWeightsAfterIteration()
+        {
+            foreach (var layerValue in _repository.Values)
+            {
+                foreach (var neuronValues in layerValue.Values)
+                {
+                    foreach (var weight in neuronValues)
+                    {
+                        weight.WeightValue = weight.NextIterationWeightValue;
+                    }
+                }
+            }
         }
     }
 }

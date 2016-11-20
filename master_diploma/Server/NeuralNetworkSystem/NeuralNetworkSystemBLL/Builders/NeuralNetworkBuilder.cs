@@ -4,6 +4,7 @@ using NeuralNetworkSystemBLL.Interfaces;
 using NeuralNetworkSystemBLL.Interfaces.Builders;
 using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.Interfaces.Functions;
+using NeuralNetworkSystemBLL.Interfaces.Learning;
 
 namespace NeuralNetworkSystemBLL.Builders
 {
@@ -17,6 +18,7 @@ namespace NeuralNetworkSystemBLL.Builders
         private IInductedLocalFieldFunction _inductedFunctionType;
         private ILayer _layerType;
         private IWeightRepository _weightRepository;
+        private ILearningSamplesRepository _leariLearningSamplesRepository;
 
         private int _inputCount;
         private int _hiddenLayersCount;
@@ -53,9 +55,15 @@ namespace NeuralNetworkSystemBLL.Builders
             return this;
         }
 
-        public INeuralNetworkBuilder<T> WithWeightRepositoryType(IWeightRepository repositoryType)
+        public INeuralNetworkBuilder<T> WithWeightRepositoryType(IWeightRepository weightRepositoryType)
         {
-            _weightRepository = repositoryType;
+            _weightRepository = weightRepositoryType;
+            return this;
+        }
+
+        public INeuralNetworkBuilder<T> WithLearningSamplesRepositoryType(ILearningSamplesRepository learningSamplesRepositoryrepositoryType)
+        {
+            _leariLearningSamplesRepository = learningSamplesRepositoryrepositoryType;
             return this;
         }
 
@@ -111,14 +119,12 @@ namespace NeuralNetworkSystemBLL.Builders
 
             _neuralNetwork.Layers = layersList;
 
-            if (isNewWeights)
+            if (_leariLearningSamplesRepository != null)
             {
-                _neuralNetwork.WeightRepository = _weightRepository.CreateStartUpRepository(_neuralNetwork);
+                _neuralNetwork.LeariningSamplesRepository = Activator.CreateInstance(_leariLearningSamplesRepository.GetType()) as ILearningSamplesRepository;
             }
-            else
-            {
-                _neuralNetwork.WeightRepository = _weightRepository.PopulateRepository();
-            }
+
+            _neuralNetwork.WeightRepository = isNewWeights ? _weightRepository.CreateStartUpRepository(_neuralNetwork) : _weightRepository.PopulateRepository();
 
             return _neuralNetwork;
         }
@@ -132,6 +138,11 @@ namespace NeuralNetworkSystemBLL.Builders
 
             var neuronsList = new List<INeuron>();
 
+            if (isOutput == false)
+            {
+                layerLength++;
+            }
+
             for (var j = 0; j < layerLength; j++)
             {
 
@@ -144,6 +155,12 @@ namespace NeuralNetworkSystemBLL.Builders
                     .WithElementIndex(j)
                     .WithLayerIndex(layerIndex)
                     .CreateNeuron();
+
+                if (j == 0 & isOutput == false)
+                {
+                    newNeuron.IsThreshold = true;
+                    newNeuron.Value = 1;
+                }
 
                 neuronsList.Add(newNeuron);
             }

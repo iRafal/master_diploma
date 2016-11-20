@@ -6,16 +6,20 @@ namespace NeuralNetworkSystemBLL.Interfaces.Components
 {
     public interface INeuron
     {
-        float Threshold { get; set; }
+        bool IsThreshold { get; set; }
 
-        Func<IEnumerable<INeuron>, IEnumerable<Weight>, float> InductedLocalFieldFunction { get; set; }
-        Func<float, float> ActivationFunction { get; set; }
+        Func<List<INeuron>, List<Weight>, double> InductedLocalFieldFunction { get; set; }
+        Func<double, double> ActivationFunction { get; set; }
 
         int LayerIndex { get; set; }
         int ElementIndex { get; set; }
-        float InductedField { get; set; }
-        float Value { get; set; }
 
-        float CalculateOutput(IEnumerable<INeuron> inputLayer, IEnumerable<Weight> weights);
+        double InductedField { get; set; }
+        double Value { get; set; }
+
+        double Error { get; set; }
+        double Gradient { get; set; }
+
+        double CalculateOutput(List<INeuron> inputLayer, List<Weight> weights);
     }
 }

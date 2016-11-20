@@ -7,16 +7,20 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents
 {
     public class Neuron : INeuron
     {
+        public bool IsThreshold { get; set; }
+
         public int LayerIndex { get; set; }
         public int ElementIndex { get; set; }
-        public float Threshold { get; set; } = 1;
-        public float InductedField { get; set; }
-        public float Value { get; set; }
+        
+        public double InductedField { get; set; }
+        public double Value { get; set; }
+        public double Error { get; set; }
+        public double Gradient { get; set; }
 
-        public Func<IEnumerable<INeuron>, IEnumerable<Weight>, float> InductedLocalFieldFunction { get; set; }
-        public Func<float, float> ActivationFunction { get; set; }
+        public Func<List<INeuron>, List<Weight>, double> InductedLocalFieldFunction { get; set; }
+        public Func<double, double> ActivationFunction { get; set; }
 
-        public float CalculateOutput(IEnumerable<INeuron> inputLayer, IEnumerable<Weight> weights)
+        public double CalculateOutput(List<INeuron> inputLayer, List<Weight> weights)
         {
             if (inputLayer.Count() != weights.Count())
             {
@@ -25,7 +29,7 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents
 
             InductedField = InductedLocalFieldFunction(inputLayer, weights);
 
-            Value = ActivationFunction(InductedField + Threshold);
+            Value = ActivationFunction(InductedField);
 
             return Value;
         }

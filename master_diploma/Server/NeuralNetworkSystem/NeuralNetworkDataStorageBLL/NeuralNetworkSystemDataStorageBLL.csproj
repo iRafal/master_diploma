@@ -41,7 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LearningSamples\LearningSample.cs" />
+    <Compile Include="LearningSamples\MemoryLearningSamplesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeightRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
+      <Project>{8F600248-C789-4307-82FF-1386AD6E07CE}</Project>
+      <Name>NeuralNetworkSystemBLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

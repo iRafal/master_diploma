@@ -8,11 +8,11 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions
 {
     public class InductedLocalFieldFunction : IInductedLocalFieldFunction
     {
-        public Func<IEnumerable<INeuron>, IEnumerable<Weight>,  float> GetInductedLocalFieldFunction()
+        public Func<List<INeuron>, List<Weight>,  double> GetInductedLocalFieldFunction()
         {
-            Func<IEnumerable<INeuron>, IEnumerable<Weight>, float> function = (neurons, weights) =>
+            Func<List<INeuron>, List<Weight>, double> function = (neurons, weights) =>
             {
-                float field = 0;
+                double field = 0;
 
                 var neuronsCount = neurons.Count();
                 var neuronsArray = neurons.ToArray();

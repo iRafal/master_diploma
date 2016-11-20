@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NeuralNetworkDataStorageBLL\NeuralNetworkSystemDataStorageBLL.csproj">
+      <Project>{ef5cf5ce-ae4f-49ef-9b46-bb33d84bcf24}</Project>
+      <Name>NeuralNetworkSystemDataStorageBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
       <Project>{8f600248-c789-4307-82ff-1386ad6e07ce}</Project>
       <Name>NeuralNetworkSystemBLL</Name>

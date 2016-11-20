@@ -5,7 +5,7 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents
 {
     public class NeuralLayer : ILayer
     {
-        public IEnumerable<INeuron> Neurons { get; set; }
+        public List<INeuron> Neurons { get; set; }
         public int LayerIndex { get; set; }
         public bool IsInputLayer { get; set; }
         public bool IsOutputLayer { get; set; }
