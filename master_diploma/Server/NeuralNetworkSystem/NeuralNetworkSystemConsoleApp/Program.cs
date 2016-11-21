@@ -8,6 +8,9 @@ using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions;
 using NeuralNetworkDataStorageBLL;
 using NeuralNetworkDataStorageBLL.LearningSamples;
+using NeuralNetworkDataStorageBLL.LearningSamples.Mappers;
+using NeuralNetworkDataStorageBLL.LearningSamples.Mappers.OutPutMappers;
+using NeuralNetworkDataStorageBLL.LearningSamples.Repositories;
 
 namespace NeuralNetworkSystemConsoleApp
 {
@@ -15,6 +18,9 @@ namespace NeuralNetworkSystemConsoleApp
     {
         static void Main(string[] args)
         {
+
+            //var repo = new DataBaseDiseasesLearningSamplesRepository("NeuralNetworkDB", new DiseasesTypeMapper(new DiseasesOutputMapper()));
+
             var neuralNetworkBuilder = new NeuralNetworkBuilder<NeuralNetwork>();
 
             var neuralNetwork = neuralNetworkBuilder
@@ -24,10 +30,10 @@ namespace NeuralNetworkSystemConsoleApp
                 .WithLearningFunctionsType(new SigmoidalLearningFunctions())
                 .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
                 .WithInputCount(2)
-                .WithHiddenLayersCount(2)
-                .WithHiddenLayersLength(3)
+                .WithHiddenLayersCount(1)
+                .WithHiddenLayersLength(4)
                 .WithOutputCount(2)
-                .WithMaximumEpochCount(3000)
+                .WithMaximumEpochCount(500)
                 .WithWeightRepositoryType(new WeightRepository())
                 .WithLearningSamplesRepositoryType(new MemoryLearningSamplesRepository())
                 .CreateNetwork(true)
@@ -42,7 +48,7 @@ namespace NeuralNetworkSystemConsoleApp
                 var secondNUm = int.Parse(Console.ReadLine());
 
                 var layer = new NeuralLayer();
-                
+
                 var neuronsList = new List<INeuron>();
 
                 var zeroNeuron = new Neuron

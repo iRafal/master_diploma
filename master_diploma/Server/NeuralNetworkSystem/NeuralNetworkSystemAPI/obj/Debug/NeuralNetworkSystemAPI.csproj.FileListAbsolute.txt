@@ -73,3 +73,5 @@ C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNet
 C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemAPI\obj\Debug\NeuralNetworkSystemAPI.csprojResolveAssemblyReference.cache
 C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemAPI\obj\Debug\NeuralNetworkSystemAPI.dll
 C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemAPI\obj\Debug\NeuralNetworkSystemAPI.pdb
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemAPI\bin\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemAPI\bin\NeuralNetworkDataStorageBLL.pdb

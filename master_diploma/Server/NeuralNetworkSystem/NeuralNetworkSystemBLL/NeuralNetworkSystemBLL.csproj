@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\OutputTrainingSampleAttribute.cs" />
     <Compile Include="Builders\NeuralNetworkBuilder.cs" />
     <Compile Include="Builders\NeuronBuilder.cs" />
+    <Compile Include="Interfaces\AttributeMappers\IOutputAttributeMapper.cs" />
     <Compile Include="Interfaces\Builders\INeuralNetworkBuilder.cs" />
     <Compile Include="Interfaces\Builders\INeuronBuilder.cs" />
     <Compile Include="Interfaces\Functions\IActivationFunction.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="NeuralNetworkComponents\Neuron.cs" />
     <Compile Include="NeuralNetworkComponents\Weight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Attributes\InputTrainingSampleAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.Interfaces.Learning;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 
-namespace NeuralNetworkDataStorageBLL.LearningSamples
+namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
 {
     public class MemoryLearningSamplesRepository : ILearningSamplesRepository
     {

@@ -162,9 +162,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NeuralNetworkController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="NeuralNetwork\NeuralNetworkResponse.cs" />
+    <Compile Include="NeuralNetwork\NeuralNetworkSaver.cs" />
+    <Compile Include="NeuralNetwork\RequestMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +218,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NeuralNetworkDataStorageBLL\NeuralNetworkSystemDataStorageBLL.csproj">
+      <Project>{ef5cf5ce-ae4f-49ef-9b46-bb33d84bcf24}</Project>
+      <Name>NeuralNetworkSystemDataStorageBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
       <Project>{8f600248-c789-4307-82ff-1386ad6e07ce}</Project>
       <Name>NeuralNetworkSystemBLL</Name>

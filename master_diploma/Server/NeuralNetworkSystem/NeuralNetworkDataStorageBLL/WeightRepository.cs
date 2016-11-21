@@ -55,7 +55,7 @@ namespace NeuralNetworkDataStorageBLL
                 {
                     var weightList = nextLayerNeuronsArray.Select(nextLayerNeuron => new Weight
                     {
-                        InputLayerIndex = currentNeuron.LayerIndex, InputNeuronIndex = currentNeuron.ElementIndex, OutputLayerIndex = nextLayerNeuron.LayerIndex, OutputNeuronIndex = nextLayerNeuron.ElementIndex, WeightValue = _random.Next(-5, 5)/10
+                        InputLayerIndex = currentNeuron.LayerIndex, InputNeuronIndex = currentNeuron.ElementIndex, OutputLayerIndex = nextLayerNeuron.LayerIndex, OutputNeuronIndex = nextLayerNeuron.ElementIndex, WeightValue = Convert.ToDouble(_random.Next(-5, 5))/10
                     }).ToList();
 
                     _repository[i][currentNeuron.ElementIndex] = weightList;
