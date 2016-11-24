@@ -27,7 +27,6 @@ namespace NeuralNetworkSystemBLL.Builders
         private int _outputLength;
         private int _maxEpochCount;
 
-
         public NeuralNetworkBuilder()
         {
             _neuralNetwork = new T(); 
@@ -146,7 +145,7 @@ namespace NeuralNetworkSystemBLL.Builders
                 _neuralNetwork.LearningFunctions = Activator.CreateInstance(_learningFunctionsType.GetType()) as ILearningFunctions;
             }
 
-            _neuralNetwork.MaximumEpochCunt = _maxEpochCount;
+            _neuralNetwork.MaximumEpochCount = _maxEpochCount;
 
             return _neuralNetwork;
         }

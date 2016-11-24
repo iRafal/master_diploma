@@ -16,7 +16,33 @@ namespace NeuralNetworkSystemBLL
         public List<ILayer> Layers { get; set; }
         public ILearningFunctions LearningFunctions { get; set; }
 
-        public int MaximumEpochCunt { get; set; }
+        public int MaximumEpochCount { get; set; }
+
+        public double NormalizationMinValue { get; set; }
+        public double NormalizationMaxValue { get; set; }
+
+        private readonly Random _random;
+
+        public NeuralNetwork()
+        {
+            _random = new Random();
+        }
+
+        public ILayer Normalize(ILayer layer)
+        {
+            foreach (var neuron in layer.Neurons)
+            {
+                if (neuron.ElementIndex == 0)
+                {
+                    continue;
+                }
+
+                neuron.Value = (neuron.Value - NormalizationMinValue) /
+                               (NormalizationMaxValue - NormalizationMinValue);
+            }
+
+            return layer;
+        }
 
         public ILayer GetOutputLayer()
         {
@@ -26,13 +52,6 @@ namespace NeuralNetworkSystemBLL
         public ILayer GetInputLayer()
         {
             return Layers.FirstOrDefault();
-        }
-
-        private readonly Random _random;
-
-        public NeuralNetwork()
-        {
-            _random = new Random();
         }
 
         public void Calculate(ILayer inputLauer)
@@ -72,20 +91,59 @@ namespace NeuralNetworkSystemBLL
                 throw new NullReferenceException("Learning Samples repository are empty");
             }
 
-            for (var i = 0; i < MaximumEpochCunt; i++)
+            NormalizeSamples();
+
+            for (var i = 0; i <= MaximumEpochCount;)
             {
+                var errorsCount = 0;
+
                 foreach (var sample in LeariningSamplesRepository.LearningSamples)
                 {
                     //back propogation
                     FrontIteration(sample);
+
+                    if (IsTooBigError())
+                    {
+                        errorsCount++;
+                    }
+
                     BackIteration();
                     WeightRepository.ChangeWeightsAfterIteration();
                 }
 
+                if (CheckToStop(errorsCount))
+                {
+                    break;
+                }
+                
                 LeariningSamplesRepository.LearningSamples = ReorderSamples(LeariningSamplesRepository.LearningSamples);
+
+                if (MaximumEpochCount != 0)
+                {
+                    i++;
+                }
             }
 
             return this;
+        }
+
+        private bool IsTooBigError()
+        {
+            var result = false;
+            var outputLayer = GetOutputLayer();
+
+            return outputLayer.Neurons.Any(neuron => Math.Abs(neuron.Error) >= 0.2) || result;
+        }
+
+        private bool CheckToStop(int errorsCount)
+        {
+            var samplesCount = Convert.ToDouble(LeariningSamplesRepository.LearningSamples.Count());
+            var errors = Convert.ToDouble(errorsCount);
+
+            var percent = (errors * 100)/samplesCount;
+
+            Console.WriteLine("Error percentage : " + percent);
+            return !(percent >= 5);
         }
 
         private List<ILearningSample> ReorderSamples(List<ILearningSample> samples )
@@ -118,7 +176,7 @@ namespace NeuralNetworkSystemBLL
                 throw new Exception("Neuron should be not in input Layer");
             }
 
-            var previousLayer = Layers.ToArray()[previousLayerIndex];
+            var previousLayer = Layers[previousLayerIndex];
 
             var weightList = previousLayer.Neurons
                 .Select(neuronInLayer => 
@@ -132,7 +190,7 @@ namespace NeuralNetworkSystemBLL
         private List<Weight> GetWeighsForNeuronOutput(INeuron neuron)
         {
             var currentLayerIndex = neuron.LayerIndex;
-            var currentLayer = Layers.ToArray()[currentLayerIndex];
+            var currentLayer = Layers[currentLayerIndex];
 
             if (currentLayer.IsOutputLayer)
             {
@@ -142,7 +200,7 @@ namespace NeuralNetworkSystemBLL
             var nextLayerIndex = neuron.LayerIndex + 1;
             var currentNeuronIndex = neuron.ElementIndex;
 
-            var nextLayer = Layers.ToArray()[nextLayerIndex];
+            var nextLayer = Layers[nextLayerIndex];
 
             return nextLayer.Neurons.Where(n => !n.IsThreshold).Select(nextNeuron => WeightRepository.GetWeight(currentLayerIndex, nextLayerIndex, currentNeuronIndex, nextNeuron.ElementIndex)).ToList();
         }
@@ -179,10 +237,11 @@ namespace NeuralNetworkSystemBLL
                         LearningFunctions.GetHiddenGradient(neuronsArray[j], GetWeighsForNeuronOutput(neuronsArray[j]), Layers[i + 1].Neurons.Where(n => !n.IsThreshold).ToList());
                     }
 
-                    var previousLayerNeurons = Layers[i - 1].Neurons.ToArray();
-                    var previousWeights = GetWeighsForNeuronInput(neuronsArray[j]).ToArray();
+                    var previousLayerNeurons = Layers[i - 1].Neurons;
+                    var previousWeights = GetWeighsForNeuronInput(neuronsArray[j]);
+                    var previousWeightCount = previousWeights.Count();
 
-                    for (var k = 0; k < previousWeights.Length; k++)
+                    for (var k = 0; k < previousWeightCount; k++)
                     {
                         var neuronValue = previousLayerNeurons[k].Value;
                         var delta = LearningFunctions.LearningSpeed * neuronsArray[j].Gradient * neuronValue;
@@ -191,6 +250,44 @@ namespace NeuralNetworkSystemBLL
                     }
                 }
             }
+        }
+
+        private void NormalizeSamples()
+        {
+            NormalizationMinValue = FoundMinValueInLayer(LeariningSamplesRepository.LearningSamples);
+            NormalizationMaxValue = FoundMaxValueInLayer(LeariningSamplesRepository.LearningSamples);
+
+            foreach (var sample in LeariningSamplesRepository.LearningSamples)
+            {
+                sample.InputLayer = Normalize(sample.InputLayer);
+            }
+        }
+
+        private double FoundMinValueInLayer(List<ILearningSample> samples)
+        {
+            var allInputs = new List<double>();
+
+            foreach (var sample in samples)
+            {
+                allInputs.AddRange(sample.InputLayer.Neurons.Where(n => n.ElementIndex != 0).Select(n => n.Value));
+            }
+
+            var result = allInputs.Min();
+
+            return result;
+        }
+
+        private double FoundMaxValueInLayer(List<ILearningSample> samples)
+        {
+            var allInputs = new List<double>();
+
+            foreach (var sample in samples)
+            {
+                allInputs.AddRange(sample.InputLayer.Neurons.Where(n => n.ElementIndex != 0).Select(n => n.Value));
+            }
+
+            var result = allInputs.Max();
+            return result;
         }
     }
 }

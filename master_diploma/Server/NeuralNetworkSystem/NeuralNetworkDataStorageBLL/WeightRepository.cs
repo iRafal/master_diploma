@@ -28,7 +28,7 @@ namespace NeuralNetworkDataStorageBLL
         public Weight UpdateWeight(Weight updatedWeight)
         {
             var  weight = _repository[updatedWeight.InputLayerIndex][updatedWeight.InputNeuronIndex].Single(w => w.OutputNeuronIndex == updatedWeight.OutputNeuronIndex);
-            Console.WriteLine($"Weight on layer: {weight.InputLayerIndex} - {weight.InputNeuronIndex} - {weight.OutputNeuronIndex} with value: {weight.WeightValue} ->>>> {weight.NextIterationWeightValue}\n");
+           // Console.WriteLine($"Weight on layer: {weight.InputLayerIndex} - {weight.InputNeuronIndex} - {weight.OutputNeuronIndex} with value: {weight.WeightValue} ->>>> {weight.NextIterationWeightValue}\n");
             return weight;
         }
 
@@ -39,8 +39,8 @@ namespace NeuralNetworkDataStorageBLL
 
         public IWeightRepository CreateStartUpRepository(INeuralNetwork neuralNetwork)
         {
-            var layersArray = neuralNetwork.Layers.ToArray();
-            var layersCount = layersArray.Length;
+            var layersArray = neuralNetwork.Layers;
+            var layersCount = layersArray.Count();
 
 
             for (var i = 0; i < layersCount - 1; i++)
@@ -48,8 +48,8 @@ namespace NeuralNetworkDataStorageBLL
                 //Creating a layer
                 _repository[i] = new Dictionary<int, IEnumerable<Weight>>();
 
-                var neuronsArray = layersArray[i].Neurons.ToArray();
-                var nextLayerNeuronsArray = layersArray[i + 1].Neurons.ToArray().Where(n => !n.IsThreshold);
+                var neuronsArray = layersArray[i].Neurons;
+                var nextLayerNeuronsArray = layersArray[i + 1].Neurons.Where(n => !n.IsThreshold);
 
                 foreach (var currentNeuron in neuronsArray)
                 {

@@ -15,8 +15,10 @@ namespace NeuralNetworkSystemAPI.Controllers
         {
             var mapper = new DiseasesTypeMapper(new DiseasesOutputMapper());
 
-            var input = mapper.MapToLearningSample<NeuralLayer, Neuron>(sample, new LearningSample());
-            NeuralNetworkSaver.NeuralNetwork.Calculate(input.InputLayer);
+            var inputSample = mapper.MapToLearningSample<NeuralLayer, Neuron>(sample, new LearningSample());
+
+            var input = NeuralNetworkSaver.NeuralNetwork.Normalize(inputSample.InputLayer);
+            NeuralNetworkSaver.NeuralNetwork.Calculate(input);
 
             var output = NeuralNetworkSaver.NeuralNetwork.GetOutputLayer();
 

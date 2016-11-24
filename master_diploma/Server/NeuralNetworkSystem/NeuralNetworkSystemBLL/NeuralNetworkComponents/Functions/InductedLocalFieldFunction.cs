@@ -15,8 +15,8 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions
                 double field = 0;
 
                 var neuronsCount = neurons.Count();
-                var neuronsArray = neurons.ToArray();
-                var weightsArray = weights.ToArray();
+                var neuronsArray = neurons;
+                var weightsArray = weights;
 
                 for (var i = 0; i < neuronsCount; i++)
                 {

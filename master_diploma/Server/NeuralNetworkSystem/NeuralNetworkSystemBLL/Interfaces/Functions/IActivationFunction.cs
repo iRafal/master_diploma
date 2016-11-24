@@ -6,6 +6,5 @@ namespace NeuralNetworkSystemBLL.Interfaces.Functions
     {
         Func<double, double> GetActivationFunction();
         Func<double, double> GetActivationDerivativeFunction();
-
     }
 }

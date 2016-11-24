@@ -17,14 +17,14 @@ namespace NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions
             Func<double, double> activationFunc = f =>
             {
                 var result = 1/(1 + Math.Exp(Convert.ToDouble(-1*_slopeParameter*f)));
-                if (result == 1)
-                {
-                    result = 0.9999;
-                }
-                else if (result == 0)
-                {
-                    result = 0.000001;
-                }
+                //if (result == 1)
+                //{
+                //    result = 0.9999;
+                //}
+                //else if (result == 0)
+                //{
+                //    result = 0.000001;
+                //}
                 return result;
             };
 
