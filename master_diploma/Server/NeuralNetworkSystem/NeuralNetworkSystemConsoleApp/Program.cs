@@ -17,25 +17,22 @@ namespace NeuralNetworkSystemConsoleApp
         {
             var neuralNetworkBuilder = new NeuralNetworkBuilder<NeuralNetwork>();
             var neuralNetwork = neuralNetworkBuilder
-                .WithLayerType(new NeuralLayer())
-                .WithActivationFunctionType(new SigmoidalActivationFunction())
-                .WithInductedFunctionType(new InductedLocalFieldFunction())
-                .WithLearningFunctionsType(new SigmoidalLearningFunctions())
-                .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
-                .WithInputCount(21)
-                .WithHiddenLayersCount(2)
-                .WithHiddenLayersLength(42)
-                .WithOutputCount(2)
-                .WithMaximumEpochCount(0)
-                .WithWeightRepositoryType(new WeightRepository())
-                .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
-                .CreateNetwork(true)
-                .LearnNetwork();
-
-
-
-
-
+               .WithLayerType(new NeuralLayer())
+               .WithActivationFunctionType(new SigmoidalActivationFunction())
+               .WithInductedFunctionType(new InductedLocalFieldFunction())
+               .WithLearningFunctionsType(new SigmoidalLearningFunctions())
+               .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
+               .WithInputCount(21)
+               .WithHiddenLayersCount(3)
+               .WithHiddenLayersLength(42)
+               .WithOutputCount(2)
+               .WithErrorThreshold(0.3)
+               .WithErrorCountThreshold(5)
+               .WithMaximumEpochCount(0)
+               .WithWeightRepositoryType(new WeightRepository(), true)
+               .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
+               .CreateNetwork()
+               .LearnNetwork();
             //var neuralNetwork = neuralNetworkBuilder
             //    .WithLayerType(new NeuralLayer())
             //    .WithActivationFunctionType(new SigmoidalActivationFunction())
@@ -46,10 +43,12 @@ namespace NeuralNetworkSystemConsoleApp
             //    .WithHiddenLayersCount(1)
             //    .WithHiddenLayersLength(4)
             //    .WithOutputCount(2)
+            //    .WithErrorThreshold(0.3)
+            //    .WithErrorCountThreshold(5)
             //    .WithMaximumEpochCount(0)
-            //    .WithWeightRepositoryType(new WeightRepository())
+            //    .WithWeightRepositoryType(new WeightRepository(), true)
             //    .WithLearningSamplesRepositoryType(new MemoryLearningSamplesRepository())
-            //    .CreateNetwork(true)
+            //    .CreateNetwork()
             //    .LearnNetwork();
 
             //while (true)
@@ -57,8 +56,8 @@ namespace NeuralNetworkSystemConsoleApp
             //    Console.WriteLine("\nEnter firstNum: ");
             //    var firstUm = int.Parse(Console.ReadLine());
 
-            //   // Console.WriteLine("\nEnter SecondNum: ");
-            //   // var secondNUm = int.Parse(Console.ReadLine());
+            //    // Console.WriteLine("\nEnter SecondNum: ");
+            //    // var secondNUm = int.Parse(Console.ReadLine());
 
             //    var layer = new NeuralLayer();
 

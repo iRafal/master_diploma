@@ -34,13 +34,15 @@ namespace NeuralNetworkSystemAPI
                 .WithLearningFunctionsType(new SigmoidalLearningFunctions())
                 .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
                 .WithInputCount(21)
-                .WithHiddenLayersCount(4)
+                .WithHiddenLayersCount(3)
                 .WithHiddenLayersLength(42)
                 .WithOutputCount(2)
-                .WithMaximumEpochCount(1000)
-                .WithWeightRepositoryType(new WeightRepository())
+                .WithErrorThreshold(0.35)
+                .WithErrorCountThreshold(5)
+                .WithMaximumEpochCount(0)
+                .WithWeightRepositoryType(new WeightRepository(), true)
                 .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
-                .CreateNetwork(true)
+                .CreateNetwork()
                 .LearnNetwork();
 
             NeuralNetworkSaver.NeuralNetwork = neuralNetwork;

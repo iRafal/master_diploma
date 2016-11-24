@@ -22,6 +22,10 @@ namespace NeuralNetworkSystemBLL.Interfaces
         int MaximumEpochCount { get; set; }
         double NormalizationMinValue { get; set; }
         double NormalizationMaxValue { get; set; }
+        double ErrorThreshold { get; set; }
+        double ErrorsCountThreshold { get; set; }
+
+
         ILayer Normalize(ILayer layer);
     } 
 }

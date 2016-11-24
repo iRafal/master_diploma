@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using NeuralNetworkSystemBLL.Interfaces;
 using NeuralNetworkSystemBLL.Interfaces.Components;
@@ -20,6 +21,8 @@ namespace NeuralNetworkSystemBLL
 
         public double NormalizationMinValue { get; set; }
         public double NormalizationMaxValue { get; set; }
+        public double ErrorThreshold { get; set; }
+        public double ErrorsCountThreshold { get; set; }
 
         private readonly Random _random;
 
@@ -129,10 +132,9 @@ namespace NeuralNetworkSystemBLL
 
         private bool IsTooBigError()
         {
-            var result = false;
             var outputLayer = GetOutputLayer();
 
-            return outputLayer.Neurons.Any(neuron => Math.Abs(neuron.Error) >= 0.2) || result;
+            return outputLayer.Neurons.Any(neuron => Math.Abs(neuron.Error) >= ErrorThreshold);
         }
 
         private bool CheckToStop(int errorsCount)
@@ -142,8 +144,8 @@ namespace NeuralNetworkSystemBLL
 
             var percent = (errors * 100)/samplesCount;
 
-            Console.WriteLine("Error percentage : " + percent);
-            return !(percent >= 5);
+            Debug.WriteLine("Error percentage : " + percent);
+            return !(percent >= ErrorsCountThreshold);
         }
 
         private List<ILearningSample> ReorderSamples(List<ILearningSample> samples )
@@ -207,7 +209,7 @@ namespace NeuralNetworkSystemBLL
 
         private void FrontIteration(ILearningSample sample)
         {
-            this.Calculate(sample.InputLayer);
+            Calculate(sample.InputLayer);
 
             var outputLayer = GetOutputLayer();
 

@@ -16,20 +16,24 @@ namespace NeuralNetworkSystemBLL.Builders
         private INeuron _neuronType;
         private IActivationFunction _activationFunctionType;
         private IInductedLocalFieldFunction _inductedFunctionType;
-        private ILearningFunctions _learningFunctionsType;
+        private IWeightRepository _weightRepositoryType;
+        
+
         private ILayer _layerType;
-        private IWeightRepository _weightRepository;
-        private ILearningSamplesRepository _leariLearningSamplesRepository;
 
         private int _inputCount;
         private int _hiddenLayersCount;
         private int _hiddenLayerLength;
         private int _outputLength;
-        private int _maxEpochCount;
+
+        private bool _isNewWeights;
 
         public NeuralNetworkBuilder()
         {
-            _neuralNetwork = new T(); 
+            _neuralNetwork = new T();
+
+            _neuralNetwork.ErrorThreshold = 0;
+            _neuralNetwork.ErrorsCountThreshold = 100;
         }
 
         public INeuralNetworkBuilder<T> WithLayerType(ILayer layerType)
@@ -52,7 +56,7 @@ namespace NeuralNetworkSystemBLL.Builders
 
         public INeuralNetworkBuilder<T> WithLearningFunctionsType(ILearningFunctions learningFunctionsFunctionType)
         {
-            _learningFunctionsType = learningFunctionsFunctionType;
+            _neuralNetwork.LearningFunctions = learningFunctionsFunctionType;
             return this;
         }
 
@@ -63,15 +67,17 @@ namespace NeuralNetworkSystemBLL.Builders
             return this;
         }
 
-        public INeuralNetworkBuilder<T> WithWeightRepositoryType(IWeightRepository weightRepositoryType)
+        public INeuralNetworkBuilder<T> WithWeightRepositoryType(IWeightRepository weightRepositoryType, bool isNewWeights)
         {
-            _weightRepository = weightRepositoryType;
+            _weightRepositoryType = weightRepositoryType;
+            _isNewWeights = isNewWeights;
+            
             return this;
         }
 
         public INeuralNetworkBuilder<T> WithLearningSamplesRepositoryType(ILearningSamplesRepository learningSamplesRepositoryrepositoryType)
         {
-            _leariLearningSamplesRepository = learningSamplesRepositoryrepositoryType;
+            _neuralNetwork.LeariningSamplesRepository = learningSamplesRepositoryrepositoryType;
             return this;
         }
 
@@ -101,11 +107,23 @@ namespace NeuralNetworkSystemBLL.Builders
 
         public INeuralNetworkBuilder<T> WithMaximumEpochCount(int maxEpochCount)
         {
-            _maxEpochCount = maxEpochCount;
+            _neuralNetwork.MaximumEpochCount = maxEpochCount;
             return this;
         }
 
-        public INeuralNetwork CreateNetwork(bool isNewWeights)
+        public INeuralNetworkBuilder<T> WithErrorThreshold(double errorThreshold)
+        {
+            _neuralNetwork.ErrorThreshold = errorThreshold;
+            return this;
+        }
+
+        public INeuralNetworkBuilder<T> WithErrorCountThreshold(double errorCountThreshold)
+        {
+            _neuralNetwork.ErrorsCountThreshold = errorCountThreshold;
+            return this;
+        }
+
+        public INeuralNetwork CreateNetwork()
         {
             #region InputLayer
 
@@ -133,19 +151,7 @@ namespace NeuralNetworkSystemBLL.Builders
 
             _neuralNetwork.Layers = layersList;
 
-            if (_leariLearningSamplesRepository != null)
-            {
-                _neuralNetwork.LeariningSamplesRepository = Activator.CreateInstance(_leariLearningSamplesRepository.GetType()) as ILearningSamplesRepository;
-            }
-
-            _neuralNetwork.WeightRepository = isNewWeights ? _weightRepository.CreateStartUpRepository(_neuralNetwork) : _weightRepository.PopulateRepository();
-
-            if (_learningFunctionsType != null)
-            {
-                _neuralNetwork.LearningFunctions = Activator.CreateInstance(_learningFunctionsType.GetType()) as ILearningFunctions;
-            }
-
-            _neuralNetwork.MaximumEpochCount = _maxEpochCount;
+            _neuralNetwork.WeightRepository = _isNewWeights ? _weightRepositoryType.CreateStartUpRepository(_neuralNetwork) : _weightRepositoryType.PopulateRepository();
 
             return _neuralNetwork;
         }
