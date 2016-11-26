@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.medvid.andrii.diplomawork.R;
 
-public class Loginactivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
