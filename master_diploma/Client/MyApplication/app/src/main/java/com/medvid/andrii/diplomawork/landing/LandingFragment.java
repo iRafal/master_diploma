@@ -75,9 +75,12 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.loginButton:
-//                getActivity().startActivity(ProgramsListActivity.getIntent(getActivity()));
-//                break;
+            case R.id.loginTextView:
+//                getActivity().startActivity(LoginActivity.getIntent(getActivity()));
+                break;
+            case R.id.registrationTextView:
+//                getActivity().startActivity(RegistrationActivity.getIntent(getActivity()));
+                break;
         }
     }
 
@@ -110,7 +113,10 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
      */
 
     private void initUi(@NonNull View rootView) {
-//        mLoginTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.loginTextInputLayout);
+        mLoginTextView = (TextView) rootView.findViewById(R.id.loginTextView);
+        mRegistrationTextView = (TextView) rootView.findViewById(R.id.registrationTextView);
 
+        mLoginTextView.setOnClickListener(this);
+        mRegistrationTextView.setOnClickListener(this);
     }
 }
