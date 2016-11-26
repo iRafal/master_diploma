@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.login.LoginActivity;
 
 /**
  * Use the {@link LandingFragment#newInstance} factory method to
@@ -76,7 +77,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginTextView:
-//                getActivity().startActivity(LoginActivity.getIntent(getActivity()));
+                getActivity().startActivity(LoginActivity.getIntent(getActivity()));
                 break;
             case R.id.registrationTextView:
 //                getActivity().startActivity(RegistrationActivity.getIntent(getActivity()));
