@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
+import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
 
 /**
  * Use the {@link LandingFragment#newInstance} factory method to
@@ -80,7 +81,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
                 getActivity().startActivity(LoginActivity.getIntent(getActivity()));
                 break;
             case R.id.registrationTextView:
-//                getActivity().startActivity(RegistrationActivity.getIntent(getActivity()));
+                getActivity().startActivity(RegistrationActivity.getIntent(getActivity()));
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.login;
+package com.medvid.andrii.diplomawork.registration;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,14 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.login.LoginContract;
 
 /**
- * Use the {@link LoginFragment#newInstance} factory method to
+ * Use the {@link RegistrationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment implements LoginContract.View, View.OnClickListener   {
+public class RegistrationFragment extends Fragment implements RegistrationContract.View, View.OnClickListener   {
 
-    private LoginContract.Presenter mPresenter;
+    private RegistrationContract.Presenter mPresenter;
 
     private TextInputLayout mLoginTextInputLayout;
     private EditText mLoginEditText;
@@ -30,11 +31,11 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
 
     private TextView mLoginTextView;
 
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
+    public static RegistrationFragment newInstance() {
+        return new RegistrationFragment();
     }
 
-    public LoginFragment() {
+    public RegistrationFragment() {
         // Required empty public constructor
     }
 
@@ -91,7 +92,7 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
      * {@link LoginContract.View} methods
      */
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
+    public void setPresenter(RegistrationContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -106,6 +107,16 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
     }
 
     @Override
+    public String getFirstName() {
+        return null; //TODO
+    }
+
+    @Override
+    public String getLastName() {
+        return null; //TODO
+    }
+
+    @Override
     public void showLoginError() {
         mLoginTextInputLayout.setError("Wrong login");
     }
@@ -113,6 +124,16 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
     @Override
     public void showPasswordError() {
         mPassTextInputLayout.setError("Wrong password");
+    }
+
+    @Override
+    public void showFirstNameError() {
+        // TODO
+    }
+
+    @Override
+    public void showLastNameError() {
+        // TODO
     }
 
     @Override
