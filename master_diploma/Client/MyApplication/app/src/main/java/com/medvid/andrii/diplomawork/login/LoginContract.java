@@ -38,6 +38,8 @@ public interface LoginContract {
 
         void showNetworkError();
 
+        void showHomeScreen();
+
         boolean isActive();
 
     }

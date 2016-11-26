@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.medvid.andrii.diplomawork.HomeActivity;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.login.LoginContract;
 
@@ -26,10 +27,19 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     private TextInputLayout mLoginTextInputLayout;
     private EditText mLoginEditText;
 
+    private TextInputLayout mFirstNameTextInputLayout;
+    private EditText mFirstNameEditText;
+
+    private TextInputLayout mLastNameTextInputLayout;
+    private EditText mLastNameEditText;
+
     private TextInputLayout mPassTextInputLayout;
     private EditText mPassEditText;
 
-    private TextView mLoginTextView;
+    private TextInputLayout mConfirmPasswordTextInputLayout;
+    private EditText mConfirmPasswordEditText;
+
+    private TextView mRegisterTextView;
 
     public static RegistrationFragment newInstance() {
         return new RegistrationFragment();
@@ -51,7 +61,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_registration, container, false);
     }
 
     @Override
@@ -82,8 +92,8 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     @Override
     public void onClick(View view) {
         switch (view.getId())   {
-            case R.id.loginTextView:
-//                getActivity().startActivity(.getIntent(getActivity()));
+            case R.id.registerTextView:
+                showHomeScreen();
                 break;
         }
     }
@@ -108,37 +118,42 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
     @Override
     public String getFirstName() {
-        return null; //TODO
+        return mFirstNameEditText.getText().toString();
     }
 
     @Override
     public String getLastName() {
-        return null; //TODO
+        return mLastNameEditText.getText().toString();
     }
 
     @Override
     public void showLoginError() {
-        mLoginTextInputLayout.setError("Wrong login");
+        mLoginTextInputLayout.setError(getString(R.string.wrong_login));
     }
 
     @Override
     public void showPasswordError() {
-        mPassTextInputLayout.setError("Wrong password");
+        mPassTextInputLayout.setError(getString(R.string.wrong_password));
     }
 
     @Override
     public void showFirstNameError() {
-        // TODO
+        mFirstNameTextInputLayout.setError(getString(R.string.first_name_empty));
     }
 
     @Override
     public void showLastNameError() {
-        // TODO
+        mLastNameTextInputLayout.setError(getString(R.string.last_name_empty));
     }
 
     @Override
     public void showNetworkError() {
         // TODO
+    }
+
+    @Override
+    public void showHomeScreen() {
+        getActivity().startActivity(HomeActivity.getIntent(getActivity()));
     }
 
     @Override
@@ -155,10 +170,19 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
         mLoginTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.loginTextInputLayout);
         mLoginEditText = (EditText) rootView.findViewById(R.id.loginEditText);
 
+        mFirstNameTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.firstNameTextInputLayout);
+        mFirstNameEditText = (EditText) rootView.findViewById(R.id.firstNameEditText);
+
+        mLastNameTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.lastNameTextInputLayout);
+        mLastNameEditText = (EditText) rootView.findViewById(R.id.lastNameEditText);
+
         mPassTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.passwordTextInputLayout);
         mPassEditText = (EditText) rootView.findViewById(R.id.passwordEditText);
 
-        mLoginTextView = (TextView) rootView.findViewById(R.id.loginTextView);
-        mLoginTextView.setOnClickListener(this);
+        mConfirmPasswordTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.confirmPasswordTextInputLayout);
+        mConfirmPasswordEditText = (EditText) rootView.findViewById(R.id.confirmPasswordEditText);
+
+        mRegisterTextView = (TextView) rootView.findViewById(R.id.registerTextView);
+        mRegisterTextView.setOnClickListener(this);
     }
 }

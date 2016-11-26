@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.medvid.andrii.diplomawork.HomeActivity;
 import com.medvid.andrii.diplomawork.R;
 
 /**
@@ -82,7 +83,7 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
     public void onClick(View view) {
         switch (view.getId())   {
             case R.id.loginTextView:
-//                getActivity().startActivity(.getIntent(getActivity()));
+                showHomeScreen();
                 break;
         }
     }
@@ -107,17 +108,22 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
 
     @Override
     public void showLoginError() {
-        mLoginTextInputLayout.setError("Wrong login");
+        mLoginTextInputLayout.setError(getString(R.string.wrong_login));
     }
 
     @Override
     public void showPasswordError() {
-        mPassTextInputLayout.setError("Wrong password");
+        mPassTextInputLayout.setError(getString(R.string.wrong_password));
     }
 
     @Override
     public void showNetworkError() {
         // TODO
+    }
+
+    @Override
+    public void showHomeScreen() {
+        getActivity().startActivity(HomeActivity.getIntent(getActivity()));
     }
 
     @Override

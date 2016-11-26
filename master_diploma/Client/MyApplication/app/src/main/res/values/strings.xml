@@ -9,4 +9,8 @@
     <string name="confirm_password">Confirm password</string>
     <string name="last_name">Last name</string>
     <string name="first_name">First name</string>
+    <string name="wrong_login">Wrong login</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="first_name_empty">First name is empty</string>
+    <string name="last_name_empty">Last name is empty</string>
 </resources>

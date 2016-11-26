@@ -46,6 +46,8 @@ public interface RegistrationContract {
 
         void showNetworkError();
 
+        void showHomeScreen();
+
         boolean isActive();
 
     }
