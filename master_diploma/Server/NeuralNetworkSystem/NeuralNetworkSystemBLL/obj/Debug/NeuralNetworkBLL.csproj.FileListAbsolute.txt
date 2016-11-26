@@ -1,0 +1,5 @@
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemBLL\bin\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemBLL\bin\Debug\NeuralNetworkSystemBLL.pdb
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkBLL.csprojResolveAssemblyReference.cache
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\onedrive\документи\visual studio 2015\Projects\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkSystemBLL.pdb

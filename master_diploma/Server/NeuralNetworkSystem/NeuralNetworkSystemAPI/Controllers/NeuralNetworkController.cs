@@ -1,43 +1,51 @@
-﻿using System.Web.Http;
-using NeuralNetworkDataStorageBLL.DTO;
+﻿using System;
+using System.Web.Http;
+using NeuralNetworkDataStorageBLL;
 using NeuralNetworkDataStorageBLL.Enums;
-using NeuralNetworkDataStorageBLL.LearningSamples;
-using NeuralNetworkDataStorageBLL.LearningSamples.Mappers;
-using NeuralNetworkDataStorageBLL.LearningSamples.Mappers.OutPutMappers;
+using NeuralNetworkDataStorageBLL.LearningSamples.Repositories;
+using NeuralNetworkSystemAPI.Models;
 using NeuralNetworkSystemAPI.NeuralNetwork;
+using NeuralNetworkSystemBLL.Builders;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
+using NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions;
 
 namespace NeuralNetworkSystemAPI.Controllers
 {
     public class NeuralNetworkController : ApiController
     {
-        public NeuralNetworkResponse GetForecast([FromUri]DiseaseMonitoringSample sample)
+        public NeuralNetworkResponse GetForecast([FromUri]DieseaseRequestModel requestModel)
         {
-            var mapper = new DiseasesTypeMapper(new DiseasesOutputMapper());
+            var neuralNetworkBuilder = new NeuralNetworkBuilder<NeuralNetworkSystemBLL.NeuralNetwork>();
 
-            var inputSample = mapper.MapToLearningSample<NeuralLayer, Neuron>(sample, new LearningSample());
+            var neuralNetwork = neuralNetworkBuilder
+                .WithLayerType(new NeuralLayer())
+                .WithActivationFunctionType(new SigmoidalActivationFunction())
+                .WithInductedFunctionType(new InductedLocalFieldFunction())
+                .WithLearningFunctionsType(new SigmoidalLearningFunctions())
+                .WithNeuronBuilerType(new NeuronBuilder(), new Neuron())
+                .WithInputCount(21)
+                .WithHiddenLayersCount(3)
+                .WithHiddenLayersLength(42)
+                .WithOutputCount(2)
+                .WithWeightRepositoryType(new DataBaseWeightRepository(WeightTypeEnum.DiseaseNeuralNetwork), false)
+                .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
+                .CreateNetwork(true);
 
-            var input = NeuralNetworkSaver.NeuralNetwork.Normalize(inputSample.InputLayer);
-            NeuralNetworkSaver.NeuralNetwork.Calculate(input);
+            var neuralNetworkHelper = new NeuralNetworkHelper();
 
-            var output = NeuralNetworkSaver.NeuralNetwork.GetOutputLayer();
+            var input = neuralNetworkHelper.MapToInput(requestModel, neuralNetwork, true);
+
+            neuralNetwork.Calculate(input);
+
+            var output = neuralNetworkHelper.GetNetwrokOutput(neuralNetwork.GetOutputLayer());
+
+            var disease = (DiseasesStatusEnum)Enum.ToObject(typeof(DiseasesStatusEnum), output);
 
             var neuralResponse = new NeuralNetworkResponse
             {
-                FirstOutput = output.Neurons[0].Value,
-                SecondOuput = output.Neurons[1].Value
+                Disease = (int) disease,
+                Description = disease.ToString()
             };
-
-            if (neuralResponse.FirstOutput > neuralResponse.SecondOuput)
-            {
-                neuralResponse.Diseases = 1;
-                neuralResponse.Description = DiseasesStatusEnum.Normal.ToString();
-            }
-            else
-            {
-                neuralResponse.Diseases = 2;
-                neuralResponse.Description = DiseasesStatusEnum.Infarct.ToString();
-            }
 
             return neuralResponse;
         }

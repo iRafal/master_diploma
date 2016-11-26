@@ -49,6 +49,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -154,7 +158,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -166,9 +169,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="NeuralNetwork\NeuralNetworkResponse.cs" />
-    <Compile Include="NeuralNetwork\NeuralNetworkSaver.cs" />
-    <Compile Include="NeuralNetwork\RequestMapper.cs" />
+    <Compile Include="NeuralNetwork\NeuralNetworkHelper.cs" />
+    <Compile Include="Models\DieseaseRequestModel.cs" />
+    <Compile Include="Models\NeuralNetworkResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +225,9 @@
       <Project>{ef5cf5ce-ae4f-49ef-9b46-bb33d84bcf24}</Project>
       <Name>NeuralNetworkSystemDataStorageBLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
+    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkBLL.csproj">
       <Project>{8f600248-c789-4307-82ff-1386ad6e07ce}</Project>
-      <Name>NeuralNetworkSystemBLL</Name>
+      <Name>NeuralNetworkBLL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

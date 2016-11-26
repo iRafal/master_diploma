@@ -7,6 +7,7 @@ using NeuralNetworkSystemBLL.Interfaces.Components;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents.Functions;
 using NeuralNetworkDataStorageBLL;
+using NeuralNetworkDataStorageBLL.Enums;
 using NeuralNetworkDataStorageBLL.LearningSamples.Repositories;
 
 namespace NeuralNetworkSystemConsoleApp
@@ -16,6 +17,7 @@ namespace NeuralNetworkSystemConsoleApp
         static void Main(string[] args)
         {
             var neuralNetworkBuilder = new NeuralNetworkBuilder<NeuralNetwork>();
+
             var neuralNetwork = neuralNetworkBuilder
                .WithLayerType(new NeuralLayer())
                .WithActivationFunctionType(new SigmoidalActivationFunction())
@@ -29,10 +31,11 @@ namespace NeuralNetworkSystemConsoleApp
                .WithErrorThreshold(0.3)
                .WithErrorCountThreshold(5)
                .WithMaximumEpochCount(0)
-               .WithWeightRepositoryType(new WeightRepository(), true)
+               .WithWeightRepositoryType(new MemoryWeightRepository(), true)
                .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
-               .CreateNetwork()
+               .CreateNetwork(true)
                .LearnNetwork();
+
             //var neuralNetwork = neuralNetworkBuilder
             //    .WithLayerType(new NeuralLayer())
             //    .WithActivationFunctionType(new SigmoidalActivationFunction())

@@ -30,10 +30,12 @@ namespace NeuralNetworkSystemBLL.Builders
 
         public NeuralNetworkBuilder()
         {
-            _neuralNetwork = new T();
+            _neuralNetwork = new T
+            {
+                ErrorThreshold = 0,
+                ErrorsCountThreshold = 100
+            };
 
-            _neuralNetwork.ErrorThreshold = 0;
-            _neuralNetwork.ErrorsCountThreshold = 100;
         }
 
         public INeuralNetworkBuilder<T> WithLayerType(ILayer layerType)
@@ -123,7 +125,7 @@ namespace NeuralNetworkSystemBLL.Builders
             return this;
         }
 
-        public INeuralNetwork CreateNetwork()
+        public INeuralNetwork CreateNetwork(bool normalizeNetwork)
         {
             #region InputLayer
 
@@ -152,6 +154,12 @@ namespace NeuralNetworkSystemBLL.Builders
             _neuralNetwork.Layers = layersList;
 
             _neuralNetwork.WeightRepository = _isNewWeights ? _weightRepositoryType.CreateStartUpRepository(_neuralNetwork) : _weightRepositoryType.PopulateRepository();
+
+            if (normalizeNetwork)
+            {
+                _neuralNetwork.NormalizeSamples();
+            }
+            
 
             return _neuralNetwork;
         }

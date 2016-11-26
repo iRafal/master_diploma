@@ -127,6 +127,7 @@ namespace NeuralNetworkSystemBLL
                 }
             }
 
+            WeightRepository.UpdateWeights();
             return this;
         }
 
@@ -248,13 +249,13 @@ namespace NeuralNetworkSystemBLL
                         var neuronValue = previousLayerNeurons[k].Value;
                         var delta = LearningFunctions.LearningSpeed * neuronsArray[j].Gradient * neuronValue;
                         previousWeights[k].NextIterationWeightValue = previousWeights[k].WeightValue + delta;
-                        WeightRepository.UpdateWeight(previousWeights[k]);
+                        //WeightRepository.UpdateWeight(previousWeights[k]);
                     }
                 }
             }
         }
 
-        private void NormalizeSamples()
+        public void NormalizeSamples()
         {
             NormalizationMinValue = FoundMinValueInLayer(LeariningSamplesRepository.LearningSamples);
             NormalizationMaxValue = FoundMaxValueInLayer(LeariningSamplesRepository.LearningSamples);
@@ -265,7 +266,7 @@ namespace NeuralNetworkSystemBLL
             }
         }
 
-        private double FoundMinValueInLayer(List<ILearningSample> samples)
+        public static double FoundMinValueInLayer(IEnumerable<ILearningSample> samples)
         {
             var allInputs = new List<double>();
 
@@ -279,7 +280,7 @@ namespace NeuralNetworkSystemBLL
             return result;
         }
 
-        private double FoundMaxValueInLayer(List<ILearningSample> samples)
+        public static double FoundMaxValueInLayer(IEnumerable<ILearningSample> samples)
         {
             var allInputs = new List<double>();
 

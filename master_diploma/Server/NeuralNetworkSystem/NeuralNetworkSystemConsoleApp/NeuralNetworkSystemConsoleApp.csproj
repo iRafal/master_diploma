@@ -55,9 +55,9 @@
       <Project>{ef5cf5ce-ae4f-49ef-9b46-bb33d84bcf24}</Project>
       <Name>NeuralNetworkSystemDataStorageBLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
+    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkBLL.csproj">
       <Project>{8f600248-c789-4307-82ff-1386ad6e07ce}</Project>
-      <Name>NeuralNetworkSystemBLL</Name>
+      <Name>NeuralNetworkBLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemAPI", "NeuralNetworkSystemAPI\NeuralNetworkSystemAPI.csproj", "{9EE5D1C7-E308-4728-8577-89AAB5B34B13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemBLL", "NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj", "{8F600248-C789-4307-82FF-1386AD6E07CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkBLL", "NeuralNetworkSystemBLL\NeuralNetworkBLL.csproj", "{8F600248-C789-4307-82FF-1386AD6E07CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetworkSystemConsoleApp", "NeuralNetworkSystemConsoleApp\NeuralNetworkSystemConsoleApp.csproj", "{C4687E01-F160-4136-84B7-C66906A43523}"
 EndProject
