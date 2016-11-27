@@ -69,7 +69,7 @@ public class UsersLocalDataSource implements UserDataSourceContract {
         ContentValues values = UserTableContract.getInstance().getContentValues(user);
 
         String selection = UserTableContract._ID + " LIKE ?";
-        String[] selectionArgs = {  Long.toString(user.id)  };
+        String[] selectionArgs = {  Long.toString(user.getId())  };
 
         mContentResolver.update(UserTableContract.buildUri(), values, selection, selectionArgs);
     }
