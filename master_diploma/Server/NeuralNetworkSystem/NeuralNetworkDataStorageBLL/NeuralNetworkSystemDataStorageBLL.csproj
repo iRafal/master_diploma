@@ -42,23 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataBaseWeightRepository.cs" />
     <Compile Include="DTO\Disease.cs" />
     <Compile Include="DTO\DiseaseMonitoringSample.cs" />
     <Compile Include="DTO\GroupRisk.cs" />
     <Compile Include="Enums\DiseasesStatusEnum.cs" />
     <Compile Include="Enums\RiskStatusEnum.cs" />
+    <Compile Include="Enums\WeightTypeEnum.cs" />
     <Compile Include="LearningSamples\Repositories\DataBaseDiseasesLearningSamplesRepository.cs" />
     <Compile Include="LearningSamples\LearningSample.cs" />
     <Compile Include="LearningSamples\Mappers\DiseasesTypeMapper.cs" />
     <Compile Include="LearningSamples\Mappers\OutPutMappers\DiseasesOutputMapper.cs" />
     <Compile Include="LearningSamples\Repositories\MemoryLearningSamplesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeightRepository.cs" />
+    <Compile Include="MemoryWeightRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkSystemBLL.csproj">
+    <ProjectReference Include="..\NeuralNetworkSystemBLL\NeuralNetworkBLL.csproj">
       <Project>{8F600248-C789-4307-82FF-1386AD6E07CE}</Project>
-      <Name>NeuralNetworkSystemBLL</Name>
+      <Name>NeuralNetworkBLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

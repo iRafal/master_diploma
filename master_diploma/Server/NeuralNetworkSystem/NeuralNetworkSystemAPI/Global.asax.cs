@@ -2,8 +2,12 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AutoMapper;
 using NeuralNetworkDataStorageBLL;
+using NeuralNetworkDataStorageBLL.DTO;
+using NeuralNetworkDataStorageBLL.Enums;
 using NeuralNetworkDataStorageBLL.LearningSamples.Repositories;
+using NeuralNetworkSystemAPI.Models;
 using NeuralNetworkSystemAPI.NeuralNetwork;
 using NeuralNetworkSystemBLL.Builders;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
@@ -15,7 +19,8 @@ namespace NeuralNetworkSystemAPI
     {
         protected void Application_Start()
         {
-            CreateNetowrk();
+            MapperConfigurate();
+            CreateDiseaseNetowrk();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -23,7 +28,7 @@ namespace NeuralNetworkSystemAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        public void CreateNetowrk()
+        public void CreateDiseaseNetowrk()
         {
             var neuralNetworkBuilder = new NeuralNetworkBuilder<NeuralNetworkSystemBLL.NeuralNetwork>();
 
@@ -38,14 +43,19 @@ namespace NeuralNetworkSystemAPI
                 .WithHiddenLayersLength(42)
                 .WithOutputCount(2)
                 .WithErrorThreshold(0.35)
-                .WithErrorCountThreshold(5)
+                .WithErrorCountThreshold(2)
                 .WithMaximumEpochCount(0)
-                .WithWeightRepositoryType(new WeightRepository(), true)
+                .WithWeightRepositoryType(new DataBaseWeightRepository(WeightTypeEnum.DiseaseNeuralNetwork), true)
                 .WithLearningSamplesRepositoryType(new DataBaseDiseasesLearningSamplesRepository())
-                .CreateNetwork()
+                .CreateNetwork(true)
                 .LearnNetwork();
 
-            NeuralNetworkSaver.NeuralNetwork = neuralNetwork;
-      }
+            //NeuralNetworkSaver.DiseaseNeuralNetwork = neuralNetwork;
+        }
+
+        public void MapperConfigurate()
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<DieseaseRequestModel,DiseaseMonitoringSample>());
+        }
     }
 }

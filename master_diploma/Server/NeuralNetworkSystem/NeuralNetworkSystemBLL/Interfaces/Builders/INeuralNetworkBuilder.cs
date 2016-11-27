@@ -22,6 +22,6 @@ namespace NeuralNetworkSystemBLL.Interfaces.Builders
         INeuralNetworkBuilder<T> WithErrorThreshold(double errorThreshold);
         INeuralNetworkBuilder<T> WithErrorCountThreshold(double errorCountThreshold);
 
-        INeuralNetwork CreateNetwork();
+        INeuralNetwork CreateNetwork(bool normalizeNetwork);
     }
 }

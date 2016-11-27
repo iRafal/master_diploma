@@ -16,6 +16,7 @@ namespace NeuralNetworkSystemBLL.Interfaces
         ILayer GetInputLayer();
 
         void Calculate(ILayer inputLauer);
+        void NormalizeSamples();
 
         INeuralNetwork LearnNetwork();
 

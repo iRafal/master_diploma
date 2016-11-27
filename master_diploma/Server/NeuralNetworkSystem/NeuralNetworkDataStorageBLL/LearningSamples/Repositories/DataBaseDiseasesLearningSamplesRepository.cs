@@ -17,17 +17,16 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
     {
         public List<ILearningSample> LearningSamples { get; set; }
         public List<DiseaseMonitoringSample> SamplesList { get; set; }
-        private string _connectionString;
-        private DiseasesTypeMapper _mapper;
-        private Random _random;
+        private readonly string _connectionString;
+        private readonly DiseasesTypeMapper _mapper;
+        private readonly Random _random;
 
 
         public DataBaseDiseasesLearningSamplesRepository()
         {
-            var connectionStringName = "NeuralNetworkDB";
             _mapper = new DiseasesTypeMapper(new DiseasesOutputMapper());
             _random = new Random();
-            _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            _connectionString = ConfigurationManager.ConnectionStrings["NeuralNetworkDB"].ConnectionString;
     
             LearningSamples = new List<ILearningSample>();
             PopulateSamples();
@@ -94,7 +93,6 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
                 }
             }
         }
-
 
         public void Generate()
         {
@@ -170,8 +168,7 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
                 EatenCalories = reader["EatenCalories"] != null ? Convert.ToDouble(reader["EatenCalories"]) : 0,
                 FoodMultiplicity = reader["FoodMultiplicity"] != null ? Convert.ToDouble(reader["FoodMultiplicity"]) : 0,
                 FatAmount = reader["FatAmount"] != null ? Convert.ToDouble(reader["FatAmount"]) : 0,
-                CarbohydrateAmount =
-                    reader["CarbohydrateAmount"] != null ? Convert.ToDouble(reader["CarbohydrateAmount"]) : 0,
+                CarbohydrateAmount = reader["CarbohydrateAmount"] != null ? Convert.ToDouble(reader["CarbohydrateAmount"]) : 0,
                 ProteinAmount = reader["ProteinAmount"] != null ? Convert.ToDouble(reader["ProteinAmount"]) : 0,
                 VitaminC = reader["VitaminC"] != null ? Convert.ToDouble(reader["VitaminC"]) : 0,
                 SugarLevel = reader["SugarLevel"] != null ? Convert.ToDouble(reader["SugarLevel"]) : 0,
@@ -185,7 +182,8 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
                 {
                    GroupRiskType = reader["GroupRiskID"] != null ? (RiskStatusEnum)Enum.ToObject(typeof(RiskStatusEnum), Convert.ToInt32(reader["GroupRiskID"])) : 0,
                    Name = reader["RiskName"]?.ToString() ?? string.Empty
-                },             
+                },   
+                          
                 Disease = new Disease
                 {
                     Status = reader["DiseaseStatusID"] != null ? 
