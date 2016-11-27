@@ -13,12 +13,11 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class User implements ModelEntity {
 
-
     @Retention(SOURCE)
     @IntDef({MAN, WOMEN})
     public @interface Gender {
-        int MAN = 0;
-        int WOMEN = 1;
+        int MAN = 1;
+        int WOMEN = 2;
     }
 
     private long id;
@@ -26,13 +25,13 @@ public class User implements ModelEntity {
     private String firstName;
     private String lastName;
     private double age;
-    private User.Gender gender; // 1
+    private @User.Gender int gender; // 1
     private double growth; // 1.8
     private double weight; // 75
     private double bodyMassIndex; // 20
 
     public User(long id, String email, String firstName, String lastName, double age,
-                Gender gender, double growth, double weight) {
+                @User.Gender int gender, double growth, double weight, double bodyMassIndex) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -41,7 +40,7 @@ public class User implements ModelEntity {
         this.gender = gender;
         this.growth = growth;
         this.weight = weight;
-        setBodyMassIndex();
+        this.bodyMassIndex = bodyMassIndex;
     }
 
     public long getId() {
@@ -84,11 +83,11 @@ public class User implements ModelEntity {
         this.age = age;
     }
 
-    public Gender getGender() {
+    public @User.Gender int getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(@User.Gender int gender) {
         this.gender = gender;
     }
 
@@ -112,11 +111,8 @@ public class User implements ModelEntity {
         return bodyMassIndex;
     }
 
-    /**
-     * Calculates body mass index
-     */
-    public void setBodyMassIndex() {
-        this.bodyMassIndex = weight / Math.pow(growth, 2);
+    public void setBodyMassIndex(double bodyMassIndex) {
+        this.bodyMassIndex = bodyMassIndex;
     }
 
     @Override
@@ -143,15 +139,15 @@ public class User implements ModelEntity {
 
         if (id != user.id) return false;
         if (Double.compare(user.age, age) != 0) return false;
+        if (gender != user.gender) return false;
         if (Double.compare(user.growth, growth) != 0) return false;
         if (Double.compare(user.weight, weight) != 0) return false;
         if (Double.compare(user.bodyMassIndex, bodyMassIndex) != 0) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null)
             return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null)
-            return false;
-        return gender != null ? gender.equals(user.gender) : user.gender == null;
+        return lastName != null ? lastName.equals(user.lastName) : user.lastName == null;
+
     }
 
     @Override
@@ -164,7 +160,7 @@ public class User implements ModelEntity {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         temp = Double.doubleToLongBits(age);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + gender;
         temp = Double.doubleToLongBits(growth);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(weight);

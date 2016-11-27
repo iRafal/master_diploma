@@ -16,11 +16,15 @@ public interface TableDefinitionContract<T extends ModelEntity> extends BaseColu
 
     String PRIMARY_KEY = "PRIMARY KEY";
 
+    String AUTOINCREMENT = "AUTOINCREMENT";
+
     String TEXT_TYPE = "TEXT";
 
     String INTEGER_TYPE = "INTEGER";
 
     String BOOLEAN_TYPE = "INTEGER";
+
+    String REAL_TYPE = "REAL";
 
     String COMMA = ",";
 

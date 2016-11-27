@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.info;
+package com.medvid.andrii.diplomawork.data.statistics;
 
 public class Calories {
 

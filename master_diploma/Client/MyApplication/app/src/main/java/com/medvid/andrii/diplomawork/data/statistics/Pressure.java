@@ -1,21 +1,21 @@
-package com.medvid.andrii.diplomawork.data.info;
+package com.medvid.andrii.diplomawork.data.statistics;
 
 public class Pressure {
 
-    private double hightPressure; //  120
+    private double highPressure; //  120
     private double lowPressure; //  90
 
-    public Pressure(double hightPressure, double lowPressure) {
-        this.hightPressure = hightPressure;
+    public Pressure(double highPressure, double lowPressure) {
+        this.highPressure = highPressure;
         this.lowPressure = lowPressure;
     }
 
-    public double getHightPressure() {
-        return hightPressure;
+    public double getHighPressure() {
+        return highPressure;
     }
 
-    public void setHightPressure(double hightPressure) {
-        this.hightPressure = hightPressure;
+    public void setHighPressure(double highPressure) {
+        this.highPressure = highPressure;
     }
 
     public double getLowPressure() {
@@ -29,7 +29,7 @@ public class Pressure {
     @Override
     public String toString() {
         return "Pressure{" +
-                "hightPressure=" + hightPressure +
+                "highPressure=" + highPressure +
                 ", lowPressure=" + lowPressure +
                 '}';
     }
@@ -41,7 +41,7 @@ public class Pressure {
 
         Pressure pressure = (Pressure) o;
 
-        if (Double.compare(pressure.hightPressure, hightPressure) != 0) return false;
+        if (Double.compare(pressure.highPressure, highPressure) != 0) return false;
         return Double.compare(pressure.lowPressure, lowPressure) == 0;
 
     }
@@ -50,7 +50,7 @@ public class Pressure {
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(hightPressure);
+        temp = Double.doubleToLongBits(highPressure);
         result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(lowPressure);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

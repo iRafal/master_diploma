@@ -1,8 +1,8 @@
-package com.medvid.andrii.diplomawork.data.info;
+package com.medvid.andrii.diplomawork.data.statistics;
 
 import com.medvid.andrii.diplomawork.data.ModelEntity;
 
-public class Info implements ModelEntity {
+public class Statistics implements ModelEntity {
 
     private long id;
     private double distance; //  4
@@ -20,15 +20,15 @@ public class Info implements ModelEntity {
     private double pulse; // 60
     private long timeStamp;
 
-    public Info(long id, double distance, Sleep sleep, Calories calories, double foodMultiplicity,
-                double fatAmount, double carbohydrateAmount, double proteinAmount,
-                double vitaminC, double sugarLevel, double stressLevel, double temperature,
-                Pressure pressure, double pulse) {
-
+    public Statistics(long id, double distance, Sleep sleep, Calories calories,
+                      double foodMultiplicity, double fatAmount, double carbohydrateAmount,
+                      double proteinAmount, double vitaminC, double sugarLevel,
+                      double stressLevel, double temperature, Pressure pressure, double pulse,
+                      long timeStamp) {
         this.id = id;
         this.distance = distance;
-        this. mSleep = sleep;
-        this. mCalories = calories;
+        mSleep = sleep;
+        mCalories = calories;
         this.foodMultiplicity = foodMultiplicity;
         this.fatAmount = fatAmount;
         this.carbohydrateAmount = carbohydrateAmount;
@@ -37,9 +37,9 @@ public class Info implements ModelEntity {
         this.sugarLevel = sugarLevel;
         this.stressLevel = stressLevel;
         this.temperature = temperature;
-        this.mPressure = pressure;
+        mPressure = pressure;
         this.pulse = pulse;
-        setTimeStamp();
+        this.timeStamp = timeStamp;
     }
 
     public long getId() {
@@ -158,16 +158,13 @@ public class Info implements ModelEntity {
         return timeStamp;
     }
 
-    /**
-     * Calculates timestamp
-     */
-    public void setTimeStamp() {
-        this.timeStamp = System.currentTimeMillis() / 1000;
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     @Override
     public String toString() {
-        return "Info{" +
+        return "Statistics{" +
                 "id=" + id +
                 ", distance=" + distance +
                 ", mSleep=" + mSleep +
@@ -191,24 +188,24 @@ public class Info implements ModelEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Info info = (Info) o;
+        Statistics that = (Statistics) o;
 
-        if (id != info.id) return false;
-        if (Double.compare(info.distance, distance) != 0) return false;
-        if (Double.compare(info.foodMultiplicity, foodMultiplicity) != 0) return false;
-        if (Double.compare(info.fatAmount, fatAmount) != 0) return false;
-        if (Double.compare(info.carbohydrateAmount, carbohydrateAmount) != 0) return false;
-        if (Double.compare(info.proteinAmount, proteinAmount) != 0) return false;
-        if (Double.compare(info.vitaminC, vitaminC) != 0) return false;
-        if (Double.compare(info.sugarLevel, sugarLevel) != 0) return false;
-        if (Double.compare(info.stressLevel, stressLevel) != 0) return false;
-        if (Double.compare(info.temperature, temperature) != 0) return false;
-        if (Double.compare(info.pulse, pulse) != 0) return false;
-        if (timeStamp != info.timeStamp) return false;
-        if (mSleep != null ? !mSleep.equals(info.mSleep) : info.mSleep != null) return false;
-        if (mCalories != null ? !mCalories.equals(info.mCalories) : info.mCalories != null)
+        if (id != that.id) return false;
+        if (Double.compare(that.distance, distance) != 0) return false;
+        if (Double.compare(that.foodMultiplicity, foodMultiplicity) != 0) return false;
+        if (Double.compare(that.fatAmount, fatAmount) != 0) return false;
+        if (Double.compare(that.carbohydrateAmount, carbohydrateAmount) != 0) return false;
+        if (Double.compare(that.proteinAmount, proteinAmount) != 0) return false;
+        if (Double.compare(that.vitaminC, vitaminC) != 0) return false;
+        if (Double.compare(that.sugarLevel, sugarLevel) != 0) return false;
+        if (Double.compare(that.stressLevel, stressLevel) != 0) return false;
+        if (Double.compare(that.temperature, temperature) != 0) return false;
+        if (Double.compare(that.pulse, pulse) != 0) return false;
+        if (timeStamp != that.timeStamp) return false;
+        if (mSleep != null ? !mSleep.equals(that.mSleep) : that.mSleep != null) return false;
+        if (mCalories != null ? !mCalories.equals(that.mCalories) : that.mCalories != null)
             return false;
-        return mPressure != null ? mPressure.equals(info.mPressure) : info.mPressure == null;
+        return mPressure != null ? mPressure.equals(that.mPressure) : that.mPressure == null;
 
     }
 

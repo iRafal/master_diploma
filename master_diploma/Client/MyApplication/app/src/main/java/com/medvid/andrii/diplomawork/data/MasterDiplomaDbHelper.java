@@ -6,12 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 
-public class MindmarkerDbHelper extends SQLiteOpenHelper {
+public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "MasterDiploma.db";
     public static final int DB_VERSION = 1;
 
-    public MindmarkerDbHelper(Context context) {
+    public MasterDiplomaDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 

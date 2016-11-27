@@ -1,9 +1,9 @@
-package com.medvid.andrii.diplomawork.data.info;
+package com.medvid.andrii.diplomawork.data.statistics;
 
 public class Sleep {
 
     private double sleepHoursCount; //8
-    private double sleepQuality; //8
+    private double sleepQuality; //8   Value: [1.0...10.0]
 
     public Sleep(double sleepHoursCount, double sleepQuality) {
         this.sleepHoursCount = sleepHoursCount;
@@ -43,7 +43,6 @@ public class Sleep {
 
         if (Double.compare(sleep.sleepHoursCount, sleepHoursCount) != 0) return false;
         return Double.compare(sleep.sleepQuality, sleepQuality) == 0;
-
     }
 
     @Override
