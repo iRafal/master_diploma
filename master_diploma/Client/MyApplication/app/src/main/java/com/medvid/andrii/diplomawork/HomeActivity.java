@@ -10,30 +10,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.common.base.Preconditions;
-import com.mindmarker.mindmarker.mindmarker.list.MindmarkersListFragment;
-import com.mindmarker.mindmarker.programs.info.ProgramInfoFragment;
+import com.medvid.andrii.diplomawork.info.InfoFragment;
+import com.medvid.andrii.diplomawork.profile.ProfileFragment;
+import com.medvid.andrii.diplomawork.settings.SettingsFragment;
+import com.medvid.andrii.diplomawork.stats.StatsFragment;
 
 import java.lang.annotation.Retention;
 
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.INFO_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.LEADERBOARS_LIST_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.MINDMARKERS_LIST_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROFILE_LIST;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROFILE_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROGRAM_INFO_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.RESOURCES_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.SETTINGS_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.STATS_TAB;
-import static com.mindmarker.mindmarker.HomeActivity.ScreenNames.LEADERBOARS_LIST_TAB;
-import static com.mindmarker.mindmarker.HomeActivity.ScreenNames.MINDMARKERS_LIST_TAB;
-import static com.mindmarker.mindmarker.HomeActivity.ScreenNames.PROGRAM_INFO_TAB;
-import static com.mindmarker.mindmarker.HomeActivity.ScreenNames.RESOURCES_TAB;
-import static com.mindmarker.mindmarker.HomeActivity.ScreenNames.STATS_TAB;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
@@ -46,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     @IntDef({INFO_TAB, STATS_TAB, PROFILE_TAB, SETTINGS_TAB})
     public @interface ScreenNames {
         int INFO_TAB = 0;
-        int STATS_TAB =1;
+        int STATS_TAB = 1;
         int PROFILE_TAB = 2;
         int SETTINGS_TAB = 3;
     }
@@ -89,17 +79,17 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (mTabLayout.getSelectedTabPosition()) {
-                    case PROGRAM_INFO_TAB:
-                        showFragment(ProgramInfoFragment.newInstance());
-                        break;
-                    case RESOURCES_TAB:
-                        break;
-                    case MINDMARKERS_LIST_TAB:
-                        showFragment(MindmarkersListFragment.newInstance());
-                        break;
-                    case LEADERBOARS_LIST_TAB:
+                    case INFO_TAB:
+                        showFragment(InfoFragment.newInstance());
                         break;
                     case STATS_TAB:
+                        showFragment(StatsFragment.newInstance());
+                        break;
+                    case PROFILE_TAB:
+                        showFragment(ProfileFragment.newInstance());
+                        break;
+                    case SETTINGS_TAB:
+                        showFragment(SettingsFragment.newInstance());
                         break;
                 }
             }
