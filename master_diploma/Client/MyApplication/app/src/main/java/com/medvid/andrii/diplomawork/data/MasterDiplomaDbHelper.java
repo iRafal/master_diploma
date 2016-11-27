@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.medvid.andrii.diplomawork.data.sample.TrainingSampleTableContract;
+import com.medvid.andrii.diplomawork.data.statistics.StatisticsTableContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 
 public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
@@ -18,6 +20,8 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(UserTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(StatisticsTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(TrainingSampleTableContract.CREATE_TABLE);
     }
 
     @Override
