@@ -6,7 +6,7 @@ import com.medvid.andrii.diplomawork.data.statistics.Pressure;
 import com.medvid.andrii.diplomawork.data.statistics.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 
-public class Sample implements ModelEntity {
+public class TrainingSample implements ModelEntity {
 
     private long id;
     private double age;
@@ -30,12 +30,12 @@ public class Sample implements ModelEntity {
     private long timeStamp;
     private boolean isForecast;
 
-    public Sample(long id, double age, @User.Gender int gender, double growth, double weight,
-                  double bodyMassIndex, double distance, Sleep sleep, Calories calories,
-                  double foodMultiplicity, double fatAmount, double carbohydrateAmount,
-                  double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
-                  double temperature, Pressure pressure, double pulse, long timestamp,
-                  boolean isForecast) {
+    public TrainingSample(long id, double age, @User.Gender int gender, double growth, double weight,
+                          double bodyMassIndex, double distance, Sleep sleep, Calories calories,
+                          double foodMultiplicity, double fatAmount, double carbohydrateAmount,
+                          double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
+                          double temperature, Pressure pressure, double pulse, long timestamp,
+                          boolean isForecast) {
 
         this.id = id;
         this.age = age;
@@ -230,7 +230,7 @@ public class Sample implements ModelEntity {
 
     @Override
     public String toString() {
-        return "Sample{" +
+        return "TrainingSample{" +
                 "id=" + id +
                 ", age=" + age +
                 ", gender=" + gender +
@@ -260,30 +260,30 @@ public class Sample implements ModelEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Sample sample = (Sample) o;
+        TrainingSample trainingSample = (TrainingSample) o;
 
-        if (id != sample.id) return false;
-        if (Double.compare(sample.age, age) != 0) return false;
-        if (gender != sample.gender) return false;
-        if (Double.compare(sample.growth, growth) != 0) return false;
-        if (Double.compare(sample.weight, weight) != 0) return false;
-        if (Double.compare(sample.bodyMassIndex, bodyMassIndex) != 0) return false;
-        if (Double.compare(sample.distance, distance) != 0) return false;
-        if (Double.compare(sample.foodMultiplicity, foodMultiplicity) != 0) return false;
-        if (Double.compare(sample.fatAmount, fatAmount) != 0) return false;
-        if (Double.compare(sample.carbohydrateAmount, carbohydrateAmount) != 0) return false;
-        if (Double.compare(sample.proteinAmount, proteinAmount) != 0) return false;
-        if (Double.compare(sample.vitaminC, vitaminC) != 0) return false;
-        if (Double.compare(sample.sugarLevel, sugarLevel) != 0) return false;
-        if (Double.compare(sample.stressLevel, stressLevel) != 0) return false;
-        if (Double.compare(sample.temperature, temperature) != 0) return false;
-        if (Double.compare(sample.pulse, pulse) != 0) return false;
-        if (timeStamp != sample.timeStamp) return false;
-        if (isForecast != sample.isForecast) return false;
-        if (mSleep != null ? !mSleep.equals(sample.mSleep) : sample.mSleep != null) return false;
-        if (mCalories != null ? !mCalories.equals(sample.mCalories) : sample.mCalories != null)
+        if (id != trainingSample.id) return false;
+        if (Double.compare(trainingSample.age, age) != 0) return false;
+        if (gender != trainingSample.gender) return false;
+        if (Double.compare(trainingSample.growth, growth) != 0) return false;
+        if (Double.compare(trainingSample.weight, weight) != 0) return false;
+        if (Double.compare(trainingSample.bodyMassIndex, bodyMassIndex) != 0) return false;
+        if (Double.compare(trainingSample.distance, distance) != 0) return false;
+        if (Double.compare(trainingSample.foodMultiplicity, foodMultiplicity) != 0) return false;
+        if (Double.compare(trainingSample.fatAmount, fatAmount) != 0) return false;
+        if (Double.compare(trainingSample.carbohydrateAmount, carbohydrateAmount) != 0) return false;
+        if (Double.compare(trainingSample.proteinAmount, proteinAmount) != 0) return false;
+        if (Double.compare(trainingSample.vitaminC, vitaminC) != 0) return false;
+        if (Double.compare(trainingSample.sugarLevel, sugarLevel) != 0) return false;
+        if (Double.compare(trainingSample.stressLevel, stressLevel) != 0) return false;
+        if (Double.compare(trainingSample.temperature, temperature) != 0) return false;
+        if (Double.compare(trainingSample.pulse, pulse) != 0) return false;
+        if (timeStamp != trainingSample.timeStamp) return false;
+        if (isForecast != trainingSample.isForecast) return false;
+        if (mSleep != null ? !mSleep.equals(trainingSample.mSleep) : trainingSample.mSleep != null) return false;
+        if (mCalories != null ? !mCalories.equals(trainingSample.mCalories) : trainingSample.mCalories != null)
             return false;
-        return mPressure != null ? mPressure.equals(sample.mPressure) : sample.mPressure == null;
+        return mPressure != null ? mPressure.equals(trainingSample.mPressure) : trainingSample.mPressure == null;
 
     }
 

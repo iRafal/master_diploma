@@ -12,9 +12,9 @@ import com.medvid.andrii.diplomawork.data.statistics.Pressure;
 import com.medvid.andrii.diplomawork.data.statistics.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 
-public class SampleTableContract implements TableDefinitionContract<Sample> {
+public class TrainingSampleTableContract implements TableDefinitionContract<TrainingSample> {
 
-    public static final String TABLE_NAME = "statistics";
+    public static final String TABLE_NAME = "training_sample";
 
     // Static user info
     public static final String AGE = "age";
@@ -120,41 +120,41 @@ public class SampleTableContract implements TableDefinitionContract<Sample> {
     }
 
     @Override
-    public ContentValues getContentValues(@NonNull Sample sample) {
-        Preconditions.checkNotNull(sample);
+    public ContentValues getContentValues(@NonNull TrainingSample trainingSample) {
+        Preconditions.checkNotNull(trainingSample);
 
         ContentValues values = new ContentValues();
 
-        values.put(_ID, sample.getId());
-        values.put(AGE, sample.getAge());
-        values.put(GENDER, sample.getGender());
-        values.put(GROWTH, sample.getGrowth());
-        values.put(WEIGHT, sample.getWeight());
-        values.put(BODY_MASS_INDEX, sample.getBodyMassIndex());
-        values.put(DISTANCE, sample.getDistance());
-        values.put(SLEEP_HOURS_COUNT, sample.getSleep().getSleepHoursCount());
-        values.put(SLEEP_QUALITY, sample.getSleep().getSleepQuality());
-        values.put(SPENT_CALORIES, sample.getCalories().getSpentCalories());
-        values.put(EATEN_CALORIES, sample.getCalories().getEatenCalories());
-        values.put(FOOD_MULTIPLICITY, sample.getFoodMultiplicity());
-        values.put(FAT_AMOUNT, sample.getFatAmount());
-        values.put(CARBOHYDRATE_AMOUNT, sample.getCarbohydrateAmount());
-        values.put(PROTEIN_AMOUNT, sample.getProteinAmount());
-        values.put(VITAMIN_C, sample.getVitaminC());
-        values.put(SUGAR_LEVEL, sample.getSugarLevel());
-        values.put(STRESS_LEVEL, sample.getStressLevel());
-        values.put(TEMPERATURE, sample.getTemperature());
-        values.put(HIGH_PRESSURE, sample.getPressure().getHighPressure());
-        values.put(LOW_PRESSURE, sample.getPressure().getLowPressure());
-        values.put(PULSE, sample.getPulse());
-        values.put(TIME_STAMP, sample.getTimeStamp());
-        values.put(IS_FORECAST, sample.isForecast());
+        values.put(_ID, trainingSample.getId());
+        values.put(AGE, trainingSample.getAge());
+        values.put(GENDER, trainingSample.getGender());
+        values.put(GROWTH, trainingSample.getGrowth());
+        values.put(WEIGHT, trainingSample.getWeight());
+        values.put(BODY_MASS_INDEX, trainingSample.getBodyMassIndex());
+        values.put(DISTANCE, trainingSample.getDistance());
+        values.put(SLEEP_HOURS_COUNT, trainingSample.getSleep().getSleepHoursCount());
+        values.put(SLEEP_QUALITY, trainingSample.getSleep().getSleepQuality());
+        values.put(SPENT_CALORIES, trainingSample.getCalories().getSpentCalories());
+        values.put(EATEN_CALORIES, trainingSample.getCalories().getEatenCalories());
+        values.put(FOOD_MULTIPLICITY, trainingSample.getFoodMultiplicity());
+        values.put(FAT_AMOUNT, trainingSample.getFatAmount());
+        values.put(CARBOHYDRATE_AMOUNT, trainingSample.getCarbohydrateAmount());
+        values.put(PROTEIN_AMOUNT, trainingSample.getProteinAmount());
+        values.put(VITAMIN_C, trainingSample.getVitaminC());
+        values.put(SUGAR_LEVEL, trainingSample.getSugarLevel());
+        values.put(STRESS_LEVEL, trainingSample.getStressLevel());
+        values.put(TEMPERATURE, trainingSample.getTemperature());
+        values.put(HIGH_PRESSURE, trainingSample.getPressure().getHighPressure());
+        values.put(LOW_PRESSURE, trainingSample.getPressure().getLowPressure());
+        values.put(PULSE, trainingSample.getPulse());
+        values.put(TIME_STAMP, trainingSample.getTimeStamp());
+        values.put(IS_FORECAST, trainingSample.isForecast());
 
         return values;
     }
 
     @Override
-    public Sample getEntity(@NonNull Cursor cursor) {
+    public TrainingSample getEntity(@NonNull Cursor cursor) {
         Preconditions.checkNotNull(cursor);
 
         int idIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
@@ -208,7 +208,7 @@ public class SampleTableContract implements TableDefinitionContract<Sample> {
         long timeStamp = cursor.getLong(timeStampIndex);
         boolean isForecast = cursor.getInt(isForecastIndex) == 1;
 
-        return new Sample(id,
+        return new TrainingSample(id,
                 age,
                 gender,
                 growth,
