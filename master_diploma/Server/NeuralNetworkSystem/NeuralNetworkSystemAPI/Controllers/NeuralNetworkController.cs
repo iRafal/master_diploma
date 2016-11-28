@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using NeuralNetworkDataStorageBLL.DTO;
 using NeuralNetworkDataStorageBLL.DTORepositories;
 using NeuralNetworkDataStorageBLL.Enums;
 using NeuralNetworkSystemAPI.Models;
@@ -42,14 +43,23 @@ namespace NeuralNetworkSystemAPI.Controllers
                 groupRisk = (RiskStatusEnum)Enum.ToObject(typeof(RiskStatusEnum), output);
             }
 
-            var neuralResponse = new NeuralNetworkResponse
+            var diseaseResponse = new DiseaseResponseObjectModel()
             {
-                Disease = (int) disease,
-                DiseaseDescription = disease.ToString(),
-                GroupRisk = (int) groupRisk,
-                GroupRiskDescription = groupRisk.ToString(),
+                Disease = new Disease
+                {
+                    Status = disease,
+                    Name = disease.ToString()
+                },
+                GroupRisk = new GroupRisk
+                {
+                    GroupRiskType = groupRisk,
+                    Name = groupRisk.ToString()
+                },
                 Suggestions = suggestionList
             };
+
+            var neuralResponse = new NeuralNetworkResponse();
+            neuralResponse.Forecasts.Add(diseaseResponse);
 
             return neuralResponse;
         }

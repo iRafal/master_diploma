@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NeuralNetworkDataStorageBLL.DTO;
 
 namespace NeuralNetworkSystemAPI.Models
 {
@@ -7,15 +6,9 @@ namespace NeuralNetworkSystemAPI.Models
     {
         public NeuralNetworkResponse()
         {
-            Suggestions = new List<Suggestion>();
+            Forecasts = new List<DiseaseResponseObjectModel>();
         }
 
-        public int Disease { get; set; }
-        public string DiseaseDescription { get; set; }
-
-        public int GroupRisk { get; set; }
-        public string GroupRiskDescription { get; set; }
-
-        public List<Suggestion> Suggestions { get; set; }
+        public List<DiseaseResponseObjectModel> Forecasts { get; set; }
     }
 }
