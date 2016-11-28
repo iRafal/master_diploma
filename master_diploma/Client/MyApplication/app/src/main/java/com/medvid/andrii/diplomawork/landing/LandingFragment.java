@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
+import com.medvid.andrii.diplomawork.data.forecast.suggestion.SuggestionTableContract;
+import com.medvid.andrii.diplomawork.data.forecast.suggestion.parameter.ParameterTableContract;
+import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
+import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
 import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
 
@@ -54,14 +60,32 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
 
-//        Log.d("123", UserTableContract.CREATE_TABLE);
-//        Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
-//        Log.d("123", DiseaseTableContract.CREATE_TABLE);
-//        Log.d("123", GroupRiskTableContract.CREATE_TABLE);
-//        Log.d("123", SuggestionTableContract.CREATE_TABLE);
-//        Log.d("123", ParameterTableContract.CREATE_TABLE);
+        Log.d("123", UserTableContract.CREATE_TABLE);
+        Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
+        Log.d("123", DiseaseTableContract.CREATE_TABLE);
+        Log.d("123", GroupRiskTableContract.CREATE_TABLE);
+        Log.d("123", SuggestionTableContract.CREATE_TABLE);
+        Log.d("123", ParameterTableContract.CREATE_TABLE);
 //
 //        MasterDiplomaDbHelper masterDiplomaDbHelper = new MasterDiplomaDbHelper(getActivity());
+//        User user = new User(1,"email@email.email", "Andrii", "Medvid",
+//                23, User.Gender.MAN, 1.85, 62,
+//                Utils.calculateBodyMassIndex(65, 1.85));
+//
+//        UsersLocalDataSource usersLocalDataSource = UsersLocalDataSource.getInstance(getActivity().getContentResolver());
+//        usersLocalDataSource.saveUser(user);
+//
+//        usersLocalDataSource.getUser("0", new UserDataSourceContract.GetUserCallback() {
+//            @Override
+//            public void onUserLoaded(@NonNull User user) {
+//                user.getAge();
+//            }
+//
+//            @Override
+//            public void onDataNotAvailable() {
+//
+//            }
+//        });
     }
 
     @Override

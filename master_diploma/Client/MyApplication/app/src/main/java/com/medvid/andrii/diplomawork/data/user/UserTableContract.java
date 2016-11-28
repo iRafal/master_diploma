@@ -1,5 +1,6 @@
 package com.medvid.andrii.diplomawork.data.user;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,9 +25,9 @@ public class UserTableContract implements TableDefinitionContract<User> {
 
     public static final String CREATE_TABLE =
             CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " " + "(" + " "
-                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + " " + AUTOINCREMENT + ", "
-                    + EMAIL + " " + TEXT_TYPE + ", "
-                    + FIRST_NAME + " " + TEXT_TYPE + ", "
+                    + _ID + " " + INTEGER_TYPE + " " + NOT_NULL + " " + PRIMARY_KEY + " " + AUTOINCREMENT + ", "
+                    + EMAIL + " " + TEXT_TYPE + " " + NOT_NULL + ", "
+                    + FIRST_NAME + " " + TEXT_TYPE + " " + NOT_NULL + ", "
                     + AGE + " " + REAL_TYPE + ", "
                     + GENDER + " " + REAL_TYPE + ", "
                     + GROWTH + " " + REAL_TYPE + ", "
@@ -48,6 +49,14 @@ public class UserTableContract implements TableDefinitionContract<User> {
 
     public static Uri buildUri() {
         return CONTENT_URI.buildUpon().build();
+    }
+
+    public static Uri buildUriWith(long id) {
+        return ContentUris.withAppendedId(CONTENT_URI, id);
+    }
+
+    public static Uri buildUriWith(String id) {
+        return CONTENT_URI.buildUpon().appendPath(id).build();
     }
 
     private UserTableContract()  {

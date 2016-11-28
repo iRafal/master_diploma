@@ -2,7 +2,12 @@ package com.medvid.andrii.diplomawork.data.training_sample;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Calories;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Pressure;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
+
+import java.util.Date;
 
 public class TrainingSample implements ModelEntity {
 
@@ -25,7 +30,7 @@ public class TrainingSample implements ModelEntity {
     private double temperature; //  36.6
     private Pressure mPressure;
     private double pulse; // 60
-    private long timeStamp;
+    private Date timeStamp;
     private boolean isForecast;
     private boolean isStatistics;
 
@@ -37,12 +42,13 @@ public class TrainingSample implements ModelEntity {
                           double bodyMassIndex, double distance, Sleep sleep, Calories calories,
                           double foodMultiplicity, double fatAmount, double carbohydrateAmount,
                           double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
-                          double temperature, Pressure pressure, double pulse, long timestamp,
+                          double temperature, Pressure pressure, double pulse, Date timestamp,
                           boolean isForecast, boolean isStatistics) {
 
         Preconditions.checkNotNull(sleep);
         Preconditions.checkNotNull(calories);
         Preconditions.checkNotNull(pressure);
+        Preconditions.checkNotNull(timestamp);
 
         this.id = id;
         this.age = age;
@@ -220,11 +226,11 @@ public class TrainingSample implements ModelEntity {
         this.pulse = pulse;
     }
 
-    public long getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -295,13 +301,14 @@ public class TrainingSample implements ModelEntity {
         if (Double.compare(that.stressLevel, stressLevel) != 0) return false;
         if (Double.compare(that.temperature, temperature) != 0) return false;
         if (Double.compare(that.pulse, pulse) != 0) return false;
-        if (timeStamp != that.timeStamp) return false;
         if (isForecast != that.isForecast) return false;
         if (isStatistics != that.isStatistics) return false;
         if (mSleep != null ? !mSleep.equals(that.mSleep) : that.mSleep != null) return false;
         if (mCalories != null ? !mCalories.equals(that.mCalories) : that.mCalories != null)
             return false;
-        return mPressure != null ? mPressure.equals(that.mPressure) : that.mPressure == null;
+        if (mPressure != null ? !mPressure.equals(that.mPressure) : that.mPressure != null)
+            return false;
+        return timeStamp != null ? timeStamp.equals(that.timeStamp) : that.timeStamp == null;
 
     }
 
@@ -342,7 +349,7 @@ public class TrainingSample implements ModelEntity {
         result = 31 * result + (mPressure != null ? mPressure.hashCode() : 0);
         temp = Double.doubleToLongBits(pulse);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (int) (timeStamp ^ (timeStamp >>> 32));
+        result = 31 * result + (timeStamp != null ? timeStamp.hashCode() : 0);
         result = 31 * result + (isForecast ? 1 : 0);
         result = 31 * result + (isStatistics ? 1 : 0);
         return result;

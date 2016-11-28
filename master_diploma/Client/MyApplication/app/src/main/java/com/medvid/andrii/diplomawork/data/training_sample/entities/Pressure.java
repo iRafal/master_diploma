@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.training_sample;
+package com.medvid.andrii.diplomawork.data.training_sample.entities;
 
 public class Pressure {
 

@@ -1,22 +1,22 @@
-package com.medvid.andrii.diplomawork.data.group_risk;
+package com.medvid.andrii.diplomawork.data.forecast;
 
 import com.medvid.andrii.diplomawork.data.ModelEntity;
 
 public class GroupRisk implements ModelEntity {
 
-    private int id;
+    private long id;
     private String riskName;
 
-    public GroupRisk(int id, String riskName) {
+    public GroupRisk(long id, String riskName) {
         this.id = id;
         this.riskName = riskName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,7 +50,7 @@ public class GroupRisk implements ModelEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (riskName != null ? riskName.hashCode() : 0);
         return result;
     }

@@ -1,8 +1,8 @@
-package com.medvid.andrii.diplomawork.data.suggestion;
+package com.medvid.andrii.diplomawork.data.forecast.suggestion;
 
 import android.support.annotation.NonNull;
 
-public class SuggestionLocalDataSource implements SuggestionDataSourceContract {
+public class SuggestionRemoteDataSource implements SuggestionDataSourceContract {
 
     @Override
     public void saveSuggestion(@NonNull Suggestion suggestion) {

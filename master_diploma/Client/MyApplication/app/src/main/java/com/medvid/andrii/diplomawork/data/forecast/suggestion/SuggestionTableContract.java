@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.suggestion;
+package com.medvid.andrii.diplomawork.data.forecast.suggestion;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -8,26 +8,23 @@ import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.TableDefinitionContract;
-import com.medvid.andrii.diplomawork.data.disease.Disease;
-import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
-import com.medvid.andrii.diplomawork.data.suggestion.parameter.Parameter;
-import com.medvid.andrii.diplomawork.data.suggestion.parameter.ParameterTableContract;
+import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
 
 public class SuggestionTableContract implements TableDefinitionContract<Suggestion> {
 
     public static final String TABLE_NAME = "suggestion";
 
-    public static final String DESCRIPTION = "description";
-    public static final String DISEASE_ID = "disease_id";
-    public static final String PARAMETER_ID = "parameter_id";
+    public static final String SUGGESTION_DESCRIPTION = "suggestion_description";
+    public static final String PARAMETER_DESCRIPTION = "parameter_description";
+    public static final String FORECAST_ID = "forecast_id";
 
     public static final String CREATE_TABLE =
             CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " ( "
-                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + " " + AUTOINCREMENT + ", "
-                    + DESCRIPTION + " " + TEXT_TYPE + ", "
-                    + DISEASE_ID + " " + INTEGER_TYPE + ", "
-                    + FOREIGN_KEY + " (" + DISEASE_ID + ") " + REFERENCES + " " + DiseaseTableContract.TABLE_NAME + "(" + _ID + ") " + ON_DELETE_CASCADE + " "
-                    + PARAMETER_ID + " " + INTEGER_TYPE + " " + REFERENCES + " " + ParameterTableContract.TABLE_NAME + "(" + _ID + ") " + ON_DELETE_CASCADE
+                    + _ID + " " + INTEGER_TYPE + " " + NOT_NULL + " " + PRIMARY_KEY + " " + AUTOINCREMENT + ", "
+                    + SUGGESTION_DESCRIPTION + " " + TEXT_TYPE + ", "
+                    + PARAMETER_DESCRIPTION + " " + TEXT_TYPE + ", "
+                    + FORECAST_ID + " " + INTEGER_TYPE + " " + NOT_NULL + " "
+                    + FOREIGN_KEY + " (" + FORECAST_ID + ") " + REFERENCES + " " + ForecastTableContract.TABLE_NAME + " (" + _ID + ")"
                     + " )";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
@@ -54,9 +51,9 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
     public String[] getColumns() {
         return new String[] {
                 BaseColumns._ID,
-                DESCRIPTION,
-                DISEASE_ID,
-                PARAMETER_ID
+                SUGGESTION_DESCRIPTION,
+                PARAMETER_DESCRIPTION,
+                FORECAST_ID
         };
     }
 
@@ -66,9 +63,9 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
 
         ContentValues values = new ContentValues();
         values.put(_ID, suggestion.getId());
-        values.put(DESCRIPTION, suggestion.getDescription());
-        values.put(DISEASE_ID, suggestion.getDisease().getId());
-        values.put(PARAMETER_ID, suggestion.getParameter().getId());
+        values.put(SUGGESTION_DESCRIPTION, suggestion.getSuggestionDescription());
+        values.put(PARAMETER_DESCRIPTION, suggestion.getParameterDescription());
+        values.put(FORECAST_ID, suggestion.getForecaseId());
 
         return values;
     }
@@ -79,19 +76,19 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
         Preconditions.checkNotNull(cursor);
 
         int idIndex = cursor.getColumnIndexOrThrow(_ID);
-        int descriptionIndex = cursor.getColumnIndexOrThrow(DESCRIPTION);
-        int diseaseIdIndex = cursor.getColumnIndexOrThrow(DISEASE_ID);
-        int parameterIdIndex = cursor.getColumnIndexOrThrow(PARAMETER_ID);
+        int suggestionDescriptionIndex = cursor.getColumnIndexOrThrow(SUGGESTION_DESCRIPTION);
+        int parameterDescriptionIdIndex = cursor.getColumnIndexOrThrow(PARAMETER_DESCRIPTION);
+        int forecastIdIndex = cursor.getColumnIndexOrThrow(FORECAST_ID);
 
         int id = cursor.getInt(idIndex);
-        String description = cursor.getString(descriptionIndex);
-        int diseaseId = cursor.getInt(diseaseIdIndex);
-        int parameterId = cursor.getInt(parameterIdIndex);
+        String suggestionDescription = cursor.getString(suggestionDescriptionIndex);
+        String parameterDescription = cursor.getString(parameterDescriptionIdIndex);
+        int forecastId = cursor.getInt(forecastIdIndex);
 
         return new Suggestion(
                 id,
-                description,
-                new Disease(diseaseId, ""),
-                new Parameter(parameterId, ""));
+                suggestionDescription,
+                parameterDescription,
+                forecastId);
     }
 }

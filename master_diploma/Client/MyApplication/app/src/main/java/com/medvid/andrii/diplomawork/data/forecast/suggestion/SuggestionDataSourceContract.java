@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.suggestion;
+package com.medvid.andrii.diplomawork.data.forecast.suggestion;
 
 import android.support.annotation.NonNull;
 

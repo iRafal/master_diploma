@@ -34,6 +34,8 @@ public interface TableDefinitionContract<T extends ModelEntity> extends BaseColu
 
     String DATE_TYPE = "DATE";
 
+    String NOT_NULL = "NOT NULL";
+
     String INTEGER_PRIMARY_KEY_ROW_DEFINITION = BaseColumns._ID + " " + INTEGER_TYPE + " " + PRIMARY_KEY;
 
     String CONTENT_AUTHORITY = BuildConfig.APPLICATION_ID;

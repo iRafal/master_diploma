@@ -1,11 +1,12 @@
     package com.medvid.andrii.diplomawork.data.user;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
+    import android.content.ContentResolver;
+    import android.content.ContentValues;
+    import android.database.Cursor;
+    import android.provider.BaseColumns;
+    import android.support.annotation.NonNull;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+    import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UsersLocalDataSource implements UserDataSourceContract {
 
@@ -41,7 +42,19 @@ public class UsersLocalDataSource implements UserDataSourceContract {
 
     @Override
     public void getUser(@NonNull String userId, @NonNull GetUserCallback callback) {
-        //  data is loaded via Cursor Loader
+        checkNotNull(userId);
+        checkNotNull(callback);
+
+        Cursor cursor = mContentResolver.query(
+                UserTableContract.buildUriWith(userId),
+                UserTableContract.getInstance().getColumns(),
+                null, null, null);
+        User user = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            user = UserTableContract.getInstance().getEntity(cursor);
+            cursor.close();
+        }
+        callback.onUserLoaded(user);
     }
 
     @Override
