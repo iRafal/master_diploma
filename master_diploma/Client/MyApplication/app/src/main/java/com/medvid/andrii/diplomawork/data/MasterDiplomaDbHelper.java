@@ -42,4 +42,17 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SuggestionTableContract.DROP_TABLE);
         sqLiteDatabase.execSQL(ParameterTableContract.CREATE_TABLE);
     }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        super.onDowngrade(sqLiteDatabase, oldVersion, newVersion);
+
+        sqLiteDatabase.execSQL(UserTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(StatisticsTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(TrainingSampleTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(DiseaseTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(GroupRiskTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(SuggestionTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(ParameterTableContract.CREATE_TABLE);
+    }
 }
