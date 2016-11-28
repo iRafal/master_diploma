@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.sample;
+package com.medvid.andrii.diplomawork.data.training_sample;
 
 import android.content.ContentValues;
 import android.database.Cursor;

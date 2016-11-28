@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.sample;
+package com.medvid.andrii.diplomawork.data.training_sample;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
