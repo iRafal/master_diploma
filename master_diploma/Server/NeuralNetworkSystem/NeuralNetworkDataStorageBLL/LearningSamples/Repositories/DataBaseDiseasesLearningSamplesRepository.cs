@@ -18,25 +18,31 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
         public List<ILearningSample> LearningSamples { get; set; }
         public List<DiseaseMonitoringSample> SamplesList { get; set; }
         private readonly string _connectionString;
-        private readonly DiseasesTypeMapper _mapper;
+        public  DiseasesTypeMapper Mapper;
+        public NetworkTypeEnum NetworkType;
         private readonly Random _random;
 
 
         public DataBaseDiseasesLearningSamplesRepository()
         {
-            _mapper = new DiseasesTypeMapper(new DiseasesOutputMapper());
+           // Mapper = new DiseasesTypeMapper(new DiseasesOutputMapper());
             _random = new Random();
             _connectionString = ConfigurationManager.ConnectionStrings["NeuralNetworkDB"].ConnectionString;
     
             LearningSamples = new List<ILearningSample>();
-            PopulateSamples();
         }
 
         public List<DiseaseMonitoringSample> GetAll()
         {
             var resultList = new List<DiseaseMonitoringSample>();
             var queryString = "SELECT LearningSamples.*, DiseaseStatus.*,GroupRisk.*  " +
-                              " FROM LearningSamples LEFT JOIN DiseaseStatus ON LearningSamples.DiseaseStatusID = DiseaseStatus.DiseaseStatusID LEFT JOIN GroupRisk ON LearningSamples.GroupRiskID = GroupRisk.GroupRiskID";
+                              " FROM LearningSamples LEFT JOIN DiseaseStatus ON LearningSamples.DiseaseStatusID = DiseaseStatus.DiseaseStatusID LEFT JOIN GroupRisk ON LearningSamples.GroupRiskID = GroupRisk.GroupRiskID ";
+
+            if (NetworkType != NetworkTypeEnum.DiseaseNeuralNetwork)
+            {
+                queryString += "WHERE LearningSamples.DiseaseStatusID = " + (int) NetworkType;
+            }
+
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand(queryString, connection);
@@ -102,23 +108,23 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
             {
 
                 var newSample = new DiseaseMonitoringSample();
-                newSample.Age = _random.Next(40, 60);
-                newSample.Gender = 2;
+                newSample.Age = _random.Next(60, 90);
+                newSample.Gender = 1;
                 newSample.Growth = Convert.ToDouble(_random.Next(150, 160)) / 100;
-                newSample.Weight = _random.Next(55, 75);
+                newSample.Weight = _random.Next(80, 90);
                 newSample.BodyMassIndex = newSample.Weight / (newSample.Growth * newSample.Growth);
                 newSample.Distance = _random.Next(1, 1);
                 newSample.SleepHoursCount = _random.Next(9, 11);
                 newSample.SleepQuality = _random.Next(6, 7);
                 newSample.SpentCalories = _random.Next(1500, 1600);
                 newSample.EatenCalories = _random.Next(3000, 3500);
-                newSample.FoodMultiplicity = _random.Next(5, 6);
-                newSample.FatAmount = newSample.Weight + _random.Next(10, 30);
+                newSample.FoodMultiplicity = _random.Next(4, 6);
+                newSample.FatAmount = newSample.Weight + _random.Next(30, 50);
                 newSample.CarbohydrateAmount = newSample.Weight * 4 + _random.Next(-15, 15);
                 newSample.ProteinAmount = newSample.Weight + _random.Next(-10, 10);
                 newSample.VitaminC = _random.Next(55, 65);
                 newSample.SugarLevel = _random.Next(4, 5);
-                newSample.StressLevel = _random.Next(4, 10);
+                newSample.StressLevel = _random.Next(6, 10);
                 newSample.Temperature = 36.6;
                 newSample.HightPressure = _random.Next(130, 135);
                 newSample.LowPressure = _random.Next(85, 100);
@@ -129,7 +135,7 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
                 };
                 newSample.GroupRisk = new GroupRisk
                 {
-                    GroupRiskType = RiskStatusEnum.Middle
+                    GroupRiskType = RiskStatusEnum.Hight
                 };
 
 
@@ -142,14 +148,16 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
             }
         }
 
-        private void PopulateSamples()
+        public ILearningSamplesRepository PopulateSamples()
         {
             var samplesList = GetAll();
 
             foreach (var sample in samplesList)
             {
-                LearningSamples.Add(_mapper.MapToLearningSample<NeuralLayer, Neuron>(sample, new LearningSample()));
-            }          
+                LearningSamples.Add(Mapper.MapToLearningSample<NeuralLayer, Neuron>(sample, new LearningSample()));
+            }
+
+            return this;
         }
 
         public static DiseaseMonitoringSample GetSampleFromReader(IDataRecord reader)
