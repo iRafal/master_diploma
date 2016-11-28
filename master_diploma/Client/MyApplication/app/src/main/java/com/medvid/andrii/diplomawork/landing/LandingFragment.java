@@ -12,9 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
-import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
+import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
 import com.medvid.andrii.diplomawork.data.forecast.suggestion.SuggestionTableContract;
-import com.medvid.andrii.diplomawork.data.forecast.suggestion.parameter.ParameterTableContract;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
@@ -62,10 +61,8 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
         Log.d("123", UserTableContract.CREATE_TABLE);
         Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
-        Log.d("123", DiseaseTableContract.CREATE_TABLE);
-        Log.d("123", GroupRiskTableContract.CREATE_TABLE);
         Log.d("123", SuggestionTableContract.CREATE_TABLE);
-        Log.d("123", ParameterTableContract.CREATE_TABLE);
+        Log.d("123", ForecastTableContract.CREATE_TABLE);
 //
 //        MasterDiplomaDbHelper masterDiplomaDbHelper = new MasterDiplomaDbHelper(getActivity());
 //        User user = new User(1,"email@email.email", "Andrii", "Medvid",
