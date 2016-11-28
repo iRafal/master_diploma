@@ -2,6 +2,7 @@
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -51,7 +52,7 @@ public class UsersLocalDataSource implements UserDataSourceContract {
     @Override
     public void deleteUser(@NonNull String userId) {
         checkNotNull(userId);
-        String selection = UserTableContract._ID + " LIKE ?";
+        String selection = BaseColumns._ID + " LIKE ?";
         String[] selectionArgs = {userId};
 
         mContentResolver.delete(UserTableContract.buildUri(), selection, selectionArgs);
@@ -68,7 +69,7 @@ public class UsersLocalDataSource implements UserDataSourceContract {
 
         ContentValues values = UserTableContract.getInstance().getContentValues(user);
 
-        String selection = UserTableContract._ID + " LIKE ?";
+        String selection = BaseColumns._ID + " LIKE ?";
         String[] selectionArgs = {  Long.toString(user.getId())  };
 
         mContentResolver.update(UserTableContract.buildUri(), values, selection, selectionArgs);
