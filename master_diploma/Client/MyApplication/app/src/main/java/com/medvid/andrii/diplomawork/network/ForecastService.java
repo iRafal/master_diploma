@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.network;
+package com.medvid.andrii.diplomawork.network;
 
 import android.support.annotation.NonNull;
 

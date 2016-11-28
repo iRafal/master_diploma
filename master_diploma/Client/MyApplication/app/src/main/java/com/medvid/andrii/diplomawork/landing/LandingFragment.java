@@ -53,6 +53,15 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
+
+//        Log.d("123", UserTableContract.CREATE_TABLE);
+//        Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
+//        Log.d("123", DiseaseTableContract.CREATE_TABLE);
+//        Log.d("123", GroupRiskTableContract.CREATE_TABLE);
+//        Log.d("123", SuggestionTableContract.CREATE_TABLE);
+//        Log.d("123", ParameterTableContract.CREATE_TABLE);
+//
+//        MasterDiplomaDbHelper masterDiplomaDbHelper = new MasterDiplomaDbHelper(getActivity());
     }
 
     @Override

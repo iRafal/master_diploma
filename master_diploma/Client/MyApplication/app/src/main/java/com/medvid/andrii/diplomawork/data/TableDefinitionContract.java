@@ -16,7 +16,13 @@ public interface TableDefinitionContract<T extends ModelEntity> extends BaseColu
 
     String PRIMARY_KEY = "PRIMARY KEY";
 
+    String FOREIGN_KEY = "FOREIGN KEY";
+
+    String REFERENCES  = "REFERENCES ";
+
     String AUTOINCREMENT = "AUTOINCREMENT";
+
+    String ON_DELETE_CASCADE = "ON DELETE CASCADE";
 
     String TEXT_TYPE = "TEXT";
 
@@ -26,11 +32,9 @@ public interface TableDefinitionContract<T extends ModelEntity> extends BaseColu
 
     String REAL_TYPE = "REAL";
 
-    String COMMA = ",";
+    String DATE_TYPE = "DATE";
 
-    String SPACE = " ";
-
-    String INTEGER_PRIMARY_KEY_ROW_DEFINITION = BaseColumns._ID + SPACE + INTEGER_TYPE + SPACE + PRIMARY_KEY;
+    String INTEGER_PRIMARY_KEY_ROW_DEFINITION = BaseColumns._ID + " " + INTEGER_TYPE + " " + PRIMARY_KEY;
 
     String CONTENT_AUTHORITY = BuildConfig.APPLICATION_ID;
 

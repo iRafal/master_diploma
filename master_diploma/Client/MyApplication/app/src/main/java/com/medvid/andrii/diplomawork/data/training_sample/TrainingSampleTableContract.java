@@ -8,9 +8,6 @@ import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.TableDefinitionContract;
-import com.medvid.andrii.diplomawork.data.statistics.Calories;
-import com.medvid.andrii.diplomawork.data.statistics.Pressure;
-import com.medvid.andrii.diplomawork.data.statistics.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 
 public class TrainingSampleTableContract implements TableDefinitionContract<TrainingSample> {
@@ -49,39 +46,41 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
     public static final String PULSE = "pulse";
     public static final String TIME_STAMP = "time_stamp";
     public static final String IS_FORECAST = "is_forecast";
+    public static final String IS_STATISTICS = "is_statistics";
 
     public static final String CREATE_TABLE =
-            CREATE_TABLE_IF_NOT_EXISTS + SPACE + TABLE_NAME + SPACE + "("
-                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + SPACE + AUTOINCREMENT + COMMA
-                    + AGE + SPACE + REAL_TYPE + COMMA // Static user info
-                    + GENDER + SPACE + REAL_TYPE + COMMA // Static user info
-                    + GROWTH + SPACE + REAL_TYPE + COMMA // Static user info
-                    + WEIGHT + SPACE + REAL_TYPE + COMMA // Static user info
-                    + BODY_MASS_INDEX + SPACE + REAL_TYPE // Static user info
-                    + DISTANCE + SPACE + REAL_TYPE + COMMA
-                    + SLEEP_HOURS_COUNT + SPACE + REAL_TYPE + COMMA  // Sleep
-                    + SLEEP_QUALITY + SPACE + REAL_TYPE + COMMA  // Sleep
-                    + SPENT_CALORIES + SPACE + REAL_TYPE + COMMA    // Calories
-                    + EATEN_CALORIES + SPACE + REAL_TYPE + COMMA    // Calories
-                    + FOOD_MULTIPLICITY + SPACE + REAL_TYPE + COMMA
-                    + FAT_AMOUNT + SPACE + REAL_TYPE + COMMA
-                    + CARBOHYDRATE_AMOUNT + SPACE + REAL_TYPE + COMMA
-                    + PROTEIN_AMOUNT + SPACE + REAL_TYPE + COMMA
-                    + VITAMIN_C + SPACE + REAL_TYPE + COMMA
-                    + SUGAR_LEVEL + SPACE + REAL_TYPE + COMMA
-                    + STRESS_LEVEL + SPACE + REAL_TYPE + COMMA
-                    + TEMPERATURE + SPACE + REAL_TYPE + COMMA
-                    + HIGH_PRESSURE + SPACE + REAL_TYPE + COMMA // Pressure
-                    + LOW_PRESSURE + SPACE + REAL_TYPE + COMMA // Pressure
-                    + PULSE + SPACE + REAL_TYPE + COMMA
-                    + TIME_STAMP + SPACE + REAL_TYPE + COMMA
-                    + IS_FORECAST + SPACE + BOOLEAN_TYPE
-                    + SPACE + ")";
+            CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " ( "
+                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + " " + AUTOINCREMENT + ", "
+                    + AGE + " " + REAL_TYPE + ", " // Static user info
+                    + GENDER + " " + REAL_TYPE + ", " // Static user info
+                    + GROWTH + " " + REAL_TYPE + ", " // Static user info
+                    + WEIGHT + " " + REAL_TYPE + ", " // Static user info
+                    + BODY_MASS_INDEX + " " + REAL_TYPE + ", " // Static user info
+                    + DISTANCE + " " + REAL_TYPE + ", "
+                    + SLEEP_HOURS_COUNT + " " + REAL_TYPE + ", "  // Sleep
+                    + SLEEP_QUALITY + " " + REAL_TYPE + ", " // Sleep
+                    + SPENT_CALORIES + " " + REAL_TYPE + ", "    // Calories
+                    + EATEN_CALORIES + " " + REAL_TYPE + ", "    // Calories
+                    + FOOD_MULTIPLICITY + " " + REAL_TYPE + ", "
+                    + FAT_AMOUNT + " " + REAL_TYPE + ", "
+                    + CARBOHYDRATE_AMOUNT + " " + REAL_TYPE + ", "
+                    + PROTEIN_AMOUNT + " " + REAL_TYPE + ", "
+                    + VITAMIN_C + " " + REAL_TYPE + ", "
+                    + SUGAR_LEVEL + " " + REAL_TYPE + ", "
+                    + STRESS_LEVEL + " " + REAL_TYPE + ", "
+                    + TEMPERATURE + " " + REAL_TYPE + ", "
+                    + HIGH_PRESSURE + " " + REAL_TYPE + ", " // Pressure
+                    + LOW_PRESSURE + " " + REAL_TYPE + ", "// Pressure
+                    + PULSE + " " + REAL_TYPE + ", "
+                    + TIME_STAMP + " " + REAL_TYPE + ", "
+                    + IS_FORECAST + " " + BOOLEAN_TYPE + ", "
+                    + IS_STATISTICS + " " + BOOLEAN_TYPE
+                    + " )";
 
-    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
+    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
 
-    public static final int CODE_TRAINING_SAMPLE = 4;
-    public static final int CODE_TRAINING_SAMPLE_ITEM = 5;
+    public static final int CODE_TRAINING_SAMPLE = 2;
+    public static final int CODE_TRAINING_SAMPLE_ITEM = 3;
     public static final String CONTENT_TRAINING_SAMPLE_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_TRAINING_SAMPLE_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();
@@ -130,7 +129,8 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
 
                 PULSE,
                 TIME_STAMP,
-                IS_FORECAST
+                IS_FORECAST,
+                IS_STATISTICS
         };
     }
 
@@ -164,6 +164,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         values.put(PULSE, trainingSample.getPulse());
         values.put(TIME_STAMP, trainingSample.getTimeStamp());
         values.put(IS_FORECAST, trainingSample.isForecast());
+        values.put(IS_STATISTICS, trainingSample.isStatistics());
 
         return values;
     }
@@ -196,6 +197,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         int pulseIndex = cursor.getColumnIndexOrThrow(PULSE);
         int timeStampIndex = cursor.getColumnIndexOrThrow(TIME_STAMP);
         int isForecastIndex = cursor.getColumnIndexOrThrow(IS_FORECAST);
+        int isStatisticsIndex = cursor.getColumnIndexOrThrow(IS_STATISTICS);
 
 
         int id = cursor.getInt(idIndex);
@@ -222,6 +224,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         double pulse = cursor.getDouble(pulseIndex);
         long timeStamp = cursor.getLong(timeStampIndex);
         boolean isForecast = cursor.getInt(isForecastIndex) == 1;
+        boolean isStatistics = cursor.getInt(isStatisticsIndex) == 1;
 
         return new TrainingSample(id,
                 age,
@@ -242,6 +245,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
                 new Pressure(highPressure, lowPressure),
                 pulse,
                 timeStamp,
-                isForecast);
+                isForecast,
+                isStatistics);
     }
 }

@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.network;
+package com.medvid.andrii.diplomawork.network;
 
 import java.util.List;
 import java.util.Map;

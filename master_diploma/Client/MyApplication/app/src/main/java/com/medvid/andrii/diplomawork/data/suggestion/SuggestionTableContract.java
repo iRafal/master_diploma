@@ -9,7 +9,9 @@ import android.support.annotation.NonNull;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.TableDefinitionContract;
 import com.medvid.andrii.diplomawork.data.disease.Disease;
+import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
 import com.medvid.andrii.diplomawork.data.suggestion.parameter.Parameter;
+import com.medvid.andrii.diplomawork.data.suggestion.parameter.ParameterTableContract;
 
 public class SuggestionTableContract implements TableDefinitionContract<Suggestion> {
 
@@ -20,17 +22,18 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
     public static final String PARAMETER_ID = "parameter_id";
 
     public static final String CREATE_TABLE =
-            CREATE_TABLE_IF_NOT_EXISTS + SPACE + TABLE_NAME + SPACE + "("
-                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + COMMA
-                    + DESCRIPTION + SPACE + TEXT_TYPE + COMMA
-                    + DISEASE_ID + SPACE + INTEGER_TYPE + COMMA
-                    + PARAMETER_ID + SPACE + INTEGER_TYPE
-                    + SPACE + ")";
+            CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " ( "
+                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + " " + AUTOINCREMENT + ", "
+                    + DESCRIPTION + " " + TEXT_TYPE + ", "
+                    + DISEASE_ID + " " + INTEGER_TYPE + ", "
+                    + FOREIGN_KEY + " (" + DISEASE_ID + ") " + REFERENCES + " " + DiseaseTableContract.TABLE_NAME + "(" + _ID + ") " + ON_DELETE_CASCADE + " "
+                    + PARAMETER_ID + " " + INTEGER_TYPE + " " + REFERENCES + " " + ParameterTableContract.TABLE_NAME + "(" + _ID + ") " + ON_DELETE_CASCADE
+                    + " )";
 
-    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
+    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
 
-    public static final int CODE_SUGGESTION = 10;
-    public static final int CODE_SUGGESTION_ITEM = 11;
+    public static final int CODE_SUGGESTION = 8;
+    public static final int CODE_SUGGESTION_ITEM = 9;
     public static final String CONTENT_SUGGESTION_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_SUGGESTION_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

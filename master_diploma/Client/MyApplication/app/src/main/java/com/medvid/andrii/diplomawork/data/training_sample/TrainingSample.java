@@ -2,9 +2,6 @@ package com.medvid.andrii.diplomawork.data.training_sample;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
-import com.medvid.andrii.diplomawork.data.statistics.Calories;
-import com.medvid.andrii.diplomawork.data.statistics.Pressure;
-import com.medvid.andrii.diplomawork.data.statistics.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 
 public class TrainingSample implements ModelEntity {
@@ -30,6 +27,7 @@ public class TrainingSample implements ModelEntity {
     private double pulse; // 60
     private long timeStamp;
     private boolean isForecast;
+    private boolean isStatistics;
 
     public TrainingSample() {
         // Test empty constructor
@@ -40,7 +38,7 @@ public class TrainingSample implements ModelEntity {
                           double foodMultiplicity, double fatAmount, double carbohydrateAmount,
                           double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
                           double temperature, Pressure pressure, double pulse, long timestamp,
-                          boolean isForecast) {
+                          boolean isForecast, boolean isStatistics) {
 
         Preconditions.checkNotNull(sleep);
         Preconditions.checkNotNull(calories);
@@ -67,6 +65,7 @@ public class TrainingSample implements ModelEntity {
         this.pulse = pulse;
         this.timeStamp = timestamp;
         this.isForecast = isForecast;
+        this.isStatistics = isStatistics;
     }
 
     public long getId() {
@@ -237,6 +236,14 @@ public class TrainingSample implements ModelEntity {
         isForecast = isForecast;
     }
 
+    public boolean isStatistics() {
+        return isStatistics;
+    }
+
+    public void setStatistics(boolean statistics) {
+        isStatistics = statistics;
+    }
+
     @Override
     public String toString() {
         return "TrainingSample{" +
@@ -261,6 +268,7 @@ public class TrainingSample implements ModelEntity {
                 ", pulse=" + pulse +
                 ", timeStamp=" + timeStamp +
                 ", isForecast=" + isForecast +
+                ", isStatistics=" + isStatistics +
                 '}';
     }
 
@@ -269,30 +277,31 @@ public class TrainingSample implements ModelEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TrainingSample trainingSample = (TrainingSample) o;
+        TrainingSample that = (TrainingSample) o;
 
-        if (id != trainingSample.id) return false;
-        if (Double.compare(trainingSample.age, age) != 0) return false;
-        if (gender != trainingSample.gender) return false;
-        if (Double.compare(trainingSample.growth, growth) != 0) return false;
-        if (Double.compare(trainingSample.weight, weight) != 0) return false;
-        if (Double.compare(trainingSample.bodyMassIndex, bodyMassIndex) != 0) return false;
-        if (Double.compare(trainingSample.distance, distance) != 0) return false;
-        if (Double.compare(trainingSample.foodMultiplicity, foodMultiplicity) != 0) return false;
-        if (Double.compare(trainingSample.fatAmount, fatAmount) != 0) return false;
-        if (Double.compare(trainingSample.carbohydrateAmount, carbohydrateAmount) != 0) return false;
-        if (Double.compare(trainingSample.proteinAmount, proteinAmount) != 0) return false;
-        if (Double.compare(trainingSample.vitaminC, vitaminC) != 0) return false;
-        if (Double.compare(trainingSample.sugarLevel, sugarLevel) != 0) return false;
-        if (Double.compare(trainingSample.stressLevel, stressLevel) != 0) return false;
-        if (Double.compare(trainingSample.temperature, temperature) != 0) return false;
-        if (Double.compare(trainingSample.pulse, pulse) != 0) return false;
-        if (timeStamp != trainingSample.timeStamp) return false;
-        if (isForecast != trainingSample.isForecast) return false;
-        if (mSleep != null ? !mSleep.equals(trainingSample.mSleep) : trainingSample.mSleep != null) return false;
-        if (mCalories != null ? !mCalories.equals(trainingSample.mCalories) : trainingSample.mCalories != null)
+        if (id != that.id) return false;
+        if (Double.compare(that.age, age) != 0) return false;
+        if (gender != that.gender) return false;
+        if (Double.compare(that.growth, growth) != 0) return false;
+        if (Double.compare(that.weight, weight) != 0) return false;
+        if (Double.compare(that.bodyMassIndex, bodyMassIndex) != 0) return false;
+        if (Double.compare(that.distance, distance) != 0) return false;
+        if (Double.compare(that.foodMultiplicity, foodMultiplicity) != 0) return false;
+        if (Double.compare(that.fatAmount, fatAmount) != 0) return false;
+        if (Double.compare(that.carbohydrateAmount, carbohydrateAmount) != 0) return false;
+        if (Double.compare(that.proteinAmount, proteinAmount) != 0) return false;
+        if (Double.compare(that.vitaminC, vitaminC) != 0) return false;
+        if (Double.compare(that.sugarLevel, sugarLevel) != 0) return false;
+        if (Double.compare(that.stressLevel, stressLevel) != 0) return false;
+        if (Double.compare(that.temperature, temperature) != 0) return false;
+        if (Double.compare(that.pulse, pulse) != 0) return false;
+        if (timeStamp != that.timeStamp) return false;
+        if (isForecast != that.isForecast) return false;
+        if (isStatistics != that.isStatistics) return false;
+        if (mSleep != null ? !mSleep.equals(that.mSleep) : that.mSleep != null) return false;
+        if (mCalories != null ? !mCalories.equals(that.mCalories) : that.mCalories != null)
             return false;
-        return mPressure != null ? mPressure.equals(trainingSample.mPressure) : trainingSample.mPressure == null;
+        return mPressure != null ? mPressure.equals(that.mPressure) : that.mPressure == null;
 
     }
 
@@ -335,6 +344,7 @@ public class TrainingSample implements ModelEntity {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (int) (timeStamp ^ (timeStamp >>> 32));
         result = 31 * result + (isForecast ? 1 : 0);
+        result = 31 * result + (isStatistics ? 1 : 0);
         return result;
     }
 }

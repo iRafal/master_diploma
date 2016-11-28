@@ -23,18 +23,18 @@ public class UserTableContract implements TableDefinitionContract<User> {
     public static final String BODY_MASS_INDEX = "body_mass_index";
 
     public static final String CREATE_TABLE =
-            CREATE_TABLE_IF_NOT_EXISTS + SPACE + TABLE_NAME + SPACE + "("
-                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + COMMA
-                    + EMAIL + SPACE + TEXT_TYPE + COMMA
-                    + FIRST_NAME + SPACE + TEXT_TYPE + COMMA
-                    + AGE + SPACE + REAL_TYPE + COMMA
-                    + GENDER + SPACE + REAL_TYPE + COMMA
-                    + GROWTH + SPACE + REAL_TYPE + COMMA
-                    + WEIGHT + SPACE + REAL_TYPE + COMMA
-                    + BODY_MASS_INDEX + SPACE + REAL_TYPE
-                    + SPACE + ")";
+            CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " " + "(" + " "
+                    + INTEGER_PRIMARY_KEY_ROW_DEFINITION + " " + AUTOINCREMENT + ", "
+                    + EMAIL + " " + TEXT_TYPE + ", "
+                    + FIRST_NAME + " " + TEXT_TYPE + ", "
+                    + AGE + " " + REAL_TYPE + ", "
+                    + GENDER + " " + REAL_TYPE + ", "
+                    + GROWTH + " " + REAL_TYPE + ", "
+                    + WEIGHT + " " + REAL_TYPE + ", "
+                    + BODY_MASS_INDEX + " " + REAL_TYPE
+                    + " )";
 
-    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
+    public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
 
     public static final int CODE_USER = 0;
     public static final int CODE_USER_ITEM = 1;
