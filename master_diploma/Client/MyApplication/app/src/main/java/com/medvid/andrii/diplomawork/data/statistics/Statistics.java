@@ -1,5 +1,6 @@
 package com.medvid.andrii.diplomawork.data.statistics;
 
+import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
 
 public class Statistics implements ModelEntity {
@@ -25,6 +26,11 @@ public class Statistics implements ModelEntity {
                       double proteinAmount, double vitaminC, double sugarLevel,
                       double stressLevel, double temperature, Pressure pressure, double pulse,
                       long timeStamp) {
+
+        Preconditions.checkNotNull(sleep);
+        Preconditions.checkNotNull(calories);
+        Preconditions.checkNotNull(pressure);
+
         this.id = id;
         this.distance = distance;
         mSleep = sleep;

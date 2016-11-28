@@ -32,6 +32,7 @@ public class User implements ModelEntity {
 
     public User(long id, String email, String firstName, String lastName, double age,
                 @User.Gender int gender, double growth, double weight, double bodyMassIndex) {
+
         this.id = id;
         this.email = email;
         this.firstName = firstName;

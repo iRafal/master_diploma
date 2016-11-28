@@ -1,5 +1,6 @@
 package com.medvid.andrii.diplomawork.data.sample;
 
+import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
 import com.medvid.andrii.diplomawork.data.statistics.Calories;
 import com.medvid.andrii.diplomawork.data.statistics.Pressure;
@@ -36,6 +37,10 @@ public class TrainingSample implements ModelEntity {
                           double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
                           double temperature, Pressure pressure, double pulse, long timestamp,
                           boolean isForecast) {
+
+        Preconditions.checkNotNull(sleep);
+        Preconditions.checkNotNull(calories);
+        Preconditions.checkNotNull(pressure);
 
         this.id = id;
         this.age = age;
