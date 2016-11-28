@@ -94,7 +94,7 @@ namespace NeuralNetworkSystemBLL
                 throw new NullReferenceException("Learning Samples repository are empty");
             }
 
-            NormalizeSamples();
+           // NormalizeSamples();
 
             for (var i = 0; i <= MaximumEpochCount;)
             {

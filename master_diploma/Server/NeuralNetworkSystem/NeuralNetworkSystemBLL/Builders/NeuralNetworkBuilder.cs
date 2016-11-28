@@ -35,7 +35,6 @@ namespace NeuralNetworkSystemBLL.Builders
                 ErrorThreshold = 0,
                 ErrorsCountThreshold = 100
             };
-
         }
 
         public INeuralNetworkBuilder<T> WithLayerType(ILayer layerType)

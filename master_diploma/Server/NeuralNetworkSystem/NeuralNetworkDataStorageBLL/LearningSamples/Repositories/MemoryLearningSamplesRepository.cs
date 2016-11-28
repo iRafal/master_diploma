@@ -10,6 +10,10 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
     public class MemoryLearningSamplesRepository : ILearningSamplesRepository
     {
         public List<ILearningSample> LearningSamples { get; set; }
+        public ILearningSamplesRepository PopulateSamples()
+        {
+            throw new NotImplementedException();
+        }
 
         private Random _random;
 
