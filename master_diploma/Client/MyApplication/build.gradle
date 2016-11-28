@@ -38,5 +38,8 @@ ext {
     junitVersion = '4.12'
     espressoVersion = '2.2.2'
     constraintLayoutVersion = '1.0.0-beta4'
+    retrofitVersion = '2.1.0'
+    okhttpVersion = '3.4.2'
+    gsonVersion = '2.8.0'
 }
 

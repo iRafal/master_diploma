@@ -1,6 +1,5 @@
 package com.medvid.andrii.diplomawork.data.user;
 
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -120,15 +119,5 @@ public class UsersRepository implements UserDataSourceContract {
         for (User user : users) {
             mUsersLocalDataSource.saveUser(user);
         }
-    }
-
-    public interface LoadDataCallback {
-        void onDataLoaded(Cursor data);
-
-        void onDataEmpty();
-
-        void onDataNotAvailable();
-
-        void onDataReset();
     }
 }

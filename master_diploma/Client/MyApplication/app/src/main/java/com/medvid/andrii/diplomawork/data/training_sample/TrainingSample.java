@@ -31,6 +31,10 @@ public class TrainingSample implements ModelEntity {
     private long timeStamp;
     private boolean isForecast;
 
+    public TrainingSample() {
+        // Test empty constructor
+    }
+
     public TrainingSample(long id, double age, @User.Gender int gender, double growth, double weight,
                           double bodyMassIndex, double distance, Sleep sleep, Calories calories,
                           double foodMultiplicity, double fatAmount, double carbohydrateAmount,

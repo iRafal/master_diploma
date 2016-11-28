@@ -2,6 +2,8 @@ package com.medvid.andrii.diplomawork.data.user;
 
 import android.support.annotation.NonNull;
 
+import com.google.common.base.Preconditions;
+
 import java.util.ArrayList;
 
 public class UsersRemoteDataSource implements UserDataSourceContract {
@@ -54,6 +56,6 @@ public class UsersRemoteDataSource implements UserDataSourceContract {
 
     @Override
     public void updateUser(@NonNull User user) {
-
+        Preconditions.checkNotNull(user);
     }
 }
