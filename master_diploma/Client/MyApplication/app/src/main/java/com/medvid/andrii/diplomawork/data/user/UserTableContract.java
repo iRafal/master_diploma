@@ -74,15 +74,15 @@ public class UserTableContract implements TableDefinitionContract<User> {
         Preconditions.checkNotNull(user);
 
         ContentValues values = new ContentValues();
-        values.put(BaseColumns._ID, user.getId());
-        values.put(UserTableContract.EMAIL, user.getEmail());
-        values.put(UserTableContract.FIRST_NAME, user.getFirstName());
-        values.put(UserTableContract.LAST_NAME, user.getLastName());
-        values.put(UserTableContract.AGE, user.getAge());
-        values.put(UserTableContract.GENDER, user.getGender());
-        values.put(UserTableContract.GROWTH, user.getGrowth());
-        values.put(UserTableContract.WEIGHT, user.getWeight());
-        values.put(UserTableContract.BODY_MASS_INDEX, user.getBodyMassIndex());
+        values.put(_ID, user.getId());
+        values.put(EMAIL, user.getEmail());
+        values.put(FIRST_NAME, user.getFirstName());
+        values.put(LAST_NAME, user.getLastName());
+        values.put(AGE, user.getAge());
+        values.put(GENDER, user.getGender());
+        values.put(GROWTH, user.getGrowth());
+        values.put(WEIGHT, user.getWeight());
+        values.put(BODY_MASS_INDEX, user.getBodyMassIndex());
 
         return values;
     }
@@ -91,15 +91,15 @@ public class UserTableContract implements TableDefinitionContract<User> {
     public User getEntity(@NonNull Cursor cursor) {
         Preconditions.checkNotNull(cursor);
 
-        int idIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
-        int emailIndex = cursor.getColumnIndexOrThrow(UserTableContract.EMAIL);
-        int firstNameIndex = cursor.getColumnIndexOrThrow(UserTableContract.FIRST_NAME);
-        int lastNameIndex = cursor.getColumnIndexOrThrow(UserTableContract.LAST_NAME);
-        int ageIndex = cursor.getColumnIndexOrThrow(UserTableContract.AGE);
-        int genderIndex = cursor.getColumnIndexOrThrow(UserTableContract.GENDER);
-        int growthIndex = cursor.getColumnIndexOrThrow(UserTableContract.GROWTH);
-        int weightIndex = cursor.getColumnIndexOrThrow(UserTableContract.WEIGHT);
-        int bodyMassIndexValue = cursor.getColumnIndexOrThrow(UserTableContract.BODY_MASS_INDEX);
+        int idIndex = cursor.getColumnIndexOrThrow(_ID);
+        int emailIndex = cursor.getColumnIndexOrThrow(EMAIL);
+        int firstNameIndex = cursor.getColumnIndexOrThrow(FIRST_NAME);
+        int lastNameIndex = cursor.getColumnIndexOrThrow(LAST_NAME);
+        int ageIndex = cursor.getColumnIndexOrThrow(AGE);
+        int genderIndex = cursor.getColumnIndexOrThrow(GENDER);
+        int growthIndex = cursor.getColumnIndexOrThrow(GROWTH);
+        int weightIndex = cursor.getColumnIndexOrThrow(WEIGHT);
+        int bodyMassIndexValue = cursor.getColumnIndexOrThrow(BODY_MASS_INDEX);
 
         int id = cursor.getInt(idIndex);
         String email = cursor.getString(emailIndex);

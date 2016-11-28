@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
+import com.medvid.andrii.diplomawork.data.group_risk.GroupRiskTableContract;
 import com.medvid.andrii.diplomawork.data.sample.TrainingSampleTableContract;
 import com.medvid.andrii.diplomawork.data.statistics.StatisticsTableContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
@@ -22,6 +24,8 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(UserTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(StatisticsTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(TrainingSampleTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(DiseaseTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(GroupRiskTableContract.CREATE_TABLE);
     }
 
     @Override
