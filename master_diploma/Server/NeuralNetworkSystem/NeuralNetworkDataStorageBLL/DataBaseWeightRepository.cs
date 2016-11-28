@@ -36,6 +36,8 @@ namespace NeuralNetworkDataStorageBLL
 
         public void UpdateWeights()
         {
+            CleanWeightRepository();
+
             foreach (var layerValue in _repository.Values)
             {
                 foreach (var neuronValues in layerValue.Values)

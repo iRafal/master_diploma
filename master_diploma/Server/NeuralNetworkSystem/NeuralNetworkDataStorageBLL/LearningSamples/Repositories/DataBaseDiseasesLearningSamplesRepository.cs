@@ -8,8 +8,8 @@ using System.Linq;
 using NeuralNetworkDataStorageBLL.DTO;
 using NeuralNetworkDataStorageBLL.Enums;
 using NeuralNetworkDataStorageBLL.LearningSamples.Mappers;
-using NeuralNetworkDataStorageBLL.LearningSamples.Mappers.OutPutMappers;
 using NeuralNetworkSystemBLL.NeuralNetworkComponents;
+using NeuralNetworkSystemBLL.Attributes;
 
 namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
 {
@@ -56,48 +56,6 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
 
             SamplesList = resultList.ToList();
             return resultList;
-        }
-
-        public void AddSample(DiseaseMonitoringSample sample)
-        {
-            var queryString =
-                "INSERT INTO LearningSamples(Age, Gender, Growth, Weight, BodyMassIndex, Distance, SleepHoursCount, SleepQuality, SpentCalories," +
-                " EatenCalories, FoodMultiplicity, FatAmount, CarbohydrateAmount, ProteinAmount, VitaminC, SugarLevel, StressLevel, Temperature, HightPressure, LowPressure, Pulse, DiseaseStatusID, GroupRiskID )" +
-                " VALUES (@Age, @Gender, @Growth, @Weight, @BodyMassIndex, @Distance, @SleepHoursCount, @SleepQuality, @SpentCalories, @EatenCalories, @FoodMultiplicity," +
-                " @FatAmount, @CarbohydrateAmount, @ProteinAmount, @VitaminC, @SugarLevel, @StressLevel, @Temperature, @HightPressure, @LowPressure, @Pulse, @DiseaseStatusID, @GroupRiskID )";
-
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                using (var cmd = new SqlCommand(queryString, connection))
-                {
-                    cmd.Parameters.Add("@Age", SqlDbType.Float).Value = sample.Age;
-                    cmd.Parameters.Add("@Gender", SqlDbType.Float).Value = sample.Gender;
-                    cmd.Parameters.Add("@Growth", SqlDbType.Float).Value = sample.Growth;
-                    cmd.Parameters.Add("@Weight", SqlDbType.Float).Value = sample.Weight;
-                    cmd.Parameters.Add("@BodyMassIndex", SqlDbType.Float).Value = sample.BodyMassIndex;
-                    cmd.Parameters.Add("@Distance", SqlDbType.Float).Value = sample.Distance;
-                    cmd.Parameters.Add("@SleepHoursCount", SqlDbType.Float).Value = sample.SleepHoursCount;
-                    cmd.Parameters.Add("@SleepQuality", SqlDbType.Float).Value = sample.SleepQuality;
-                    cmd.Parameters.Add("@SpentCalories", SqlDbType.Float).Value = sample.SpentCalories;
-                    cmd.Parameters.Add("@EatenCalories", SqlDbType.Float).Value = sample.EatenCalories;
-                    cmd.Parameters.Add("@FoodMultiplicity", SqlDbType.Float).Value = sample.FoodMultiplicity;
-                    cmd.Parameters.Add("@FatAmount", SqlDbType.Float).Value = sample.FatAmount;
-                    cmd.Parameters.Add("@CarbohydrateAmount", SqlDbType.Float).Value = sample.CarbohydrateAmount;
-                    cmd.Parameters.Add("@ProteinAmount", SqlDbType.Float).Value = sample.ProteinAmount;
-                    cmd.Parameters.Add("@VitaminC", SqlDbType.Float).Value = sample.VitaminC;
-                    cmd.Parameters.Add("@SugarLevel", SqlDbType.Float).Value = sample.SugarLevel;
-                    cmd.Parameters.Add("@StressLevel", SqlDbType.Float).Value = sample.StressLevel;
-                    cmd.Parameters.Add("@Temperature", SqlDbType.Float).Value = sample.Temperature;
-                    cmd.Parameters.Add("@HightPressure", SqlDbType.Float).Value = sample.HightPressure;
-                    cmd.Parameters.Add("@LowPressure", SqlDbType.Float).Value = sample.LowPressure;
-                    cmd.Parameters.Add("@Pulse", SqlDbType.Float).Value = sample.Pulse;
-                    cmd.Parameters.Add("@DiseaseStatusID", SqlDbType.Int).Value = (int)sample.Disease.Status;
-                    cmd.Parameters.Add("@GroupRiskID", SqlDbType.Int).Value = (int) sample.GroupRisk.GroupRiskType;
-
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
         }
 
         public void Generate()
@@ -164,6 +122,7 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
         {
             var newSample = new DiseaseMonitoringSample
             {
+                SampleID = reader["SampleID"] != null ? Convert.ToInt32(reader["SampleID"]) : 0,
                 Age = reader["Age"] != null ? Convert.ToDouble(reader["Age"]) : 0,
                 Gender = reader["Gender"] != null ? Convert.ToDouble(reader["Gender"]) : 0,
                 Growth = reader["Growth"] != null ? Convert.ToDouble(reader["Growth"]) : 0,
@@ -202,5 +161,115 @@ namespace NeuralNetworkDataStorageBLL.LearningSamples.Repositories
 
             return newSample;
         }
+
+        public void SaveNewSample(DiseaseMonitoringSample newSample)
+        {
+            var fromDbList = GetAll();
+            var allSamples = ToDistanceObject(fromDbList).ToList();
+
+            foreach (var sample in allSamples)
+            {
+                sample.Distance = CalculateDistance(newSample, sample.LearningSample);
+            }
+
+            var toDelete = allSamples.OrderBy(s => s.Distance).Take(GetFivePercentCount(allSamples)).ToList().Last();
+
+            DeleteSample(toDelete.LearningSample);
+            AddSample(newSample);
+        }
+
+        private int GetFivePercentCount(IEnumerable<LearningSampleSpaceDistance> samples)
+        {
+            var count = samples.Count();
+            var fivePercentCount = count * 5/100;
+            return fivePercentCount;
+        }
+
+        private double CalculateDistance(DiseaseMonitoringSample from, DiseaseMonitoringSample to)
+        {
+            double sum = 0;
+            var typeProperties = to.GetType().GetProperties();
+
+            foreach (var prop in typeProperties)
+            {
+                var attributes = prop.GetCustomAttributes(true);
+                foreach (var attribute in attributes)
+                {
+                    var inputAttibute = attribute as InputTrainingSampleAttribute;
+
+                    if (inputAttibute != null)
+                    {
+                        var toValue = Convert.ToDouble(prop.GetValue(to, null));
+                        var fromValue = Convert.ToDouble(from.GetType().GetProperty(prop.Name).GetValue(from));
+
+                        sum += Math.Pow(toValue - fromValue, 2);
+                    }
+                }
+            }
+
+            var sqrt = Math.Sqrt(sum);
+
+            return sqrt;
+        }
+
+        private IEnumerable<LearningSampleSpaceDistance> ToDistanceObject(IEnumerable<DiseaseMonitoringSample> samples)
+        {
+            return samples.Select(sample => new LearningSampleSpaceDistance() {LearningSample = sample});           
+        }
+
+        private void AddSample(DiseaseMonitoringSample sample)
+        {
+            var queryString =
+                "INSERT INTO LearningSamples(Age, Gender, Growth, Weight, BodyMassIndex, Distance, SleepHoursCount, SleepQuality, SpentCalories," +
+                " EatenCalories, FoodMultiplicity, FatAmount, CarbohydrateAmount, ProteinAmount, VitaminC, SugarLevel, StressLevel, Temperature, HightPressure, LowPressure, Pulse, DiseaseStatusID, GroupRiskID )" +
+                " VALUES (@Age, @Gender, @Growth, @Weight, @BodyMassIndex, @Distance, @SleepHoursCount, @SleepQuality, @SpentCalories, @EatenCalories, @FoodMultiplicity," +
+                " @FatAmount, @CarbohydrateAmount, @ProteinAmount, @VitaminC, @SugarLevel, @StressLevel, @Temperature, @HightPressure, @LowPressure, @Pulse, @DiseaseStatusID, @GroupRiskID )";
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var cmd = new SqlCommand(queryString, connection))
+                {
+                    cmd.Parameters.Add("@Age", SqlDbType.Float).Value = sample.Age;
+                    cmd.Parameters.Add("@Gender", SqlDbType.Float).Value = sample.Gender;
+                    cmd.Parameters.Add("@Growth", SqlDbType.Float).Value = sample.Growth;
+                    cmd.Parameters.Add("@Weight", SqlDbType.Float).Value = sample.Weight;
+                    cmd.Parameters.Add("@BodyMassIndex", SqlDbType.Float).Value = sample.BodyMassIndex;
+                    cmd.Parameters.Add("@Distance", SqlDbType.Float).Value = sample.Distance;
+                    cmd.Parameters.Add("@SleepHoursCount", SqlDbType.Float).Value = sample.SleepHoursCount;
+                    cmd.Parameters.Add("@SleepQuality", SqlDbType.Float).Value = sample.SleepQuality;
+                    cmd.Parameters.Add("@SpentCalories", SqlDbType.Float).Value = sample.SpentCalories;
+                    cmd.Parameters.Add("@EatenCalories", SqlDbType.Float).Value = sample.EatenCalories;
+                    cmd.Parameters.Add("@FoodMultiplicity", SqlDbType.Float).Value = sample.FoodMultiplicity;
+                    cmd.Parameters.Add("@FatAmount", SqlDbType.Float).Value = sample.FatAmount;
+                    cmd.Parameters.Add("@CarbohydrateAmount", SqlDbType.Float).Value = sample.CarbohydrateAmount;
+                    cmd.Parameters.Add("@ProteinAmount", SqlDbType.Float).Value = sample.ProteinAmount;
+                    cmd.Parameters.Add("@VitaminC", SqlDbType.Float).Value = sample.VitaminC;
+                    cmd.Parameters.Add("@SugarLevel", SqlDbType.Float).Value = sample.SugarLevel;
+                    cmd.Parameters.Add("@StressLevel", SqlDbType.Float).Value = sample.StressLevel;
+                    cmd.Parameters.Add("@Temperature", SqlDbType.Float).Value = sample.Temperature;
+                    cmd.Parameters.Add("@HightPressure", SqlDbType.Float).Value = sample.HightPressure;
+                    cmd.Parameters.Add("@LowPressure", SqlDbType.Float).Value = sample.LowPressure;
+                    cmd.Parameters.Add("@Pulse", SqlDbType.Float).Value = sample.Pulse;
+                    cmd.Parameters.Add("@DiseaseStatusID", SqlDbType.Int).Value = (int) sample.Disease.Status;
+                    cmd.Parameters.Add("@GroupRiskID", SqlDbType.Int).Value = (int) sample.GroupRisk.GroupRiskType;
+
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void DeleteSample(DiseaseMonitoringSample sample)
+        {
+            var queryString = "DELETE FROM LearningSamples WHERE LearningSamples.SampleID = " + sample.SampleID;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var cmd = new SqlCommand(queryString, connection))
+                {
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        } 
     }
 }

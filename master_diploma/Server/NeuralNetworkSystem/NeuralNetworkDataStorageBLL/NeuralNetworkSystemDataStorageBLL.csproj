@@ -56,6 +56,7 @@
     <Compile Include="Enums\DiseasesStatusEnum.cs" />
     <Compile Include="Enums\RiskStatusEnum.cs" />
     <Compile Include="Enums\NetworkTypeEnum.cs" />
+    <Compile Include="LearningSamples\LearningSampleSpaceDistance.cs" />
     <Compile Include="LearningSamples\Mappers\OutPutMappers\DiseaseGroupRiskOutputMapper.cs" />
     <Compile Include="LearningSamples\Repositories\DataBaseDiseasesLearningSamplesRepository.cs" />
     <Compile Include="LearningSamples\LearningSample.cs" />
