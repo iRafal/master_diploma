@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.TableDefinitionContract;
-import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
 import com.medvid.andrii.diplomawork.data.statistics.Calories;
 import com.medvid.andrii.diplomawork.data.statistics.Pressure;
 import com.medvid.andrii.diplomawork.data.statistics.Sleep;
@@ -81,8 +80,8 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
 
-    public static final int CODE_TRAINING_SAMPLE = 0;
-    public static final int CODE_TRAINING_SAMPLE_ITEM = 1;
+    public static final int CODE_TRAINING_SAMPLE = 4;
+    public static final int CODE_TRAINING_SAMPLE_ITEM = 5;
     public static final String CONTENT_TRAINING_SAMPLE_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_TRAINING_SAMPLE_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

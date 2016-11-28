@@ -18,13 +18,13 @@ public class DiseaseTableContract implements TableDefinitionContract<Disease> {
     public static final String CREATE_TABLE =
             CREATE_TABLE_IF_NOT_EXISTS + SPACE + TABLE_NAME + SPACE + "("
                     + INTEGER_PRIMARY_KEY_ROW_DEFINITION + COMMA
-                    + DISEASE_NAME + SPACE + TEXT_TYPE + COMMA
+                    + DISEASE_NAME + SPACE + TEXT_TYPE
                     + SPACE + ")";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
 
-    public static final int CODE_DISEASE = 0;
-    public static final int CODE_DISEASE_ITEM = 1;
+    public static final int CODE_DISEASE = 6;
+    public static final int CODE_DISEASE_ITEM = 7;
     public static final String CONTENT_DISEASE_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_DISEASE_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

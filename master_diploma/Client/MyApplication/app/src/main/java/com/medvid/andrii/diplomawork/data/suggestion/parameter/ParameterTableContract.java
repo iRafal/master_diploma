@@ -23,8 +23,8 @@ public class ParameterTableContract implements TableDefinitionContract<Parameter
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
 
-    public static final int CODE_PARAMETER = 0;
-    public static final int CODE_PARAMETER_ITEM = 1;
+    public static final int CODE_PARAMETER = 12;
+    public static final int CODE_PARAMETER_ITEM = 13;
     public static final String CONTENT_PARAMETER_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_PARAMETER_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

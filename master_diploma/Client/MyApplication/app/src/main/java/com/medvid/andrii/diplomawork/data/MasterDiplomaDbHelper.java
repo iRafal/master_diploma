@@ -8,6 +8,8 @@ import com.medvid.andrii.diplomawork.data.disease.DiseaseTableContract;
 import com.medvid.andrii.diplomawork.data.group_risk.GroupRiskTableContract;
 import com.medvid.andrii.diplomawork.data.sample.TrainingSampleTableContract;
 import com.medvid.andrii.diplomawork.data.statistics.StatisticsTableContract;
+import com.medvid.andrii.diplomawork.data.suggestion.SuggestionTableContract;
+import com.medvid.andrii.diplomawork.data.suggestion.parameter.ParameterTableContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 
 public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
@@ -26,6 +28,8 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TrainingSampleTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(DiseaseTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(GroupRiskTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(SuggestionTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(ParameterTableContract.CREATE_TABLE);
     }
 
     @Override

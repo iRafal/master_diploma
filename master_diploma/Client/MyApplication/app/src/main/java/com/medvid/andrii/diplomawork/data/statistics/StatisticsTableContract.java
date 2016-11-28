@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.TableDefinitionContract;
-import com.medvid.andrii.diplomawork.data.sample.TrainingSampleTableContract;
 
 public class StatisticsTableContract implements TableDefinitionContract<Statistics> {
 
@@ -57,13 +56,13 @@ public class StatisticsTableContract implements TableDefinitionContract<Statisti
                     + HIGH_PRESSURE + SPACE + REAL_TYPE + COMMA // Pressure
                     + LOW_PRESSURE + SPACE + REAL_TYPE + COMMA // Pressure
                     + PULSE + SPACE + REAL_TYPE + COMMA
-                    + TIME_STAMP + SPACE + REAL_TYPE + COMMA
+                    + TIME_STAMP + SPACE + REAL_TYPE
                     + SPACE + ")";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
 
-    public static final int CODE_STATISTICS = 0;
-    public static final int CODE_STATISTICS_ITEM = 1;
+    public static final int CODE_STATISTICS = 2;
+    public static final int CODE_STATISTICS_ITEM = 3;
     public static final String CONTENT_STATISTICS_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_STATISTICS_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

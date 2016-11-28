@@ -29,8 +29,8 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + SPACE + TABLE_NAME;
 
-    public static final int CODE_SUGGESTION = 0;
-    public static final int CODE_SUGGESTION_ITEM = 1;
+    public static final int CODE_SUGGESTION = 10;
+    public static final int CODE_SUGGESTION_ITEM = 11;
     public static final String CONTENT_SUGGESTION_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_SUGGESTION_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();
