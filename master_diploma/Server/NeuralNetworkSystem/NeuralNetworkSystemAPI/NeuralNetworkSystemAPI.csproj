@@ -170,6 +170,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiseaseLearningSampleModel.cs" />
     <Compile Include="Models\DiseaseResponseObjectModel.cs" />
     <Compile Include="NeuralNetwork\NeuralNetworkHelper.cs" />
     <Compile Include="Models\DieseaseRequestModel.cs" />
