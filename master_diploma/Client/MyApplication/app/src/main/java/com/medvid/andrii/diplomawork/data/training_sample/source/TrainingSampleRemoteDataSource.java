@@ -1,6 +1,8 @@
-package com.medvid.andrii.diplomawork.data.training_sample;
+package com.medvid.andrii.diplomawork.data.training_sample.source;
 
 import android.support.annotation.NonNull;
+
+import com.medvid.andrii.diplomawork.data.training_sample.TrainingSample;
 
 public class TrainingSampleRemoteDataSource implements TrainingSampleDataSourceContract {
 

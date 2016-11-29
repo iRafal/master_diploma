@@ -1,8 +1,9 @@
-package com.medvid.andrii.diplomawork.data.user;
+package com.medvid.andrii.diplomawork.data.user.source;
 
 import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
+import com.medvid.andrii.diplomawork.data.user.User;
 
 import java.util.ArrayList;
 

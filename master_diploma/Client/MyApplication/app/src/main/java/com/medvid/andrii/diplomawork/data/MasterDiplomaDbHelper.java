@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
-import com.medvid.andrii.diplomawork.data.forecast.suggestion.SuggestionTableContract;
+import com.medvid.andrii.diplomawork.data.suggestion.SuggestionTableContract;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 

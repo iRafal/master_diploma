@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
-import com.medvid.andrii.diplomawork.data.forecast.suggestion.SuggestionTableContract;
+import com.medvid.andrii.diplomawork.data.suggestion.SuggestionTableContract;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
 import com.medvid.andrii.diplomawork.data.user.User;
-import com.medvid.andrii.diplomawork.data.user.UserDataSourceContract;
+import com.medvid.andrii.diplomawork.data.user.source.UserDataSourceContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
-import com.medvid.andrii.diplomawork.data.user.UsersLocalDataSource;
+import com.medvid.andrii.diplomawork.data.user.source.UsersLocalDataSource;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
 import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
 import com.medvid.andrii.diplomawork.util.Utils;

@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.data.forecast.suggestion;
+package com.medvid.andrii.diplomawork.data.suggestion;
 
 import android.content.ContentValues;
 import android.database.Cursor;

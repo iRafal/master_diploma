@@ -1,4 +1,4 @@
-    package com.medvid.andrii.diplomawork.data.user;
+    package com.medvid.andrii.diplomawork.data.user.source;
 
     import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
+    import com.medvid.andrii.diplomawork.data.user.User;
+    import com.medvid.andrii.diplomawork.data.user.UserTableContract;
+
+    import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;

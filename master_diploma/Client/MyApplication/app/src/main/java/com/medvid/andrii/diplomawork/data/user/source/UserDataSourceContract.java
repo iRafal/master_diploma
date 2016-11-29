@@ -1,6 +1,8 @@
-package com.medvid.andrii.diplomawork.data.user;
+package com.medvid.andrii.diplomawork.data.user.source;
 
 import android.support.annotation.NonNull;
+
+import com.medvid.andrii.diplomawork.data.user.User;
 
 import java.util.List;
 

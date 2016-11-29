@@ -1,7 +1,7 @@
 package com.medvid.andrii.diplomawork.data.forecast;
 
 import com.medvid.andrii.diplomawork.data.ModelEntity;
-import com.medvid.andrii.diplomawork.data.forecast.suggestion.Suggestion;
+import com.medvid.andrii.diplomawork.data.suggestion.Suggestion;
 
 import java.util.List;
 

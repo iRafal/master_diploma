@@ -1,6 +1,8 @@
-package com.medvid.andrii.diplomawork.data.forecast;
+package com.medvid.andrii.diplomawork.data.forecast.source;
 
 import android.support.annotation.NonNull;
+
+import com.medvid.andrii.diplomawork.data.forecast.Forecast;
 
 import java.util.List;
 

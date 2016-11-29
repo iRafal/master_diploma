@@ -1,9 +1,12 @@
-    package com.medvid.andrii.diplomawork.data.training_sample;
+    package com.medvid.andrii.diplomawork.data.training_sample.source;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
+
+import com.medvid.andrii.diplomawork.data.training_sample.TrainingSample;
+import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
