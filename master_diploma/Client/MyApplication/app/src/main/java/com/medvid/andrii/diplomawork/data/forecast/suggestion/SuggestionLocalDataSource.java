@@ -11,12 +11,12 @@ public class SuggestionLocalDataSource implements SuggestionDataSourceContract {
 
     @Override
     public void getSuggestion(@NonNull String id, @NonNull GetSuggestionCallback callback) {
-
+        //  load data via Cursor Loader //TODO
     }
 
     @Override
     public void getSuggestions(@NonNull GetSuggestionsCallback callback) {
-
+        //  load data via Cursor Loader //TODO
     }
 
     @Override

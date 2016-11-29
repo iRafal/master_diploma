@@ -41,12 +41,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
         @Override
         public void getTrainingSample(@NonNull String id, @NonNull GetTrainingSampleCallback callback) {
-            //  data is loaded via Cursor Loader
+            //  load data via Cursor Loader //TODO
         }
 
         @Override
         public void getTrainingSamples(@NonNull GetTrainingSamplesCallback callback) {
-            //  data is loaded via Cursor Loader
+            //  load data via Cursor Loader //TODO
         }
 
         @Override

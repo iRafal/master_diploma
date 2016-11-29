@@ -24,6 +24,8 @@ public interface TableDefinitionContract<T extends ModelEntity> extends BaseColu
 
     String ON_DELETE_CASCADE = "ON DELETE CASCADE";
 
+    String UNIQUE = "UNIQUE";
+
     String TEXT_TYPE = "TEXT";
 
     String INTEGER_TYPE = "INTEGER";

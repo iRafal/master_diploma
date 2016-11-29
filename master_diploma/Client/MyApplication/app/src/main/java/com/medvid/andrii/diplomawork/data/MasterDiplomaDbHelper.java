@@ -22,16 +22,22 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(UserTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(TrainingSampleTableContract.CREATE_TABLE);
-        sqLiteDatabase.execSQL(SuggestionTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(ForecastTableContract.CREATE_TABLE);
+        sqLiteDatabase.execSQL(SuggestionTableContract.CREATE_TABLE);
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase sqLiteDatabase) {
+        super.onConfigure(sqLiteDatabase);
+        sqLiteDatabase.setForeignKeyConstraintsEnabled(true);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL(UserTableContract.DROP_TABLE);
         sqLiteDatabase.execSQL(TrainingSampleTableContract.DROP_TABLE);
-        sqLiteDatabase.execSQL(ForecastTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(SuggestionTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(ForecastTableContract.DROP_TABLE);
     }
 
     @Override
@@ -39,7 +45,7 @@ public class MasterDiplomaDbHelper extends SQLiteOpenHelper {
         super.onDowngrade(sqLiteDatabase, oldVersion, newVersion);
         sqLiteDatabase.execSQL(UserTableContract.DROP_TABLE);
         sqLiteDatabase.execSQL(TrainingSampleTableContract.DROP_TABLE);
-        sqLiteDatabase.execSQL(ForecastTableContract.CREATE_TABLE);
         sqLiteDatabase.execSQL(SuggestionTableContract.DROP_TABLE);
+        sqLiteDatabase.execSQL(ForecastTableContract.DROP_TABLE);
     }
 }

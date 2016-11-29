@@ -1,16 +1,12 @@
 package com.medvid.andrii.diplomawork.data;
 
 import android.content.ContentProvider;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 
@@ -18,6 +14,8 @@ public class DiplomaContentProvider extends ContentProvider {
 
     private static final String UNKNOWN_URI = "Unknown uri: ";
     private static final String URI_SEPARATOR = "/";
+    private static final String ANY_LENGTH_SYMBOLS_STRING = "*";
+    private static final String ANY_LENGTH_DIGITS_STRING = "#";
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
@@ -34,7 +32,7 @@ public class DiplomaContentProvider extends ContentProvider {
 
         matcher.addURI(
                 authority,
-                UserTableContract.TABLE_NAME + URI_SEPARATOR + "*",
+                UserTableContract.TABLE_NAME + URI_SEPARATOR + ANY_LENGTH_SYMBOLS_STRING,
                 UserTableContract.CODE_USER_ITEM);
 
         return matcher;
@@ -51,26 +49,19 @@ public class DiplomaContentProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
 
-        SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
-        String where = null;
+        String tableName = null;
 
         switch (sUriMatcher.match(uri)) {
             case UserTableContract.CODE_USER:
-                sqLiteQueryBuilder.setTables(UserTableContract.TABLE_NAME);
             case UserTableContract.CODE_USER_ITEM:
-                where = appendWhere(
-                        where,
-                        null,
-                        UserTableContract._ID + "=" + ContentUris.parseId(uri));
+                tableName = UserTableContract.TABLE_NAME;
                 break;
             default:
                 throw new UnsupportedOperationException(UNKNOWN_URI + uri);
         }
 
-        SQLiteDatabase database = mMasterDiplomaDbHelper.getWritableDatabase();
-
-        Cursor returnCursor = sqLiteQueryBuilder.query(
-                database,
+        Cursor returnCursor = mMasterDiplomaDbHelper.getReadableDatabase().query(
+                tableName,
                 projection,
                 selection,
                 selectionArgs,
@@ -103,17 +94,28 @@ public class DiplomaContentProvider extends ContentProvider {
 
         final int match = sUriMatcher.match(uri);
         Uri returnUri = null;
+        String tableName = null;
 
         switch (match) {
             case UserTableContract.CODE_USER:
-                break;
             case UserTableContract.CODE_USER_ITEM:
+                tableName = UserTableContract.TABLE_NAME;
                 break;
             default:
                 throw new UnsupportedOperationException(UNKNOWN_URI + uri);
         }
 
+        SQLiteDatabase db = mMasterDiplomaDbHelper.getWritableDatabase();
+        long id = db.replace(tableName, null, contentValues);
+
         getContext().getContentResolver().notifyChange(uri, null);
+
+        switch (match) {
+            case UserTableContract.CODE_USER:
+            case UserTableContract.CODE_USER_ITEM:
+                returnUri = UserTableContract.buildUriWith(id);
+                break;
+        }
 
         return returnUri;
     }
@@ -122,31 +124,19 @@ public class DiplomaContentProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
         final int match = sUriMatcher.match(uri);
-        String tableName = "";
+        String tableName = null;
 
         switch (match) {
             case UserTableContract.CODE_USER:
-                tableName = UserTableContract.TABLE_NAME;
             case UserTableContract.CODE_USER_ITEM:
-                selection = appendSelection(
-                        selection,
-                        UserTableContract._ID + "= ?" + ContentUris.parseId(uri));
-
+                tableName = UserTableContract.TABLE_NAME;
                 break;
             default:
                 throw new UnsupportedOperationException(UNKNOWN_URI + uri);
         }
 
         final SQLiteDatabase database = mMasterDiplomaDbHelper.getWritableDatabase();
-        database.beginTransaction();
-        int rowsDeleted = 0;
-
-        try {
-            rowsDeleted = database.delete(tableName, selection, selectionArgs);
-            database.setTransactionSuccessful();
-        } finally {
-            database.endTransaction();
-        }
+        int rowsDeleted = database.delete(tableName, selection, selectionArgs);
 
         if (selection == null || rowsDeleted != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
@@ -159,15 +149,12 @@ public class DiplomaContentProvider extends ContentProvider {
     public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
 
         final int match = sUriMatcher.match(uri);
-        String tableName = "";
+        String tableName = null;
 
         switch (match) {
             case UserTableContract.CODE_USER:
-                tableName = UserTableContract.TABLE_NAME;
             case UserTableContract.CODE_USER_ITEM:
-                selection = appendSelection(
-                        selection,
-                        UserTableContract._ID + "=" + ContentUris.parseId(uri));
+                tableName = UserTableContract.TABLE_NAME;
                 break;
             default:
                 throw new UnsupportedOperationException(UNKNOWN_URI + uri);
@@ -182,29 +169,4 @@ public class DiplomaContentProvider extends ContentProvider {
 
         return rowsUpdated;
     }
-
-    private String appendSelection(@Nullable String original, @NonNull String selection) {
-        String newSelection =  TextUtils.isEmpty(original) ? "" : original + " AND ";
-        newSelection += "(" + selection + ")";
-        return newSelection;
-    }
-
-    private String appendWhere(String where, String conjuction, String clause) {
-        String retval = "";
-
-        if (!TextUtils.isEmpty(where)) {
-            retval = where;
-
-            if (!TextUtils.isEmpty(conjuction)) {
-                retval += " " + conjuction + " ";
-            } else {
-                retval += " AND ";
-            }
-        }
-
-        retval += "(" + clause + ")";
-
-        return retval;
-    }
-
 }

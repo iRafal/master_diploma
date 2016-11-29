@@ -25,9 +25,10 @@ public class UserTableContract implements TableDefinitionContract<User> {
 
     public static final String CREATE_TABLE =
             CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " " + "(" + " "
-                    + _ID + " " + INTEGER_TYPE + " " + NOT_NULL + " " + PRIMARY_KEY + " " + AUTOINCREMENT + ", "
+                    + _ID + " " + INTEGER_TYPE + " " + NOT_NULL + " " + UNIQUE + " " + PRIMARY_KEY + " " + AUTOINCREMENT + ", "
                     + EMAIL + " " + TEXT_TYPE + " " + NOT_NULL + ", "
                     + FIRST_NAME + " " + TEXT_TYPE + " " + NOT_NULL + ", "
+                    + LAST_NAME + " " + TEXT_TYPE + " " + NOT_NULL + ", "
                     + AGE + " " + REAL_TYPE + ", "
                     + GENDER + " " + REAL_TYPE + ", "
                     + GROWTH + " " + REAL_TYPE + ", "

@@ -1,12 +1,15 @@
     package com.medvid.andrii.diplomawork.data.user;
 
     import android.content.ContentResolver;
-    import android.content.ContentValues;
-    import android.database.Cursor;
-    import android.provider.BaseColumns;
-    import android.support.annotation.NonNull;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.provider.BaseColumns;
+import android.support.annotation.NonNull;
 
-    import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UsersLocalDataSource implements UserDataSourceContract {
 
@@ -42,13 +45,17 @@ public class UsersLocalDataSource implements UserDataSourceContract {
 
     @Override
     public void getUser(@NonNull String userId, @NonNull GetUserCallback callback) {
+        //  load data via Cursor Loader //TODO
         checkNotNull(userId);
         checkNotNull(callback);
+
+        String selection = BaseColumns._ID + " LIKE ?";
+        String[] selectionArgs = {userId};
 
         Cursor cursor = mContentResolver.query(
                 UserTableContract.buildUriWith(userId),
                 UserTableContract.getInstance().getColumns(),
-                null, null, null);
+                selection, selectionArgs, null);
         User user = null;
         if (cursor != null && cursor.moveToFirst()) {
             user = UserTableContract.getInstance().getEntity(cursor);
@@ -59,7 +66,31 @@ public class UsersLocalDataSource implements UserDataSourceContract {
 
     @Override
     public void getUsers(@NonNull GetUsersCallback callback) {
-        //  data is loaded via Cursor Loader
+        //  load data via Cursor Loader //TODO
+        checkNotNull(callback);
+
+        Cursor cursor = mContentResolver.query(
+                UserTableContract.buildUri(),
+                UserTableContract.getInstance().getColumns(),
+                null, null, null);
+
+        User user = null;
+        List<User> userList = new ArrayList<>();
+
+        if (cursor == null)	{
+            callback.onUsersLoaded(userList);
+        }
+        if (!cursor.moveToFirst())	{
+            callback.onUsersLoaded(userList);
+        }
+
+        do {
+            user = UserTableContract.getInstance().getEntity(cursor);
+            userList.add(user);
+        } while (cursor.moveToNext());
+
+        cursor.close();
+        callback.onUsersLoaded(userList);
     }
 
     @Override
@@ -68,7 +99,7 @@ public class UsersLocalDataSource implements UserDataSourceContract {
         String selection = BaseColumns._ID + " LIKE ?";
         String[] selectionArgs = {userId};
 
-        mContentResolver.delete(UserTableContract.buildUri(), selection, selectionArgs);
+        mContentResolver.delete(UserTableContract.buildUriWith(userId), selection, selectionArgs);
     }
 
     @Override

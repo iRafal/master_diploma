@@ -15,9 +15,15 @@ import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
 import com.medvid.andrii.diplomawork.data.forecast.suggestion.SuggestionTableContract;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
+import com.medvid.andrii.diplomawork.data.user.User;
+import com.medvid.andrii.diplomawork.data.user.UserDataSourceContract;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
+import com.medvid.andrii.diplomawork.data.user.UsersLocalDataSource;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
 import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
+import com.medvid.andrii.diplomawork.util.Utils;
+
+import java.util.List;
 
 /**
  * Use the {@link LandingFragment#newInstance} factory method to
@@ -59,30 +65,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
 
-        Log.d("123", UserTableContract.CREATE_TABLE);
-        Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
-        Log.d("123", SuggestionTableContract.CREATE_TABLE);
-        Log.d("123", ForecastTableContract.CREATE_TABLE);
-//
-//        MasterDiplomaDbHelper masterDiplomaDbHelper = new MasterDiplomaDbHelper(getActivity());
-//        User user = new User(1,"email@email.email", "Andrii", "Medvid",
-//                23, User.Gender.MAN, 1.85, 62,
-//                Utils.calculateBodyMassIndex(65, 1.85));
-//
-//        UsersLocalDataSource usersLocalDataSource = UsersLocalDataSource.getInstance(getActivity().getContentResolver());
-//        usersLocalDataSource.saveUser(user);
-//
-//        usersLocalDataSource.getUser("0", new UserDataSourceContract.GetUserCallback() {
-//            @Override
-//            public void onUserLoaded(@NonNull User user) {
-//                user.getAge();
-//            }
-//
-//            @Override
-//            public void onDataNotAvailable() {
-//
-//            }
-//        });
+        usersTest();
     }
 
     @Override
@@ -150,5 +133,83 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
         mLoginTextView.setOnClickListener(this);
         mRegistrationTextView.setOnClickListener(this);
+    }
+
+    private void usersTest()    {
+        Log.d("123", UserTableContract.CREATE_TABLE);
+        Log.d("123", TrainingSampleTableContract.CREATE_TABLE);
+        Log.d("123", ForecastTableContract.CREATE_TABLE);
+        Log.d("123", SuggestionTableContract.CREATE_TABLE);
+//
+        User user = new User(1 ,"email@email.email", "Andrii", "Medvid",
+                23, User.Gender.MAN, 1.85, 62,
+                Utils.calculateBodyMassIndex(65, 1.85));
+
+        UsersLocalDataSource usersLocalDataSource = UsersLocalDataSource.getInstance(getActivity().getContentResolver());
+        usersLocalDataSource.saveUser(user);
+
+        usersLocalDataSource.getUser("1", new UserDataSourceContract.GetUserCallback() {
+            @Override
+            public void onUserLoaded(@NonNull User user) {
+                Log.d("123", user.toString());
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        usersLocalDataSource.getUsers(new UserDataSourceContract.GetUsersCallback() {
+
+            @Override
+            public void onUsersLoaded(@NonNull List<User> users) {
+                Log.d("123", users.toString());
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        usersLocalDataSource.deleteUser("1");
+
+        usersLocalDataSource.saveUser(user);
+        User user2 = new User(1 ,"email2@email.email", "Andrii2", "Medvid2",
+                23, User.Gender.MAN, 1.85, 62,
+                Utils.calculateBodyMassIndex(65, 1.85));
+        usersLocalDataSource.saveUser(user2);
+
+        usersLocalDataSource.getUsers(new UserDataSourceContract.GetUsersCallback() {
+
+            @Override
+            public void onUsersLoaded(@NonNull List<User> users) {
+                Log.d("123", users.toString());
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        User user3 = new User(1 ,"email2222@email.email", "Andrii2222", "Medvid2222",
+                23, User.Gender.MAN, 1.85, 62,
+                Utils.calculateBodyMassIndex(65, 1.85));
+        usersLocalDataSource.updateUser(user3);
+
+        usersLocalDataSource.getUsers(new UserDataSourceContract.GetUsersCallback() {
+
+            @Override
+            public void onUsersLoaded(@NonNull List<User> users) {
+                Log.d("123", users.toString());
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
     }
 }

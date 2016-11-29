@@ -23,14 +23,14 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
                     + _ID + " " + INTEGER_TYPE + " " + NOT_NULL + " " + PRIMARY_KEY + " " + AUTOINCREMENT + ", "
                     + SUGGESTION_DESCRIPTION + " " + TEXT_TYPE + ", "
                     + PARAMETER_DESCRIPTION + " " + TEXT_TYPE + ", "
-                    + FORECAST_ID + " " + INTEGER_TYPE + " " + NOT_NULL + " "
+                    + FORECAST_ID + " " + INTEGER_TYPE + " " + NOT_NULL + ", "
                     + FOREIGN_KEY + " (" + FORECAST_ID + ") " + REFERENCES + " " + ForecastTableContract.TABLE_NAME + " (" + _ID + ")"
                     + " )";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
 
-    public static final int CODE_SUGGESTION = 8;
-    public static final int CODE_SUGGESTION_ITEM = 9;
+    public static final int CODE_SUGGESTION = 4;
+    public static final int CODE_SUGGESTION_ITEM = 5;
     public static final String CONTENT_SUGGESTION_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_SUGGESTION_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();

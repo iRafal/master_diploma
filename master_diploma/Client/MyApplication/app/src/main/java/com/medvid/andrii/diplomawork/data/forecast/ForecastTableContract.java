@@ -25,13 +25,13 @@ public class ForecastTableContract implements TableDefinitionContract<Forecast> 
                     + DISEASE_ID + " " + INTEGER_TYPE + " " + NOT_NULL + ", "
                     + DISEASE_NAME + " " + TEXT_TYPE + " " + NOT_NULL + ", "
                     + GROUP_RISK_ID + " " + INTEGER_TYPE + " " + NOT_NULL + ", "
-                    + GROUP_RISK_NAME + " " + TEXT_TYPE + " " + NOT_NULL + ", "
+                    + GROUP_RISK_NAME + " " + TEXT_TYPE + " " + NOT_NULL
                     + " )";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
 
-    public static final int CODE_FORECAST = 0;
-    public static final int CODE_FORECAST_ITEM = 1;
+    public static final int CODE_FORECAST = 6;
+    public static final int CODE_FORECAST_ITEM = 7;
     public static final String CONTENT_FORECAST_TYPE = "vnd.android.cursor.dir/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final String CONTENT_FORECAST_ITEM_TYPE = "vnd.android.cursor.item/" + CONTENT_AUTHORITY + "/" + TABLE_NAME;
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(TABLE_NAME).build();
