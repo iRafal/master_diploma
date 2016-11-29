@@ -1,5 +1,7 @@
 package com.medvid.andrii.diplomawork.data.training_sample;
 
+import android.support.annotation.NonNull;
+
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.data.ModelEntity;
 import com.medvid.andrii.diplomawork.data.training_sample.entities.Calories;
@@ -34,16 +36,70 @@ public class TrainingSample implements ModelEntity {
     private boolean isForecast;
     private boolean isStatistics;
 
+    public static TrainingSample getStatisticsTrainingSample(
+            long id, double age, @User.Gender int gender, double growth, double weight,
+            double bodyMassIndex, double distance, @NonNull Sleep sleep, @NonNull Calories calories,
+            double foodMultiplicity, double fatAmount, double carbohydrateAmount,
+            double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
+            double temperature, @NonNull Pressure pressure, double pulse, @NonNull Date timestamp) {
+
+        boolean isForecast = false;
+        boolean isStatistics = true;
+
+        return new TrainingSample(id, age, gender, growth, weight,
+                bodyMassIndex, distance, sleep, calories,
+                foodMultiplicity, fatAmount, carbohydrateAmount,
+                proteinAmount, vitaminC, sugarLevel, stressLevel,
+                temperature, pressure, pulse, timestamp,
+                isForecast, isStatistics);
+    }
+
+    public static TrainingSample getForecastTrainingSample(
+            long id, double age, @User.Gender int gender, double growth, double weight,
+            double bodyMassIndex, double distance, @NonNull Sleep sleep, @NonNull Calories calories,
+            double foodMultiplicity, double fatAmount, double carbohydrateAmount,
+            double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
+            double temperature, @NonNull Pressure pressure, double pulse, @NonNull Date timestamp) {
+
+        boolean isForecast = true;
+        boolean isStatistics = false;
+
+        return new TrainingSample(id, age, gender, growth, weight,
+                bodyMassIndex, distance, sleep, calories,
+                foodMultiplicity, fatAmount, carbohydrateAmount,
+                proteinAmount, vitaminC, sugarLevel, stressLevel,
+                temperature, pressure, pulse, timestamp,
+                isForecast, isStatistics);
+    }
+
+    public static TrainingSample getSampleTrainingSample(
+            long id, double age, @User.Gender int gender, double growth, double weight,
+            double bodyMassIndex, double distance, @NonNull Sleep sleep, @NonNull Calories calories,
+            double foodMultiplicity, double fatAmount, double carbohydrateAmount,
+            double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
+            double temperature, @NonNull Pressure pressure, double pulse, @NonNull Date timestamp) {
+
+        boolean isForecast = false;
+        boolean isStatistics = false;
+
+        return new TrainingSample(id, age, gender, growth, weight,
+                bodyMassIndex, distance, sleep, calories,
+                foodMultiplicity, fatAmount, carbohydrateAmount,
+                proteinAmount, vitaminC, sugarLevel, stressLevel,
+                temperature, pressure, pulse, timestamp,
+                isForecast, isStatistics);
+    }
+
     public TrainingSample() {
         // Test empty constructor
     }
 
     public TrainingSample(long id, double age, @User.Gender int gender, double growth, double weight,
-                          double bodyMassIndex, double distance, Sleep sleep, Calories calories,
+                          double bodyMassIndex, double distance, @NonNull Sleep sleep, @NonNull Calories calories,
                           double foodMultiplicity, double fatAmount, double carbohydrateAmount,
                           double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
-                          double temperature, Pressure pressure, double pulse, Date timestamp,
-                          boolean isForecast, boolean isStatistics) {
+                          double temperature, @NonNull Pressure pressure, double pulse,
+                          @NonNull Date timestamp, boolean isForecast, boolean isStatistics) {
 
         Preconditions.checkNotNull(sleep);
         Preconditions.checkNotNull(calories);

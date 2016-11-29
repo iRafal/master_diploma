@@ -31,7 +31,7 @@ public interface ForecastDataSourceContract {
         void onDataNotAvailable();
     }
 
-    void saveForecastSample(@NonNull Forecast forecast);
+    long saveForecastSample(@NonNull Forecast forecast);
 
     void getForecastSample(@NonNull String id, @NonNull GetForecastSampleCallback callback);
 

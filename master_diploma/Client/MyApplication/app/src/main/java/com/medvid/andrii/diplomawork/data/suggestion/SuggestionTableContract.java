@@ -1,5 +1,6 @@
 package com.medvid.andrii.diplomawork.data.suggestion;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -41,6 +42,14 @@ public class SuggestionTableContract implements TableDefinitionContract<Suggesti
 
     public static Uri buildUri() {
         return CONTENT_URI.buildUpon().build();
+    }
+
+    public static Uri buildUriWith(long id) {
+        return ContentUris.withAppendedId(CONTENT_URI, id);
+    }
+
+    public static Uri buildUriWith(String id) {
+        return CONTENT_URI.buildUpon().appendPath(id).build();
     }
 
     private SuggestionTableContract()  {

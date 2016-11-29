@@ -31,7 +31,19 @@ public interface SuggestionDataSourceContract {
         void onDataNotAvailable();
     }
 
-    void saveSuggestion(@NonNull Suggestion suggestion);
+    /**
+     *
+     * @param suggestion
+     * @return inserted row id
+     */
+    long saveSuggestion(@NonNull Suggestion suggestion);
+
+    /**
+     *
+     * @param suggestionList
+     * @return inserted rows count
+     */
+    int saveSuggestions(@NonNull List<Suggestion> suggestionList);
 
     void getSuggestion(@NonNull String id, @NonNull GetSuggestionCallback callback);
 

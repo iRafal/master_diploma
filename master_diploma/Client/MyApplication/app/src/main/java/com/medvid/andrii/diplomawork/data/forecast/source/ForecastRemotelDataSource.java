@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 import com.medvid.andrii.diplomawork.data.forecast.Forecast;
 
 public class ForecastRemotelDataSource implements ForecastDataSourceContract  {
+
     @Override
-    public void saveForecastSample(@NonNull Forecast forecast) {
+    public long saveForecastSample(@NonNull Forecast forecast) {
+        return 0;
     }
 
     @Override

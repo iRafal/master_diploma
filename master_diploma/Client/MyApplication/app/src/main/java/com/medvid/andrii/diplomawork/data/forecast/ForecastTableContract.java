@@ -78,7 +78,6 @@ public class ForecastTableContract implements TableDefinitionContract<Forecast> 
         values.put(DISEASE_NAME, modelEntity.getDisease().getDiseaseName());
         values.put(GROUP_RISK_ID, modelEntity.getGroupRisk().getId());
         values.put(GROUP_RISK_NAME, modelEntity.getGroupRisk().getRiskName());
-
         return values;
     }
 

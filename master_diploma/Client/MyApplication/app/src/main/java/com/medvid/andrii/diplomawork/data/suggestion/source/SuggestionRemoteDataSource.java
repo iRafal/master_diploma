@@ -4,11 +4,18 @@ import android.support.annotation.NonNull;
 
 import com.medvid.andrii.diplomawork.data.suggestion.Suggestion;
 
+import java.util.List;
+
 public class SuggestionRemoteDataSource implements SuggestionDataSourceContract {
 
     @Override
-    public void saveSuggestion(@NonNull Suggestion suggestion) {
+    public long saveSuggestion(@NonNull Suggestion suggestion) {
+        return 0;
+    }
 
+    @Override
+    public int saveSuggestions(@NonNull List<Suggestion> suggestionList) {
+        return 0;
     }
 
     @Override
