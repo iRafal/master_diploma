@@ -16,8 +16,6 @@
 
 package com.medvid.andrii.diplomawork.login;
 
-import android.support.annotation.Nullable;
-
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
 
@@ -32,11 +30,16 @@ public interface LoginContract {
 
         String getPassword();
 
-        void showLoginError();
+        void showLoginError(String message);
 
-        void showPasswordError();
+        void hideLoginError();
 
-        void showNetworkError();
+        void showPasswordError(String message);
+
+        void hidePasswordError();
+
+
+        void showNetworkError(boolean show);
 
         void showHomeScreen();
 
@@ -51,14 +54,14 @@ public interface LoginContract {
          * @param login
          * @return operation success
          */
-        boolean isLoginValid(@Nullable String login);
+        boolean isLoginValid(String login);
 
         /**
          * Password validation
          * @param password
          * @return operation success
          */
-        boolean isPasswordValid(@Nullable String password);
+        boolean isPasswordValid(String password);
 
         /**
          * Checks login and password and asks {@link LoginContract.View} to show error messages

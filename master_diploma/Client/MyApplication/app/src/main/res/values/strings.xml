@@ -1,16 +1,19 @@
 <resources>
     <string name="app_name">DiplomaWork</string>
-    <string name="login">LOGIN</string>
-    <string name="registration">REGISTRATION</string>
-    <string name="healthControl">Health control application</string>
-    <string name="login_field">Login</string>
-    <string name="password">Password</string>
-    <string name="register">REGISTER</string>
+    <string name="registration_camel_style">Registration</string>
+
+    <string name="login_caps">LOGIN</string>
+    <string name="registration_caps">REGISTRATION</string>
+
+    <string name="health_control_app_title">Health control application</string>
+    <string name="login_camel_style">Login</string>
+    <string name="password_camel_style">Password</string>
+
+    <string name="register_caps">REGISTER</string>
     <string name="confirm_password">Confirm password</string>
     <string name="last_name">Last name</string>
     <string name="first_name">First name</string>
-    <string name="wrong_login">Wrong login</string>
-    <string name="wrong_password">Wrong password</string>
-    <string name="first_name_empty">First name is empty</string>
-    <string name="last_name_empty">Last name is empty</string>
+    <string name="wrong_field_format">Wrong %s</string>
+    <string name="empty_field_message_format">%s is empty</string>
+    <string name="passwords_do_not_match">Passwords don\'t match</string>
 </resources>

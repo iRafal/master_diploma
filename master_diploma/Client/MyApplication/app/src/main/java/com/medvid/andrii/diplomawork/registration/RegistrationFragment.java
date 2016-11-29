@@ -1,20 +1,24 @@
 package com.medvid.andrii.diplomawork.registration;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.HomeActivity;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.login.LoginContract;
+import com.medvid.andrii.diplomawork.util.StringUtils;
 
 /**
  * Use the {@link RegistrationFragment#newInstance} factory method to
@@ -93,7 +97,7 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     public void onClick(View view) {
         switch (view.getId())   {
             case R.id.registerTextView:
-                showHomeScreen();
+                mPresenter.performRegistration();
                 break;
         }
     }
@@ -117,6 +121,53 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     }
 
     @Override
+    public String getConfirmPassword() {
+        return mConfirmPasswordEditText.getText().toString();
+    }
+
+    @Override
+    public void showLoginError(String message) {
+        mLoginTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hideLoginError() {
+        mLoginTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showFirstNameError(boolean show) {
+        mFirstNameTextInputLayout.setError(show
+                ? StringUtils.getEmptyFieldString(R.string.first_name) : "");
+    }
+
+    @Override
+    public void showLastNameError(boolean show) {
+        mLastNameTextInputLayout.setError(show
+                ? StringUtils.getEmptyFieldString(R.string.last_name) : "");
+    }
+
+    @Override
+    public void showPasswordError(String message) {
+        mPassTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hidePasswordError() {
+        mPassTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showConfirmPasswordError(String message) {
+        mConfirmPasswordTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hideConfirmPasswordError() {
+        mConfirmPasswordTextInputLayout.setError("");
+    }
+
+    @Override
     public String getFirstName() {
         return mFirstNameEditText.getText().toString();
     }
@@ -127,33 +178,15 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
     }
 
     @Override
-    public void showLoginError() {
-        mLoginTextInputLayout.setError(getString(R.string.wrong_login));
-    }
-
-    @Override
-    public void showPasswordError() {
-        mPassTextInputLayout.setError(getString(R.string.wrong_password));
-    }
-
-    @Override
-    public void showFirstNameError() {
-        mFirstNameTextInputLayout.setError(getString(R.string.first_name_empty));
-    }
-
-    @Override
-    public void showLastNameError() {
-        mLastNameTextInputLayout.setError(getString(R.string.last_name_empty));
-    }
-
-    @Override
-    public void showNetworkError() {
+    public void showNetworkError(boolean show) {
         // TODO
     }
 
     @Override
     public void showHomeScreen() {
-        getActivity().startActivity(HomeActivity.getIntent(getActivity()));
+        Intent intent = HomeActivity.getIntent(getActivity());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -181,6 +214,18 @@ public class RegistrationFragment extends Fragment implements RegistrationContra
 
         mConfirmPasswordTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.confirmPasswordTextInputLayout);
         mConfirmPasswordEditText = (EditText) rootView.findViewById(R.id.confirmPasswordEditText);
+
+        TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    mPresenter.performRegistration();
+                }
+                return false;
+            }
+        };
+
+        mConfirmPasswordEditText.setOnEditorActionListener(editorActionListener);
 
         mRegisterTextView = (TextView) rootView.findViewById(R.id.registerTextView);
         mRegisterTextView.setOnClickListener(this);

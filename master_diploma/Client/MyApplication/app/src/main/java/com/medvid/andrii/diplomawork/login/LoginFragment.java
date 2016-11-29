@@ -1,14 +1,17 @@
 package com.medvid.andrii.diplomawork.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -83,7 +86,7 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
     public void onClick(View view) {
         switch (view.getId())   {
             case R.id.loginTextView:
-                showHomeScreen();
+                mPresenter.performLogin();
                 break;
         }
     }
@@ -107,23 +110,36 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
     }
 
     @Override
-    public void showLoginError() {
-        mLoginTextInputLayout.setError(getString(R.string.wrong_login));
+    public void showLoginError(String message) {
+        mLoginTextInputLayout.setError(message);
     }
 
     @Override
-    public void showPasswordError() {
-        mPassTextInputLayout.setError(getString(R.string.wrong_password));
+    public void hideLoginError() {
+        mLoginTextInputLayout.setError("");
     }
 
     @Override
-    public void showNetworkError() {
+    public void showPasswordError(String message) {
+        mPassTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hidePasswordError() {
+        mPassTextInputLayout.setError("");
+    }
+
+
+    @Override
+    public void showNetworkError(boolean show) {
         // TODO
     }
 
     @Override
     public void showHomeScreen() {
-        getActivity().startActivity(HomeActivity.getIntent(getActivity()));
+        Intent intent = HomeActivity.getIntent(getActivity());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -136,12 +152,23 @@ public class LoginFragment extends Fragment implements LoginContract.View, View.
      */
 
     private void initUi(@NonNull View rootView)   {
-
         mLoginTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.loginTextInputLayout);
         mLoginEditText = (EditText) rootView.findViewById(R.id.loginEditText);
 
         mPassTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.passwordTextInputLayout);
         mPassEditText = (EditText) rootView.findViewById(R.id.passwordEditText);
+
+        TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    mPresenter.performLogin();
+                }
+                return false;
+            }
+        };
+
+        mPassEditText.setOnEditorActionListener(editorActionListener);
 
         mLoginTextView = (TextView) rootView.findViewById(R.id.loginTextView);
         mLoginTextView.setOnClickListener(this);

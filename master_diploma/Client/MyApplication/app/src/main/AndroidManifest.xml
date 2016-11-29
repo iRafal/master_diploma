@@ -25,6 +25,7 @@
         <activity
             android:name=".login.LoginActivity"
             android:parentActivityName=".login.LoginActivity"
+            android:label="@string/login_camel_style"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
@@ -32,6 +33,7 @@
         <activity
             android:name=".registration.RegistrationActivity"
             android:parentActivityName=".landing.LandingActivity"
+            android:label="@string/registration_camel_style"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

@@ -16,8 +16,6 @@
 
 package com.medvid.andrii.diplomawork.registration;
 
-import android.support.annotation.Nullable;
-
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
 
@@ -30,21 +28,31 @@ public interface RegistrationContract {
 
         String getLogin();
 
-        String getPassword();
-
         String getFirstName();
 
         String getLastName();
 
-        void showLoginError();
+        String getPassword();
 
-        void showPasswordError();
+        String getConfirmPassword();
 
-        void showFirstNameError();
+        void showLoginError(String message);
 
-        void showLastNameError();
+        void hideLoginError();
 
-        void showNetworkError();
+        void showFirstNameError(boolean show);
+
+        void showLastNameError(boolean show);
+
+        void showPasswordError(String message);
+
+        void hidePasswordError();
+
+        void showConfirmPasswordError(String message);
+
+        void hideConfirmPasswordError();
+
+        void showNetworkError(boolean show);
 
         void showHomeScreen();
 
@@ -59,24 +67,28 @@ public interface RegistrationContract {
          * @param login
          * @return operation success
          */
-        boolean isLoginValid(@Nullable String login);
+        boolean isLoginValid(String login);
 
         /**
          * Password validation
          * @param password
          * @return operation success
          */
-        boolean isPasswordValid(@Nullable String password);
+        boolean isPasswordValid(String password);
 
         /**
-         * Checks login and password and asks {@link RegistrationContract.View} to show error messages
-         * @return both login and password validation opretaion success
+         * Confirm password validation
+         * @param password
+         * @param confirmPassword
+         * @return operation success
          */
-        boolean isLoginDataValid();
+        boolean isConfirmPasswordValid(String password, String confirmPassword);
 
-        boolean isFirstNameValid(@Nullable String firstName);
+        boolean checkRegistrationValid();
 
-        boolean isLastNameValid(@Nullable String lastName);
+        boolean isFirstNameValid(String firstName);
+
+        boolean isLastNameValid(String lastName);
 
         /**
          * Call Api Service
