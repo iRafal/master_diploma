@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="registration_camel_style">Реєстрація</string>
+
+    <string name="login_caps">ЛОГІН</string>
+    <string name="registration_caps">РЕЄСТРАЦІЯ</string>
+
+    <string name="health_control_app_title">Health control application</string>
+    <string name="login_camel_style">Логін</string>
+    <string name="password_camel_style">Пароль</string>
+
+    <string name="register_caps">РЕЄСТРАЦІЯ</string>
+    <string name="confirm_password">Підтвердити пароль</string>
+    <string name="last_name">Ім\`я</string>
+    <string name="first_name">Прізвище</string>
+    <string name="wrong_field_format">Неправильне значення %s</string>
+    <string name="empty_field_message_format">Поле %s порожнє</string>
+    <string name="passwords_do_not_match">Паролі не сходяться</string>
+    <string name="about_camel_style">Про додаток</string>
+    <string name="log_out_camel_style">Вийти</string>
+    <string name="log_out_message">Ви збираєтеся вийти. Ви впевнені?</string>
+    <string name="ok">Ок</string>
+    <string name="cancel">Відміна</string>
+    <string name="diploma_about">\'Дослідження методів моделювання акустичного поля в закритих приміщеннях\'\nМедвідь Андрій</string>
+</resources>

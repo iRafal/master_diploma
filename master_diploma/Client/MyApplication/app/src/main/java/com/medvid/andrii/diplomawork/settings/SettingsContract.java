@@ -28,6 +28,8 @@ public interface SettingsContract {
 
         void showAboutInfo();
 
+        void showLogout();
+
         boolean isActive();
 
     }
@@ -35,6 +37,8 @@ public interface SettingsContract {
     interface Presenter extends BasePresenter {
 
         void performUserLogout();
+
+        void performLogout();
 
     }
 }

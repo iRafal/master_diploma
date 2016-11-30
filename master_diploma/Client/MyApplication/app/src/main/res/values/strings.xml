@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DiplomaWork</string>
+    <string name="app_name" translatable="false">DiplomaWork</string>
     <string name="registration_camel_style">Registration</string>
 
     <string name="login_caps">LOGIN</string>
@@ -16,4 +16,10 @@
     <string name="wrong_field_format">Wrong %s</string>
     <string name="empty_field_message_format">%s is empty</string>
     <string name="passwords_do_not_match">Passwords don\'t match</string>
+    <string name="about_camel_style">About</string>
+    <string name="log_out_camel_style">Log out</string>
+    <string name="log_out_message">You are going to log out. Are you sure?</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="diploma_about">\'Research of the acoustic field modeling methods in enclosed spaces\'\nMedvid Andrii</string>
 </resources>
