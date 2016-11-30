@@ -5,6 +5,8 @@ import android.text.TextUtils;
 
 import com.medvid.andrii.diplomawork.DiplomaApplication;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.data.user.User;
+import com.medvid.andrii.diplomawork.util.AccountManager;
 import com.medvid.andrii.diplomawork.util.StringUtils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -97,6 +99,14 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
         if(!checkRegistrationValid()) {
             return;
         }
+
+        User user = new User(0, mView.getLogin(), mView.getFirstName(), mView.getLastName(),
+                0, User.Gender.MAN, 0, 0, 0);
+
+        AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
+        accountManager.logoutUser(); // Remove everything from DB.
+        accountManager.saveUser(user);
+
         mView.showHomeScreen();
     }
 }

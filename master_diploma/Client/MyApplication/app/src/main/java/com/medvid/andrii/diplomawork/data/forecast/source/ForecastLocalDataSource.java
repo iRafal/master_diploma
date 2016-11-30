@@ -82,11 +82,10 @@ public class ForecastLocalDataSource implements ForecastDataSourceContract  {
         Forecast forecast = null;
         List<Forecast> forecastList = new ArrayList<>();
 
-        if (cursor == null)	{
+        if (cursor == null || !cursor.moveToFirst())	{
+            cursor.close();
             callback.onForecastsLoaded(forecastList);
-        }
-        if (!cursor.moveToFirst())	{
-            callback.onForecastsLoaded(forecastList);
+            return;
         }
 
         do {

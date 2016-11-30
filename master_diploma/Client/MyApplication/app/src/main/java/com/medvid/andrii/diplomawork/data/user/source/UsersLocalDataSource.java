@@ -80,11 +80,10 @@ public class UsersLocalDataSource implements UserDataSourceContract {
         User user = null;
         List<User> userList = new ArrayList<>();
 
-        if (cursor == null)	{
+        if (cursor == null || !cursor.moveToFirst())	{
+            cursor.close();
             callback.onUsersLoaded(userList);
-        }
-        if (!cursor.moveToFirst())	{
-            callback.onUsersLoaded(userList);
+            return;
         }
 
         do {
@@ -116,8 +115,8 @@ public class UsersLocalDataSource implements UserDataSourceContract {
 
         ContentValues values = UserTableContract.getInstance().getContentValues(user);
 
-        String selection = BaseColumns._ID + " LIKE ?";
-        String[] selectionArgs = {  Long.toString(user.getId())  };
+        String selection = UserTableContract.EMAIL + " LIKE ?";
+        String[] selectionArgs = {  user.getEmail()  };
 
         mContentResolver.update(UserTableContract.buildUri(), values, selection, selectionArgs);
     }

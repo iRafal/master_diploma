@@ -75,7 +75,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
         initUi(view);
 
 //        usersTest();
-        suggestionsTest();
+//        suggestionsTest();
     }
 
 

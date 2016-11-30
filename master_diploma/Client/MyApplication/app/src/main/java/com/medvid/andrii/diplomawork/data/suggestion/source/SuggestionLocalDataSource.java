@@ -103,7 +103,9 @@ public class SuggestionLocalDataSource implements SuggestionDataSourceContract  
         List<Suggestion> suggestionList = new ArrayList<>();
 
         if (cursor == null || !cursor.moveToFirst())	{
+            cursor.close();
             callback.onSuggestionsLoaded(suggestionList);
+            return;
         }
 
         do {
