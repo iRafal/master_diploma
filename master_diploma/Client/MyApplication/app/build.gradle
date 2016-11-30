@@ -35,7 +35,13 @@ android {
                     'src/main/res',
                     'src/main/res-screen/login',
                     'src/main/res-screen/registration',
-                    'src/main/res-screen/landing'
+                    'src/main/res-screen/landing',
+                    'src/main/res-screen/settings',
+                    'src/main/res-screen/profile',
+                    'src/main/res-screen/tasks',
+                    'src/main/res-screen/task_item',
+                    'src/main/res-screen/forecasts',
+                    'src/main/res-screen/forecast_item'
             ]
         }
     }

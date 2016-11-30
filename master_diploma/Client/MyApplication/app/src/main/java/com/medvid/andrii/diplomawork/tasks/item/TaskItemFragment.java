@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.profile;
+package com.medvid.andrii.diplomawork.tasks.item;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,16 +10,17 @@ import android.view.ViewGroup;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.tasks.TasksFragment;
 
-public class ProfileFragment extends Fragment implements ProfileContract.View {
+public class TaskItemFragment extends Fragment implements TaskItemContract.View {
 
-    private ProfileContract.Presenter mPresenter;
+    private TaskItemContract.Presenter mPresenter;
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static TasksFragment newInstance() {
+        return new TasksFragment();
     }
 
-    public ProfileFragment() {
+    public TaskItemFragment() {
         // Required empty public constructor
     }
 
@@ -35,17 +36,18 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_tasks_item, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
+
     }
 
     /**
-     * {@link ProfileContract.View} methods
+     * {@link TaskItemContract.View} methods
      */
 
     @Override
@@ -54,7 +56,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     }
 
     @Override
-    public void setPresenter(ProfileContract.Presenter presenter) {
+    public void setPresenter(TaskItemContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
     }
 

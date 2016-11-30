@@ -34,6 +34,8 @@ import com.medvid.andrii.diplomawork.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Use the {@link LandingFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -115,7 +117,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
      */
     @Override
     public void setPresenter(LandingContract.Presenter presenter) {
-        mPresenter = presenter;
+        mPresenter = checkNotNull(presenter);;
     }
 
 
@@ -265,8 +267,6 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
             }
         });
-
-
     }
 
     private List<Suggestion> getSuggestionsList(long forecastId)   {

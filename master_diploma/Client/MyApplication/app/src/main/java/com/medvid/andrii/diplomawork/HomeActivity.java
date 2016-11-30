@@ -13,14 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import com.google.common.base.Preconditions;
-import com.medvid.andrii.diplomawork.info.InfoFragment;
+import com.medvid.andrii.diplomawork.tasks.TasksFragment;
 import com.medvid.andrii.diplomawork.profile.ProfileFragment;
 import com.medvid.andrii.diplomawork.settings.SettingsFragment;
-import com.medvid.andrii.diplomawork.stats.StatsFragment;
+import com.medvid.andrii.diplomawork.forecasts.ForecastsFragment;
 
 import java.lang.annotation.Retention;
 
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.INFO_TAB;
+import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.TASKS_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROFILE_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.SETTINGS_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.STATS_TAB;
@@ -33,9 +33,9 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public class HomeActivity extends AppCompatActivity {
 
     @Retention(SOURCE)
-    @IntDef({INFO_TAB, STATS_TAB, PROFILE_TAB, SETTINGS_TAB})
+    @IntDef({TASKS_TAB, STATS_TAB, PROFILE_TAB, SETTINGS_TAB})
     public @interface ScreenNames {
-        int INFO_TAB = 0;
+        int TASKS_TAB = 0;
         int STATS_TAB = 1;
         int PROFILE_TAB = 2;
         int SETTINGS_TAB = 3;
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public static Intent getIntent(@NonNull Context context) {
-        return getIntent(context, INFO_TAB);
+        return getIntent(context, TASKS_TAB);
     }
 
     /**
@@ -79,11 +79,11 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (mTabLayout.getSelectedTabPosition()) {
-                    case INFO_TAB:
-                        showFragment(InfoFragment.newInstance());
+                    case TASKS_TAB:
+                        showFragment(TasksFragment.newInstance());
                         break;
                     case STATS_TAB:
-                        showFragment(StatsFragment.newInstance());
+                        showFragment(ForecastsFragment.newInstance());
                         break;
                     case PROFILE_TAB:
                         showFragment(ProfileFragment.newInstance());
@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout.Tab tab = mTabLayout.getTabAt(INFO_TAB);
+        TabLayout.Tab tab = mTabLayout.getTabAt(TASKS_TAB);
         tab.select();
     }
 

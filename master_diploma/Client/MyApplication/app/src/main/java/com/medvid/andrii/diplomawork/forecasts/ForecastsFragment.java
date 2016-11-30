@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.profile;
+package com.medvid.andrii.diplomawork.forecasts;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
 
-public class ProfileFragment extends Fragment implements ProfileContract.View {
+public class ForecastsFragment extends Fragment implements ForecastsContract.View {
 
-    private ProfileContract.Presenter mPresenter;
+    private ForecastsContract.Presenter mPresenter;
 
-    public static ProfileFragment newInstance() {
-        return new ProfileFragment();
+    public static ForecastsFragment newInstance() {
+        return new ForecastsFragment();
     }
 
-    public ProfileFragment() {
+    public ForecastsFragment() {
         // Required empty public constructor
     }
 
@@ -35,17 +35,18 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_forecasts, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
+
     }
 
     /**
-     * {@link ProfileContract.View} methods
+     * {@link ForecastsContract.View} methods
      */
 
     @Override
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     }
 
     @Override
-    public void setPresenter(ProfileContract.Presenter presenter) {
+    public void setPresenter(ForecastsContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
     }
 
