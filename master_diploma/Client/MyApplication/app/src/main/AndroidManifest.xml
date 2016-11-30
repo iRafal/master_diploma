@@ -40,6 +40,7 @@
         <activity
             android:name=".HomeActivity"
             android:parentActivityName=".HomeActivity"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

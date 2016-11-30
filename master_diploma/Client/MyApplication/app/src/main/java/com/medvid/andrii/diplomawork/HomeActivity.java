@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.tasks.TasksFragment;
@@ -23,7 +24,7 @@ import java.lang.annotation.Retention;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.TASKS_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROFILE_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.SETTINGS_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.STATS_TAB;
+import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.FORECASTS_TAB;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
@@ -33,16 +34,17 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public class HomeActivity extends AppCompatActivity {
 
     @Retention(SOURCE)
-    @IntDef({TASKS_TAB, STATS_TAB, PROFILE_TAB, SETTINGS_TAB})
+    @IntDef({TASKS_TAB, FORECASTS_TAB, PROFILE_TAB, SETTINGS_TAB})
     public @interface ScreenNames {
         int TASKS_TAB = 0;
-        int STATS_TAB = 1;
+        int FORECASTS_TAB = 1;
         int PROFILE_TAB = 2;
         int SETTINGS_TAB = 3;
     }
 
     private FrameLayout mContentFrame;
     private TabLayout mTabLayout;
+    private TextView mToolbarTitle;
 
     public static Intent getIntent(@NonNull Context context, @ScreenNames int screenName) {
         Preconditions.checkNotNull(context);
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mToolbarTitle = (TextView) findViewById(R.id.title);
         mContentFrame = (FrameLayout) findViewById(R.id.contentFrame);
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
@@ -80,15 +83,19 @@ public class HomeActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (mTabLayout.getSelectedTabPosition()) {
                     case TASKS_TAB:
+                        mToolbarTitle.setText(R.string.tasks_camel_style);
                         showFragment(TasksFragment.newInstance());
                         break;
-                    case STATS_TAB:
+                    case FORECASTS_TAB:
+                        mToolbarTitle.setText(R.string.forecasts_camel_style);
                         showFragment(ForecastsFragment.newInstance());
                         break;
                     case PROFILE_TAB:
+                        mToolbarTitle.setText(R.string.profile_camel_style);
                         showFragment(ProfileFragment.newInstance());
                         break;
                     case SETTINGS_TAB:
+                        mToolbarTitle.setText(R.string.settings_camel_style);
                         showFragment(SettingsFragment.newInstance());
                         break;
                 }
@@ -103,8 +110,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout.Tab tab = mTabLayout.getTabAt(TASKS_TAB);
-        tab.select();
+        mTabLayout.getTabAt(PROFILE_TAB).select();
     }
 
     private void showFragment(@NonNull Fragment fragment) {

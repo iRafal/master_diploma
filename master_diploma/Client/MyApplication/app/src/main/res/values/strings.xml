@@ -22,4 +22,8 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="diploma_about">\'Research of the acoustic field modeling methods in enclosed spaces\'\nMedvid Andrii</string>
+    <string name="settings_camel_style">Settings</string>
+    <string name="profile_camel_style">Profile</string>
+    <string name="tasks_camel_style">Tasks</string>
+    <string name="forecasts_camel_style">Forecasts</string>
 </resources>
