@@ -14,17 +14,21 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
-import com.medvid.andrii.diplomawork.tasks.TasksFragment;
-import com.medvid.andrii.diplomawork.profile.ProfileFragment;
-import com.medvid.andrii.diplomawork.settings.SettingsFragment;
 import com.medvid.andrii.diplomawork.forecasts.ForecastsFragment;
+import com.medvid.andrii.diplomawork.forecasts.ForecastsPresenter;
+import com.medvid.andrii.diplomawork.profile.ProfileFragment;
+import com.medvid.andrii.diplomawork.profile.ProfilePresenter;
+import com.medvid.andrii.diplomawork.settings.SettingsFragment;
+import com.medvid.andrii.diplomawork.settings.SettingsPresenter;
+import com.medvid.andrii.diplomawork.tasks.TasksFragment;
+import com.medvid.andrii.diplomawork.tasks.TasksPresenter;
 
 import java.lang.annotation.Retention;
 
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.TASKS_TAB;
+import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.FORECASTS_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.PROFILE_TAB;
 import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.SETTINGS_TAB;
-import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.FORECASTS_TAB;
+import static com.medvid.andrii.diplomawork.HomeActivity.ScreenNames.TASKS_TAB;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
@@ -81,22 +85,31 @@ public class HomeActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Fragment fragment;
                 switch (mTabLayout.getSelectedTabPosition()) {
                     case TASKS_TAB:
                         mToolbarTitle.setText(R.string.tasks_camel_style);
-                        showFragment(TasksFragment.newInstance());
+                        fragment = TasksFragment.newInstance();
+                        showFragment(fragment);
+                        new TasksPresenter((TasksFragment)fragment);
                         break;
                     case FORECASTS_TAB:
                         mToolbarTitle.setText(R.string.forecasts_camel_style);
-                        showFragment(ForecastsFragment.newInstance());
+                        fragment = ForecastsFragment.newInstance();
+                        showFragment(fragment);
+                        new ForecastsPresenter((ForecastsFragment)fragment);
                         break;
                     case PROFILE_TAB:
                         mToolbarTitle.setText(R.string.profile_camel_style);
-                        showFragment(ProfileFragment.newInstance());
+                        fragment = ProfileFragment.newInstance();
+                        showFragment(fragment);
+                        new ProfilePresenter((ProfileFragment)fragment);
                         break;
                     case SETTINGS_TAB:
                         mToolbarTitle.setText(R.string.settings_camel_style);
-                        showFragment(SettingsFragment.newInstance());
+                        fragment = SettingsFragment.newInstance();
+                        showFragment(fragment);
+                        new SettingsPresenter((SettingsFragment)fragment);
                         break;
                 }
             }

@@ -17,14 +17,9 @@ public class SettingsPresenter implements SettingsContract.Presenter    {
     }
 
     @Override
-    public void performUserLogout() {
-        AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
-        accountManager.logoutUser();
-    }
-
-    @Override
     public void performLogout() {
         AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
         accountManager.logoutUser();
+        mView.showLandingScreen();
     }
 }

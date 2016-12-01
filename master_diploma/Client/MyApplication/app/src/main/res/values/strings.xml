@@ -27,4 +27,6 @@
     <string name="tasks_camel_style">Tasks</string>
     <string name="forecasts_camel_style">Forecasts</string>
     <string name="no_data_available">No data available</string>
+    <string name="edit_account_data">Edit account data</string>
+    <string name="edit_profile_data">Edit profile data</string>
 </resources>

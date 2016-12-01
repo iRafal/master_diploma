@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.medvid.andrii.diplomawork.HomeActivity;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.user.User;
-import com.medvid.andrii.diplomawork.login.LoginActivity;
 import com.medvid.andrii.diplomawork.util.AccountManager;
 import com.medvid.andrii.diplomawork.util.ActivityUtils;
 
@@ -21,7 +20,7 @@ public class LandingActivity extends AppCompatActivity {
 
     public static Intent getIntent(@NonNull Context context)    {
         checkNotNull(context);
-        return new Intent(context, LoginActivity.class);
+        return new Intent(context, LandingActivity.class);
     }
 
     @Override

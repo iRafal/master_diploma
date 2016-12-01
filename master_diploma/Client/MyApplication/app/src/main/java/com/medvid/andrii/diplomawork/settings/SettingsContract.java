@@ -32,11 +32,11 @@ public interface SettingsContract {
 
         boolean isActive();
 
+        void showLandingScreen();
+
     }
 
     interface Presenter extends BasePresenter {
-
-        void performUserLogout();
 
         void performLogout();
 

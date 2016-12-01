@@ -23,4 +23,6 @@
     <string name="cancel">Відміна</string>
     <string name="diploma_about">\'Дослідження методів моделювання акустичного поля в закритих приміщеннях\'\nМедвідь Андрій</string>
     <string name="no_data_available">Дані недоступні</string>
+    <string name="edit_account_data">Edit account data</string>
+    <string name="edit_profile_data">Edit profile data</string>
 </resources>

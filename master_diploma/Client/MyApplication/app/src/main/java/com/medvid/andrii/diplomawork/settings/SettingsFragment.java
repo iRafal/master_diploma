@@ -2,6 +2,7 @@ package com.medvid.andrii.diplomawork.settings;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.landing.LandingActivity;
 import com.medvid.andrii.diplomawork.util.DialogUtils;
 import com.medvid.andrii.diplomawork.util.OnListItemClickListener;
 
@@ -71,6 +73,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public boolean isActive() {
         return isActive();
+    }
+
+    @Override
+    public void showLandingScreen() {
+        Intent intent = LandingActivity.getIntent(getActivity());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(intent);
     }
 
     @Override

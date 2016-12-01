@@ -34,6 +34,8 @@
         android:text="@string/no_data_available"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
+        android:gravity="center"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
