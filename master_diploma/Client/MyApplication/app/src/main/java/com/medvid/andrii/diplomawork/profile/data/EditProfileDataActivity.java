@@ -1,4 +1,4 @@
-package com.medvid.andrii.diplomawork.login;
+package com.medvid.andrii.diplomawork.profile.data;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,19 +12,19 @@ import com.medvid.andrii.diplomawork.util.ActivityUtils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class LoginActivity extends AppCompatActivity {
+public class EditProfileDataActivity extends AppCompatActivity {
 
-    private LoginContract.Presenter mPresenter;
+    private EditProfileDataContract.Presenter mPresenter;
 
     public static Intent getIntent(@NonNull Context context)    {
         checkNotNull(context);
-        return new Intent(context, LoginActivity.class);
+        return new Intent(context, EditProfileDataActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_profile_data_edit);
         initViews();
     }
 
@@ -33,13 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        LoginFragment fragment =
-                (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        EditProfileDataFragment fragment =
+                (EditProfileDataFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (fragment == null) {
-            fragment = LoginFragment.newInstance();
+            fragment = EditProfileDataFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
         }
 
-        mPresenter = new LoginPresenter(fragment);
+        mPresenter = new EditProfileDataPresenter(fragment);
     }
 }

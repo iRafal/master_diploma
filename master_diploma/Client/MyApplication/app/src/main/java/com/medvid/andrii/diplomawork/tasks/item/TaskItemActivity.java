@@ -4,19 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
-import com.medvid.andrii.diplomawork.tasks.TasksFragment;
+import com.medvid.andrii.diplomawork.util.ActivityUtils;
 
 public class TaskItemActivity extends AppCompatActivity {
 
     private FrameLayout mContentFrame;
+    private TaskItemContract.Presenter mPresenter;
 
     public static Intent getIntent(@NonNull Context context) {
         Preconditions.checkNotNull(context);
@@ -44,18 +43,14 @@ public class TaskItemActivity extends AppCompatActivity {
 
         mContentFrame = (FrameLayout) findViewById(R.id.contentFrame);
 
-        showFragment(TasksFragment.newInstance());
-    }
-
-    private void showFragment(@NonNull Fragment fragment) {
-
-        if(isFinishing() || isDestroyed())  {
-            return;
+        TaskItemFragment fragment =
+                (TaskItemFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (fragment == null) {
+            fragment = TaskItemFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
         }
 
-        Preconditions.checkNotNull(fragment);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.contentFrame, fragment);
-        fragmentTransaction.commit();
+        mPresenter = new TaskItemPresenter(fragment);
     }
+
 }

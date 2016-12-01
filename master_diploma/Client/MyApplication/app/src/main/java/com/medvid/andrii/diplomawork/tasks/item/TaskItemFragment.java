@@ -16,8 +16,8 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
 
     private TaskItemContract.Presenter mPresenter;
 
-    public static TasksFragment newInstance() {
-        return new TasksFragment();
+    public static TaskItemFragment newInstance() {
+        return new TaskItemFragment();
     }
 
     public TaskItemFragment() {

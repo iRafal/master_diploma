@@ -87,7 +87,7 @@
         <TextView
             android:id="@+id/changeUserAccountData"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:drawableEnd="@drawable/ic_create_24dp"
             android:drawablePadding="5dp"
             android:maxLines="1"

@@ -36,14 +36,14 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        LandingFragment landingFragment =
+        LandingFragment fragment =
                 (LandingFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (landingFragment == null) {
-            landingFragment = LandingFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), landingFragment, R.id.contentFrame);
+        if (fragment == null) {
+            fragment = LandingFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.contentFrame);
         }
 
-        mPresenter = new LandingPresenter(landingFragment);
+        mPresenter = new LandingPresenter(fragment);
     }
 
     /**

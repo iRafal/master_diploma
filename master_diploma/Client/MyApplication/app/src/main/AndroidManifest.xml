@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.INTERNET"/>
 
         <activity
             android:name=".landing.LandingActivity"
@@ -24,23 +24,23 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:parentActivityName=".login.LoginActivity"
             android:label="@string/login_camel_style"
+            android:parentActivityName=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
             android:name=".registration.RegistrationActivity"
-            android:parentActivityName=".landing.LandingActivity"
             android:label="@string/registration_camel_style"
+            android:parentActivityName=".landing.LandingActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".HomeActivity"
-            android:parentActivityName=".HomeActivity"
             android:label=""
+            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
@@ -56,10 +56,24 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity
+            android:name=".profile.data.EditProfileDataActivity"
+            android:label="@string/edit_profile_data"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".profile.account.EditAccountDataActivity"
+            android:label="@string/edit_account_data"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <provider
             android:name=".data.DiplomaContentProvider"
             android:authorities="${packageName}"
-            android:exported="false" />
+            android:exported="false"/>
 
     </application>
 

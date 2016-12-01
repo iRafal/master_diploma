@@ -14,30 +14,23 @@
  * limitations under the License.
  */
 
-package com.medvid.andrii.diplomawork.profile;
+package com.medvid.andrii.diplomawork.profile.data;
 
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
-import com.medvid.andrii.diplomawork.data.user.User;
 
 /**
  * This specifies the contract between the view and the presenter.
  */
-public interface ProfileContract {
+public interface EditProfileDataContract {
 
     interface View extends BaseView<Presenter> {
 
         boolean isActive();
 
-        void showEditAccountDataScreen();
-
-        void showEditProfileDataScreen();
-
     }
 
     interface Presenter extends BasePresenter {
-
-        User getUserData();
 
     }
 }

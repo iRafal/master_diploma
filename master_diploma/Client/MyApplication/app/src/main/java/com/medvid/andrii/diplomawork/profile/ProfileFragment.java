@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.user.User;
+import com.medvid.andrii.diplomawork.profile.account.EditAccountDataActivity;
+import com.medvid.andrii.diplomawork.profile.data.EditProfileDataActivity;
 
 public class ProfileFragment extends Fragment implements ProfileContract.View, View.OnClickListener {
 
@@ -68,6 +70,16 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
     }
 
     @Override
+    public void showEditAccountDataScreen() {
+        getActivity().startActivity(EditAccountDataActivity.getIntent(getActivity()));
+    }
+
+    @Override
+    public void showEditProfileDataScreen() {
+        getActivity().startActivity(EditProfileDataActivity.getIntent(getActivity()));
+    }
+
+    @Override
     public void setPresenter(ProfileContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
     }
@@ -80,8 +92,10 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
     public void onClick(View view) {
         switch (view.getId())   {
             case R.id.userAccountData:
+                showEditAccountDataScreen();
                 break;
             case R.id.userProfileData:
+                showEditProfileDataScreen();
                 break;
         }
     }
@@ -98,7 +112,9 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
         mUserIcon = (ImageView) rootView.findViewById(R.id.userIcon);
 
         mUserAccountData = rootView.findViewById(R.id.userAccountData);
+        mUserAccountData.setOnClickListener(this);
         mUserProfileData = rootView.findViewById(R.id.userProfileData);
+        mUserProfileData.setOnClickListener(this);
     }
 
     private void setUserData()  {
