@@ -26,10 +26,80 @@ public interface EditAccountDataContract {
 
     interface View extends BaseView<Presenter> {
 
+        String getLogin();
+
+        void setLogin(String login);
+
+        String getFirstName();
+
+        void setFirstName(String firstName);
+
+        String getLastName();
+
+        void setLastName(String lasetName);
+
+        String getPassword();
+
+        String getConfirmPassword();
+
+        void showLoginError(String message);
+
+        void hideLoginError();
+
+        void showFirstNameError(boolean show);
+
+        void showLastNameError(boolean show);
+
+        void showPasswordError(String message);
+
+        void hidePasswordError();
+
+        void showConfirmPasswordError(String message);
+
+        void hideConfirmPasswordError();
+
+        void showNetworkError(boolean show);
+
+        void finish();
+
+        void showProgressDialog(boolean show);
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        /**
+         * Login validation
+         * @param login
+         * @return operation success
+         */
+        boolean isLoginValid(String login);
+
+        /**
+         * Password validation
+         * @param password
+         * @return operation success
+         */
+        boolean isPasswordValid(String password);
+
+        /**
+         * Confirm password validation
+         * @param password
+         * @param confirmPassword
+         * @return operation success
+         */
+        boolean isConfirmPasswordValid(String password, String confirmPassword);
+
+        boolean checkUserDataValid();
+
+        boolean isFirstNameValid(String firstName);
+
+        boolean isLastNameValid(String lastName);
+
+        void updateUserInfo();
+
+        void setUserData();
     }
 }

@@ -1,5 +1,6 @@
 package com.medvid.andrii.diplomawork.profile.account;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.util.StringUtils;
 
 /**
  * Use the {@link EditAccountDataFragment#newInstance} factory method to
@@ -41,6 +43,8 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
     private EditText mConfirmPasswordEditText;
 
     private TextView mUpdateTextView;
+
+    private ProgressDialog mProgressDialog;
 
     public static EditAccountDataFragment newInstance() {
         return new EditAccountDataFragment();
@@ -69,6 +73,7 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
+        mPresenter.setUserData();
     }
 
     @Override
@@ -94,7 +99,7 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
     public void onClick(View view) {
         switch (view.getId())   {
             case R.id.updateTextView:
-//                mPresenter.performRegistration();
+                mPresenter.updateUserInfo();
                 break;
         }
     }
@@ -102,6 +107,98 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
     /**
      * {@link EditAccountDataContract.View} methods
      */
+
+    @Override
+    public String getLogin() {
+        return mLoginEditText.getText().toString();
+    }
+
+    @Override
+    public void setLogin(String login) {
+        mLoginEditText.setText(login);
+    }
+
+    @Override
+    public String getFirstName() {
+        return mFirstNameEditText.getText().toString();
+    }
+
+    @Override
+    public void setFirstName(String firstName) {
+        mFirstNameEditText.setText(firstName);
+    }
+
+    @Override
+    public String getLastName() {
+        return mLastNameEditText.getText().toString();
+    }
+
+    @Override
+    public void setLastName(String lastName) {
+        mLastNameEditText.setText(lastName);
+    }
+
+    @Override
+    public String getPassword() {
+        return mPassEditText.getText().toString();
+    }
+
+    @Override
+    public String getConfirmPassword() {
+        return mConfirmPasswordEditText.getText().toString();
+    }
+
+    @Override
+    public void showLoginError(String message) {
+        mLoginTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hideLoginError() {
+        mLoginTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showFirstNameError(boolean show) {
+        mFirstNameTextInputLayout.setError(show
+                ? StringUtils.getEmptyFieldString(R.string.first_name) : "");
+    }
+
+    @Override
+    public void showLastNameError(boolean show) {
+        mLastNameTextInputLayout.setError(show
+                ? StringUtils.getEmptyFieldString(R.string.last_name) : "");
+    }
+
+    @Override
+    public void showPasswordError(String message) {
+        mPassTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hidePasswordError() {
+        mPassTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showConfirmPasswordError(String message) {
+        mConfirmPasswordTextInputLayout.setError(message);
+    }
+
+    @Override
+    public void hideConfirmPasswordError() {
+        mConfirmPasswordTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showNetworkError(boolean show) {
+        // TODO
+    }
+
+    @Override
+    public void finish() {
+        getActivity().finish();
+    }
 
     @Override
     public boolean isActive() {
@@ -113,6 +210,18 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
         mPresenter = Preconditions.checkNotNull(presenter);
     }
 
+    @Override
+    public void showProgressDialog(boolean show)  {
+
+        if(show) {
+            mProgressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.processing), true);
+            return;
+        }
+
+        if(mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
 
     /**
      * Private Methods
@@ -139,7 +248,7 @@ public class EditAccountDataFragment extends Fragment implements EditAccountData
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    mPresenter.performRegistration();
+                    mPresenter.updateUserInfo();
                 }
                 return false;
             }

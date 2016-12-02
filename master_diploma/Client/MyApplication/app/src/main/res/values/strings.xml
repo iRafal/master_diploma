@@ -30,4 +30,6 @@
     <string name="edit_account_data">Edit account data</string>
     <string name="edit_profile_data">Edit profile data</string>
     <string name="update_caps">UPDATE</string>
+    <string name="loading">Loading</string>
+    <string name="processing">Processing</string>
 </resources>
