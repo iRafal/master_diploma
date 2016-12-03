@@ -1,49 +1,84 @@
 package com.medvid.andrii.diplomawork.network;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringDef;
 
 import com.google.common.base.Preconditions;
-import com.google.gson.Gson;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSample;
 
+import java.lang.annotation.Retention;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.AGE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.BODY_MASS_INDEX;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.CARBOHYDRATE_AMOUNT;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.DISTANCE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.EATEN_CALORIES;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.FAT_AMOUNT;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.FOOD_MULTIPLICITY;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.GENDER;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.GROWTH;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.HIGHT_PRESSURE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.LOW_PRESSURE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.PROTEIN_AMOUNT;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.PULSE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.SLEEP_HOURS_COUNT;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.SLEEP_QUALITY;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.SPENT_CALORIES;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.STRESS_LEVEL;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.SUGAR_LEVEL;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.TEMPERATURE;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.VITAMIN_C;
+import static com.medvid.andrii.diplomawork.network.ForecastService.QueryParams.WEIGHT;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 public class ForecastService {
 
-    private static String AGE = "Age";
-    private static String GENDER = "Gender";
-    private static String GROWTH = "Growth";
-    private static String WEIGHT = "Weight";
-    private static String BODY_MASS_INDEX = "BodyMassIndex";
-    private static String DISTANCE = "Distance";
-    private static String SLEEP_HOURS_COUNT = "SleepHoursCount";
-    private static String SLEEP_QUALITY = "SleepQuality";
-    private static String SPENT_CALORIES = "SpentCalories";
-    private static String EATEN_CALORIES = "EatenCalories";
-    private static String FOOD_MULTIPLICITY = "FoodMultiplicity";
-    private static String FAT_AMOUNT = "FatAmount";
-    private static String CARBOHYDRATE_AMOUNT = "CarbohydrateAmount";
-    private static String PROTEIN_AMOUNT = "ProteinAmount";
-    private static String VITAMIN_C = "VitaminC";
-    private static String SUGAR_LEVEL = "SugarLevel";
-    private static String STRESS_LEVEL = "StressLevel";
-    private static String TEMPERATURE = "Temperature";
-    private static String HIGHT_PRESSURE = "HightPressure";
-    private static String LOW_PRESSURE = "LowPressure";
-    private static String PULSE = "Pulse";
+    @Retention(SOURCE)
+    @StringDef({
+            AGE, GENDER, GROWTH, WEIGHT, BODY_MASS_INDEX, DISTANCE, SLEEP_HOURS_COUNT,
+            SLEEP_QUALITY, SPENT_CALORIES, EATEN_CALORIES, FOOD_MULTIPLICITY, FAT_AMOUNT,
+            CARBOHYDRATE_AMOUNT, PROTEIN_AMOUNT, VITAMIN_C, SUGAR_LEVEL, STRESS_LEVEL,
+            TEMPERATURE, HIGHT_PRESSURE, LOW_PRESSURE, PULSE
+    })
 
-    private static final String DOMAIN = "http://localhost:56906/";
+    public @interface QueryParams {
+        String AGE = "Age";
+        String GENDER = "Gender";
+        String GROWTH = "Growth";
+        String WEIGHT = "Weight";
+        String BODY_MASS_INDEX = "BodyMassIndex";
+        String DISTANCE = "Distance";
+        String SLEEP_HOURS_COUNT = "SleepHoursCount";
+        String SLEEP_QUALITY = "SleepQuality";
+        String SPENT_CALORIES = "SpentCalories";
+        String EATEN_CALORIES = "EatenCalories";
+        String FOOD_MULTIPLICITY = "FoodMultiplicity";
+        String FAT_AMOUNT = "FatAmount";
+        String CARBOHYDRATE_AMOUNT = "CarbohydrateAmount";
+        String PROTEIN_AMOUNT = "ProteinAmount";
+        String VITAMIN_C = "VitaminC";
+        String SUGAR_LEVEL = "SugarLevel";
+        String STRESS_LEVEL = "StressLevel";
+        String TEMPERATURE = "Temperature";
+        String HIGHT_PRESSURE = "HightPressure";
+        String LOW_PRESSURE = "LowPressure";
+        String PULSE = "Pulse";
+    }
 
-    public static Map<String, String> getQueryMap(@NonNull TrainingSample trainingSample) {
+    private static final String DOMAIN = "http://10.0.2.2:56906/";
+
+    private static Map<String, String> getQueryMap(@NonNull TrainingSample trainingSample) {
         Preconditions.checkNotNull(trainingSample);
 
         Map<String, String> paramsMap = new HashMap<>();
@@ -78,16 +113,19 @@ public class ForecastService {
         Preconditions.checkNotNull(trainingSample);
         Preconditions.checkNotNull(callback);
 
-        OkHttpClient okClient = new OkHttpClient.Builder().build();
-        Gson gson = new Gson();
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DOMAIN)
-                .client(okClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(clientBuilder.build())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ForecastServiceProtocol forecastServiceProtocol = retrofit.create(ForecastServiceProtocol.class);
-        Call<List<Forecast>> call = forecastServiceProtocol.getForecast(getQueryMap(new TrainingSample()));
+        Call<List<Forecast>> call = forecastServiceProtocol.getForecast(getQueryMap(trainingSample));
         call.enqueue(new Callback<List<Forecast>>() {
             @Override
             public void onResponse(Call<List<Forecast>> call, Response<List<Forecast>> response) {

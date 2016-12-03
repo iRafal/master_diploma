@@ -13,7 +13,7 @@ import com.medvid.andrii.diplomawork.data.training_sample.entities.Calories;
 import com.medvid.andrii.diplomawork.data.training_sample.entities.Pressure;
 import com.medvid.andrii.diplomawork.data.training_sample.entities.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
-import com.medvid.andrii.diplomawork.util.Utils;
+import com.medvid.andrii.diplomawork.util.DateUtils;
 
 import java.util.Date;
 
@@ -177,7 +177,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         values.put(HIGH_PRESSURE, trainingSample.getPressure().getHighPressure());
         values.put(LOW_PRESSURE, trainingSample.getPressure().getLowPressure());
         values.put(PULSE, trainingSample.getPulse());
-        values.put(TIME_STAMP, Utils.getStringFromDate(trainingSample.getTimeStamp()));
+        values.put(TIME_STAMP, DateUtils.getStringFromDate(trainingSample.getTimeStamp()));
         values.put(IS_FORECAST, trainingSample.isForecast());
         values.put(IS_STATISTICS, trainingSample.isStatistics());
 
@@ -237,7 +237,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         double highPressure = cursor.getDouble(highPressureIndex);
         double lowPressure = cursor.getDouble(lowPressureIndex);
         double pulse = cursor.getDouble(pulseIndex);
-        Date timeStamp = Utils.getDateFromString(cursor.getString(timeStampIndex));
+        Date timeStamp = DateUtils.getDateFromString(cursor.getString(timeStampIndex));
         boolean isForecast = cursor.getInt(isForecastIndex) == 1;
         boolean isStatistics = cursor.getInt(isStatisticsIndex) == 1;
 

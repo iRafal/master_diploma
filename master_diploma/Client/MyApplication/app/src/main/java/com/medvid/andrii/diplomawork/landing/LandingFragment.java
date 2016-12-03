@@ -2,6 +2,7 @@ package com.medvid.andrii.diplomawork.landing;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,17 +23,28 @@ import com.medvid.andrii.diplomawork.data.suggestion.Suggestion;
 import com.medvid.andrii.diplomawork.data.suggestion.SuggestionTableContract;
 import com.medvid.andrii.diplomawork.data.suggestion.source.SuggestionDataSourceContract;
 import com.medvid.andrii.diplomawork.data.suggestion.source.SuggestionLocalDataSource;
+import com.medvid.andrii.diplomawork.data.training_sample.TrainingSample;
 import com.medvid.andrii.diplomawork.data.training_sample.TrainingSampleTableContract;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Calories;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Pressure;
+import com.medvid.andrii.diplomawork.data.training_sample.entities.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 import com.medvid.andrii.diplomawork.data.user.source.UserDataSourceContract;
 import com.medvid.andrii.diplomawork.data.user.source.UsersLocalDataSource;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
+import com.medvid.andrii.diplomawork.network.ForecastService;
 import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
+import com.medvid.andrii.diplomawork.util.RandomUtils;
 import com.medvid.andrii.diplomawork.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -78,8 +90,8 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
 //        usersTest();
 //        suggestionsTest();
+        apiForecastCallTest();
     }
-
 
     @Override
     public void onResume() {
@@ -281,5 +293,94 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
         suggestionList.add(new Suggestion(suggestionId++, "Try to normalize your food multiplicity", "FoodMultiplicity", forecastId));
 
         return suggestionList;
+    }
+
+    private void apiForecastCallTest() {
+
+        RandomUtils randomUtils = new RandomUtils();
+        int age = randomUtils.nextInt(18, 30);
+
+        double growth = randomUtils.nextDouble(1.0, 2.0);
+        double weight = randomUtils.nextDouble(1.0, 2.0);
+        double bodyMassIndex = Utils.calculateBodyMassIndex(weight, growth);
+        double distance = randomUtils.nextDouble(1.0, 4.0);
+        Sleep mSleep = new Sleep(
+                randomUtils.nextDouble(6.0, 10.0),// SleepHoursCount
+                randomUtils.nextDouble(0.0, 10.0)// SleepQuality
+        );
+
+        Calories mCalories = new Calories(
+                randomUtils.nextDouble(2000.0, 5000.0),   // SpentCalories
+                randomUtils.nextDouble(2000.0, 5000.0)    // EatenCalories
+        );
+        double foodMultiplicity = randomUtils.nextDouble(3.0, 4.0);
+        double fatAmount = randomUtils.nextDouble(-10.0, 10.0);
+        double carbohydrateAmount = weight * 4 + randomUtils.nextDouble(-15.0, 15.0);
+        double proteinAmount = weight + randomUtils.nextDouble(-10.0, 10.0);
+        double vitaminC = randomUtils.nextDouble(55.0, 65.0);
+        double sugarLevel = randomUtils.nextDouble(3.0, 5.0);
+        double stressLevel = randomUtils.nextDouble(3.0, 5.0);
+        double temperature = 36.6;
+        Pressure mPressure = new Pressure(
+                randomUtils.nextDouble(115.0, 130.0),
+                randomUtils.nextDouble(75.0, 85.0)
+        );
+
+        double pulse = randomUtils.nextDouble(60.0, 80.0);
+        Date timeStamp = new Date();
+
+        TrainingSample trainingSample =
+                TrainingSample.getStatisticsTrainingSample(
+                        0,
+                        age,
+                        User.Gender.MAN,
+                        growth,
+                        weight,
+                        bodyMassIndex,
+                        distance,
+                        mSleep,
+                        mCalories,
+                        foodMultiplicity,
+                        fatAmount,
+                        carbohydrateAmount,
+                        proteinAmount,
+                        vitaminC,
+                        sugarLevel,
+                        stressLevel,
+                        temperature,
+                        mPressure,
+                        pulse,
+                        timeStamp
+
+                );
+
+        Callback<List<com.medvid.andrii.diplomawork.network.Forecast>> callback =
+                new Callback<List<com.medvid.andrii.diplomawork.network.Forecast>>() {
+                    @Override
+                    public void onResponse(
+                            Call<List<com.medvid.andrii.diplomawork.network.Forecast>> call,
+                            Response<List<com.medvid.andrii.diplomawork.network.Forecast>> response) {
+
+                        if (response.isSuccessful()) {
+                            List<com.medvid.andrii.diplomawork.network.Forecast> forecasts = response.body();
+                            forecasts.isEmpty();
+                        }   else    {
+                            // TODO error
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(
+                            Call<List<com.medvid.andrii.diplomawork.network.Forecast>> call,
+                            Throwable t) {
+                        // TODO error
+                    }
+                };
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        ForecastService.getForecast(trainingSample, callback);
     }
 }

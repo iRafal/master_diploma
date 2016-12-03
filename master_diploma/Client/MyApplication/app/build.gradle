@@ -67,6 +67,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
 
     testCompile "junit:junit:$rootProject.junitVersion"
 }

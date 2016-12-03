@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Forecast {
 
-    public Disease Disease;
-    public GroupRisk GroupRisk;
-    public List<Suggestion> Suggestions;
+    public Disease disease;
+    public GroupRisk groupRisk;
+    public List<Suggestion> suggestions;
 
     private static class Disease   {
         int Status;

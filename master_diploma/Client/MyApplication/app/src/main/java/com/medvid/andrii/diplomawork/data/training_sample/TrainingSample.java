@@ -19,7 +19,7 @@ public class TrainingSample implements ModelEntity {
     private double growth; // 1.8
     private double weight; // 75
     private double bodyMassIndex; // 20
-    private double distance; //  4
+    private double distance; // Kilometers //  4
     private Sleep mSleep;
     private Calories mCalories;
     private double foodMultiplicity; //3
@@ -90,21 +90,12 @@ public class TrainingSample implements ModelEntity {
                 isForecast, isStatistics);
     }
 
-    public TrainingSample() {
-        // Test empty constructor
-    }
-
     public TrainingSample(long id, double age, @User.Gender int gender, double growth, double weight,
                           double bodyMassIndex, double distance, @NonNull Sleep sleep, @NonNull Calories calories,
                           double foodMultiplicity, double fatAmount, double carbohydrateAmount,
                           double proteinAmount, double vitaminC, double sugarLevel, double stressLevel,
                           double temperature, @NonNull Pressure pressure, double pulse,
                           @NonNull Date timestamp, boolean isForecast, boolean isStatistics) {
-
-        Preconditions.checkNotNull(sleep);
-        Preconditions.checkNotNull(calories);
-        Preconditions.checkNotNull(pressure);
-        Preconditions.checkNotNull(timestamp);
 
         this.id = id;
         this.age = age;
@@ -113,8 +104,8 @@ public class TrainingSample implements ModelEntity {
         this.weight = weight;
         this.bodyMassIndex = bodyMassIndex;
         this.distance = distance;
-        mSleep = sleep;
-        mCalories = calories;
+        this.mSleep = Preconditions.checkNotNull(sleep);
+        this.mCalories =  Preconditions.checkNotNull(calories);
         this.foodMultiplicity = foodMultiplicity;
         this.fatAmount = fatAmount;
         this.carbohydrateAmount = carbohydrateAmount;
@@ -123,9 +114,9 @@ public class TrainingSample implements ModelEntity {
         this.sugarLevel = sugarLevel;
         this.stressLevel = stressLevel;
         this.temperature = temperature;
-        mPressure = pressure;
+        this.mPressure = Preconditions.checkNotNull(pressure);
         this.pulse = pulse;
-        this.timeStamp = timestamp;
+        this.timeStamp = Preconditions.checkNotNull(timestamp);
         this.isForecast = isForecast;
         this.isStatistics = isStatistics;
     }
