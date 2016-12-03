@@ -2,7 +2,6 @@ package com.medvid.andrii.diplomawork.landing;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.forecast.Disease;
-import com.medvid.andrii.diplomawork.data.forecast.Forecast;
 import com.medvid.andrii.diplomawork.data.forecast.ForecastTableContract;
 import com.medvid.andrii.diplomawork.data.forecast.GroupRisk;
 import com.medvid.andrii.diplomawork.data.forecast.source.ForecastDataSourceContract;
@@ -33,7 +31,9 @@ import com.medvid.andrii.diplomawork.data.user.UserTableContract;
 import com.medvid.andrii.diplomawork.data.user.source.UserDataSourceContract;
 import com.medvid.andrii.diplomawork.data.user.source.UsersLocalDataSource;
 import com.medvid.andrii.diplomawork.login.LoginActivity;
+import com.medvid.andrii.diplomawork.network.Forecast;
 import com.medvid.andrii.diplomawork.network.ForecastService;
+import com.medvid.andrii.diplomawork.network.ForecastsResponseObject;
 import com.medvid.andrii.diplomawork.registration.RegistrationActivity;
 import com.medvid.andrii.diplomawork.util.RandomUtils;
 import com.medvid.andrii.diplomawork.util.Utils;
@@ -242,7 +242,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
         Disease disease = new Disease(2, "Infarct");
         GroupRisk groupRisk = new GroupRisk(2, "Middle");
 
-        Forecast forecast = new Forecast(0, disease, groupRisk, null);
+        com.medvid.andrii.diplomawork.data.forecast.Forecast forecast = new com.medvid.andrii.diplomawork.data.forecast.Forecast(0, disease, groupRisk, null);
         ForecastLocalDataSource forecastLocalDataSource
                 = ForecastLocalDataSource.getInstance(getActivity().getContentResolver());
 
@@ -250,7 +250,7 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
         forecastLocalDataSource.getForecastSample(Long.toString(id), new ForecastDataSourceContract.GetForecastSampleCallback() {
             @Override
-            public void onForecastSampleLoaded(@NonNull Forecast forecast) {
+            public void onForecastSampleLoaded(@NonNull com.medvid.andrii.diplomawork.data.forecast.Forecast forecast) {
                 Log.d("123", "From DB: " + forecast);
 
                 long forecastId = forecast.getId();
@@ -354,32 +354,26 @@ public class LandingFragment extends Fragment implements LandingContract.View, V
 
                 );
 
-        Callback<List<com.medvid.andrii.diplomawork.network.Forecast>> callback =
-                new Callback<List<com.medvid.andrii.diplomawork.network.Forecast>>() {
+        Callback<ForecastsResponseObject> callback =
+                new Callback<ForecastsResponseObject>() {
                     @Override
-                    public void onResponse(
-                            Call<List<com.medvid.andrii.diplomawork.network.Forecast>> call,
-                            Response<List<com.medvid.andrii.diplomawork.network.Forecast>> response) {
+                    public void onResponse(Call<ForecastsResponseObject> call,
+                                           Response<ForecastsResponseObject> response) {
 
                         if (response.isSuccessful()) {
-                            List<com.medvid.andrii.diplomawork.network.Forecast> forecasts = response.body();
-                            forecasts.isEmpty();
-                        }   else    {
+                            ForecastsResponseObject object = response.body();
+                            List<Forecast> forecastList = object.forecastList;
+                            forecastList.isEmpty();
+                        } else {
                             // TODO error
                         }
-
                     }
 
                     @Override
-                    public void onFailure(
-                            Call<List<com.medvid.andrii.diplomawork.network.Forecast>> call,
-                            Throwable t) {
+                    public void onFailure(Call<ForecastsResponseObject> call, Throwable t) {
                         // TODO error
                     }
                 };
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         ForecastService.getForecast(trainingSample, callback);
     }

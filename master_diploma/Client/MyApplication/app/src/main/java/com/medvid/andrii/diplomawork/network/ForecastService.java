@@ -8,14 +8,12 @@ import com.medvid.andrii.diplomawork.data.training_sample.TrainingSample;
 
 import java.lang.annotation.Retention;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -108,7 +106,7 @@ public class ForecastService {
     }
 
     public static void getForecast(@NonNull TrainingSample trainingSample,
-                                   final Callback<List<Forecast>> callback)    {
+                                   final Callback<ForecastsResponseObject> callback)    {
 
         Preconditions.checkNotNull(trainingSample);
         Preconditions.checkNotNull(callback);
@@ -125,17 +123,7 @@ public class ForecastService {
                 .build();
 
         ForecastServiceProtocol forecastServiceProtocol = retrofit.create(ForecastServiceProtocol.class);
-        Call<List<Forecast>> call = forecastServiceProtocol.getForecast(getQueryMap(trainingSample));
-        call.enqueue(new Callback<List<Forecast>>() {
-            @Override
-            public void onResponse(Call<List<Forecast>> call, Response<List<Forecast>> response) {
-                callback.onResponse(call, response);
-            }
-
-            @Override
-            public void onFailure(Call<List<Forecast>> call, Throwable t) {
-                callback.onFailure(call, t);
-            }
-        });
+        Call<ForecastsResponseObject> call = forecastServiceProtocol.getForecast(getQueryMap(trainingSample));
+        call.enqueue(new NetworkCallback<>(callback));
     }
 }

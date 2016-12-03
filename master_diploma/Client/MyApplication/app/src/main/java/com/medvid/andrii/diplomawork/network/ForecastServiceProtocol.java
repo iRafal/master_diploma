@@ -1,6 +1,5 @@
 package com.medvid.andrii.diplomawork.network;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -16,5 +15,5 @@ public interface ForecastServiceProtocol {
 
     @Headers("Content-Type: application/json")
     @GET("api/NeuralNetwork/GetForecast")
-    Call<List<Forecast>> getForecast(@QueryMap Map<String, String> queryParams);
+    Call<ForecastsResponseObject> getForecast(@QueryMap Map<String, String> queryParams);
 }
