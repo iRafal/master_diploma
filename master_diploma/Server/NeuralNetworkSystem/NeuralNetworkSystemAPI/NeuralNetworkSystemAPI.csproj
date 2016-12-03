@@ -165,10 +165,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NeuralNetworkBaseController.cs" />
     <Compile Include="Controllers\NeuralNetworkController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiseaseLearningSampleModel.cs" />
+    <Compile Include="Models\DiseaseResponseObjectModel.cs" />
     <Compile Include="NeuralNetwork\NeuralNetworkHelper.cs" />
     <Compile Include="Models\DieseaseRequestModel.cs" />
     <Compile Include="Models\NeuralNetworkResponseModel.cs" />

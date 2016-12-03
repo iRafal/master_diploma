@@ -17,9 +17,9 @@ namespace NeuralNetworkDataStorageBLL
         private readonly Random _random;
         private readonly string _connectionString;
 
-        private readonly WeightTypeEnum _weightType;
+        private readonly NetworkTypeEnum _weightType;
 
-        public DataBaseWeightRepository(WeightTypeEnum weightType)
+        public DataBaseWeightRepository(NetworkTypeEnum weightType)
         {
             _weightType = weightType;
             _connectionString = ConfigurationManager.ConnectionStrings["NeuralNetworkDB"].ConnectionString;
@@ -36,6 +36,8 @@ namespace NeuralNetworkDataStorageBLL
 
         public void UpdateWeights()
         {
+            CleanWeightRepository();
+
             foreach (var layerValue in _repository.Values)
             {
                 foreach (var neuronValues in layerValue.Values)
@@ -116,7 +118,6 @@ namespace NeuralNetworkDataStorageBLL
                 }
             }
         }
-
 
         #region DbActions
         private void CleanWeightRepository()

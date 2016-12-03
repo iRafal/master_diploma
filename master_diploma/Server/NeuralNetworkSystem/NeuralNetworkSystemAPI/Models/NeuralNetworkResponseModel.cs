@@ -1,11 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
 
 namespace NeuralNetworkSystemAPI.Models
 {
     public class NeuralNetworkResponse
     {
-        public int Disease { get; set; }
+        public NeuralNetworkResponse()
+        {
+            Forecasts = new List<DiseaseResponseObjectModel>();
+        }
 
-        public string Description { get; set; }
+        public List<DiseaseResponseObjectModel> Forecasts { get; set; }
     }
 }

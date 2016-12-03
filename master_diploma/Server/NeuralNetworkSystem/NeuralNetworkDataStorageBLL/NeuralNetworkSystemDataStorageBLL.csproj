@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -43,12 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseWeightRepository.cs" />
+    <Compile Include="DTORepositories\DataBaseSuggestionRepository.cs" />
     <Compile Include="DTO\Disease.cs" />
     <Compile Include="DTO\DiseaseMonitoringSample.cs" />
     <Compile Include="DTO\GroupRisk.cs" />
+    <Compile Include="DTO\Parameter.cs" />
+    <Compile Include="DTO\Suggestion.cs" />
     <Compile Include="Enums\DiseasesStatusEnum.cs" />
     <Compile Include="Enums\RiskStatusEnum.cs" />
-    <Compile Include="Enums\WeightTypeEnum.cs" />
+    <Compile Include="Enums\NetworkTypeEnum.cs" />
+    <Compile Include="LearningSamples\LearningSampleSpaceDistance.cs" />
+    <Compile Include="LearningSamples\Mappers\OutPutMappers\DiseaseGroupRiskOutputMapper.cs" />
     <Compile Include="LearningSamples\Repositories\DataBaseDiseasesLearningSamplesRepository.cs" />
     <Compile Include="LearningSamples\LearningSample.cs" />
     <Compile Include="LearningSamples\Mappers\DiseasesTypeMapper.cs" />
@@ -62,6 +71,9 @@
       <Project>{8F600248-C789-4307-82FF-1386AD6E07CE}</Project>
       <Name>NeuralNetworkBLL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
