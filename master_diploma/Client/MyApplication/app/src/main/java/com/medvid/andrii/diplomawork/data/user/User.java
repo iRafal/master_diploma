@@ -8,16 +8,16 @@ import com.medvid.andrii.diplomawork.data.ModelEntity;
 import java.lang.annotation.Retention;
 
 import static com.medvid.andrii.diplomawork.data.user.User.Gender.MAN;
-import static com.medvid.andrii.diplomawork.data.user.User.Gender.WOMEN;
+import static com.medvid.andrii.diplomawork.data.user.User.Gender.WOMAN;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class User implements ModelEntity {
 
     @Retention(SOURCE)
-    @IntDef({MAN, WOMEN})
+    @IntDef({MAN, WOMAN})
     public @interface Gender {
         int MAN = 1;
-        int WOMEN = 2;
+        int WOMAN = 2;
     }
 
     private long id;

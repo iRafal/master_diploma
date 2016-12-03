@@ -18,6 +18,7 @@ package com.medvid.andrii.diplomawork.profile.data;
 
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
+import com.medvid.andrii.diplomawork.data.user.User;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -26,11 +27,54 @@ public interface EditProfileDataContract {
 
     interface View extends BaseView<Presenter> {
 
+        @User.Gender int getGender();
+
+        void setGender(@User.Gender int gender);
+
+        double getAge();
+
+        void setAge(double age);
+
+        double getGrowth();
+
+        void setGrowth(double growth);
+
+        double getWeight();
+
+        void setWeight(double weight);
+
+        void showAgeError(boolean show);
+
+        void showGrowthError(boolean show);
+
+        void showWeightError(boolean show);
+
+        void showNetworkError(boolean show);
+
+        void showProgressDialog(boolean show);
+
+        void finish();
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        boolean isAgeValid(double age);
+
+        boolean isGrowthValid(double growth);
+
+        boolean isWeightValid(double weight);
+
+        boolean isValidationPassed();
+
+        void updateProfileData();
+
+        /**
+         * Get user data from DB and set on the Screen.
+         */
+        void setProfileDataOnUi();
 
     }
 }

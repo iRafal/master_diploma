@@ -21,8 +21,9 @@
     <string name="log_out_message">Ви збираєтеся вийти. Ви впевнені?</string>
     <string name="ok">Ок</string>
     <string name="cancel">Відміна</string>
-    <string name="diploma_about">\'Дослідження методів моделювання акустичного поля в закритих приміщеннях\'\nМедвідь Андрій</string>
+    <string name="diploma_about">\'Проектування та розроблення адаптивної нейронної мережі для клієнтської частини системи збору, обробки, класифікації та
+прогнозування статистичних даних\'\n\nМедвідь Андрій</string>
     <string name="no_data_available">Дані недоступні</string>
-    <string name="edit_account_data">Edit account data</string>
-    <string name="edit_profile_data">Edit profile data</string>
+    <string name="edit_account_data">Редагувати дані акаунту</string>
+    <string name="edit_profile_data">Редагувати персональні дані</string>
 </resources>

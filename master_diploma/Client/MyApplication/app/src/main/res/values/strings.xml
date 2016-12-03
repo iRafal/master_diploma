@@ -21,7 +21,7 @@
     <string name="log_out_message">You are going to log out. Are you sure?</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
-    <string name="diploma_about">\'Research of the acoustic field modeling methods in enclosed spaces\'\nMedvid Andrii</string>
+    <string name="diploma_about">\'Adaptive client part processing, collecting, data classification and statistics forecasting system neural network design and development\'\n\nMedvid Andrii</string>
     <string name="settings_camel_style">Settings</string>
     <string name="profile_camel_style">Profile</string>
     <string name="tasks_camel_style">Tasks</string>
@@ -32,4 +32,12 @@
     <string name="update_caps">UPDATE</string>
     <string name="loading">Loading</string>
     <string name="processing">Processing</string>
+    <string name="gender">Gender</string>
+    <string name="age_prompt">Age from 15 to 100 years</string>
+    <string name="growth_prompt">Growth from 1 to 2 meters</string>
+    <string name="weight_prompt">Weight from 30 to 150 kilograms</string>
+    <string name="age_error_message">Age should be from 15 to 100 years</string>
+    <string name="growth_error_message">Growth should be from 1 to 2 meters</string>
+    <string name="weight_error_message">Weight should be from 30 to 150 kilograms</string>
+
 </resources>
