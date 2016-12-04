@@ -33,6 +33,8 @@ public interface ForecastDataSourceContract {
 
     long saveForecastSample(@NonNull Forecast forecast);
 
+    long saveForecastSamples(@NonNull List<Forecast> forecasts);
+
     void getForecastSample(@NonNull String id, @NonNull GetForecastSampleCallback callback);
 
     void getForecastSamples(@NonNull GetForecastSamplesCallback callback);

@@ -49,6 +49,18 @@ public class ForecastLocalDataSource implements ForecastDataSourceContract  {
     }
 
     @Override
+    public long saveForecastSamples(@NonNull List<Forecast> forecasts) {
+        checkNotNull(forecasts);
+
+        List<ContentValues> contentValuesList = new ArrayList<>(forecasts.size());
+        for (Forecast listItem : forecasts) {
+            contentValuesList.add(ForecastTableContract.getInstance().getContentValues(listItem));
+        }
+
+        return mContentResolver.bulkInsert(ForecastTableContract.buildUri(), contentValuesList.toArray(new ContentValues[]{}));
+    }
+
+    @Override
     public void getForecastSample(@NonNull String id, @NonNull GetForecastSampleCallback callback) {
         //  load data via Cursor Loader //TODO
         checkNotNull(id);

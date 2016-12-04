@@ -15,34 +15,34 @@ public class Forecast {
     @SerializedName("Suggestions")
     public List<Suggestion> suggestions;
 
-    private static class Disease   {
+    public static class Disease   {
         @SerializedName("Status")
-        int Status;
+        public int status;
 
         @SerializedName("Name")
-        String Name;
+        public String name;
     }
 
-    private static class GroupRisk   {
+    public static class GroupRisk   {
 
         @SerializedName("GroupRiskType")
-        int GroupRiskType;
+        public int groupRiskType;
 
         @SerializedName("Name")
-        String Name;
+        public String Name;
     }
 
-    private static class Suggestion    {
+    public static class Suggestion    {
 
         @SerializedName("Description")
-        String Description;
+        public String description;
 
         @SerializedName("Parameter")
-        Parameter Parameter;
+        public Parameter parameter;
     }
 
-    private static class Parameter   {
+    public static class Parameter   {
         @SerializedName("Description")
-        String Description;
+        public String description;
     }
 }
