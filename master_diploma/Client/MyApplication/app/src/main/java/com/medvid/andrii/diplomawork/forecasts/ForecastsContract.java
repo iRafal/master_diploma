@@ -16,8 +16,13 @@
 
 package com.medvid.andrii.diplomawork.forecasts;
 
+import android.support.annotation.NonNull;
+
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
+import com.medvid.andrii.diplomawork.data.forecast.Forecast;
+
+import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -26,11 +31,20 @@ public interface ForecastsContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showForecastItemScreen();
+
+        void showListEmptyView(boolean show);
+
+        void refreshList(@NonNull List<Forecast> forecastList);
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
 
+        List<Forecast> getForecasts();
+
+        void fetchForecastsApiCall();
     }
 }

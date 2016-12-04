@@ -39,5 +39,7 @@
     <string name="age_error_message">Age should be from 15 to 100 years</string>
     <string name="growth_error_message">Growth should be from 1 to 2 meters</string>
     <string name="weight_error_message">Weight should be from 30 to 150 kilograms</string>
+    <string name="group_risk_is">Group risk: %s</string>
+    <string name="disease_risk_is">Disease: %s</string>
 
 </resources>
