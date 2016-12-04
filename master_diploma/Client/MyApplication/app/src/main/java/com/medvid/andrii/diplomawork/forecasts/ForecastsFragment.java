@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.data.forecast.Forecast;
+import com.medvid.andrii.diplomawork.forecasts.item.ForecastItemActivity;
 import com.medvid.andrii.diplomawork.util.OnListItemClickListener;
 
 import java.util.List;
@@ -93,8 +94,8 @@ public class ForecastsFragment extends Fragment
     }
 
     @Override
-    public void showForecastItemScreen() {
-
+    public void showForecastItemScreen(long forecastId) {
+        getActivity().startActivity(ForecastItemActivity.getIntent(getActivity(), forecastId));
     }
 
     /**
@@ -115,5 +116,6 @@ public class ForecastsFragment extends Fragment
     @Override
     public void onListItemClick(@NonNull Forecast object) {
         long forecastId = object.getId();
+        showForecastItemScreen(forecastId);
     }
 }

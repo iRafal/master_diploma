@@ -14,23 +14,23 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/diseaseTextView"
+            android:id="@+id/parameterTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Disease"
+            android:text="Parameter"
             android:textAlignment="viewStart"
-            android:textAppearance="?android:textAppearanceMedium"
+            android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@android:color/black"/>
 
         <TextView
-            android:id="@+id/groupRiskTextView"
+            android:id="@+id/suggestionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="GroupRisk"
+            android:text="Suggestion"
             android:textAlignment="viewStart"
-            android:textAppearance="?android:textAppearanceMedium"
+            android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@android:color/black"/>
     </LinearLayout>
 

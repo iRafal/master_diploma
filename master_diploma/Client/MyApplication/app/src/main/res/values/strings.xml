@@ -41,5 +41,9 @@
     <string name="weight_error_message">Weight should be from 30 to 150 kilograms</string>
     <string name="group_risk_is">Group risk: %s</string>
     <string name="disease_risk_is">Disease: %s</string>
+    <string name="forecast">Forecast</string>
+    <string name="task">Task</string>
+    <string name="suggestions">Suggestions:</string>
+    <string name="disease_is">Disease: %s</string>
 
 </resources>

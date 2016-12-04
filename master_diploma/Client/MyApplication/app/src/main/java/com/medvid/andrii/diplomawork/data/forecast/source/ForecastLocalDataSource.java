@@ -61,13 +61,12 @@ public class ForecastLocalDataSource implements ForecastDataSourceContract  {
     }
 
     @Override
-    public void getForecastSample(@NonNull String id, @NonNull GetForecastSampleCallback callback) {
+    public void getForecastSample(long id, @NonNull GetForecastSampleCallback callback) {
         //  load data via Cursor Loader //TODO
-        checkNotNull(id);
         checkNotNull(callback);
 
         String selection = BaseColumns._ID + " LIKE ?";
-        String[] selectionArgs = {id};
+        String[] selectionArgs = { Long.toString(id) };
 
         Cursor cursor = mContentResolver.query(
                 ForecastTableContract.buildUriWith(id),

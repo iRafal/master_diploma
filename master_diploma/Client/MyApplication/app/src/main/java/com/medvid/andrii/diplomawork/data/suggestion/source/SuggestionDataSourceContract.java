@@ -47,7 +47,7 @@ public interface SuggestionDataSourceContract {
 
     void getSuggestion(@NonNull String id, @NonNull GetSuggestionCallback callback);
 
-    void getSuggestions(@NonNull GetSuggestionsCallback callback);
+    void getSuggestions(@NonNull long forecastId, @NonNull GetSuggestionsCallback callback);
 
     void deleteSuggestion(@NonNull String id);
 

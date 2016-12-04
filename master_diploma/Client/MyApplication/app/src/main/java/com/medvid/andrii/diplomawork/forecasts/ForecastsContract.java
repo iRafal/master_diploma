@@ -31,7 +31,7 @@ public interface ForecastsContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showForecastItemScreen();
+        void showForecastItemScreen(long forecastId);
 
         void showListEmptyView(boolean show);
 

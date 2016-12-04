@@ -90,14 +90,17 @@ public class SuggestionLocalDataSource implements SuggestionDataSourceContract  
     }
 
     @Override
-    public void getSuggestions(@NonNull GetSuggestionsCallback callback) {
+    public void getSuggestions(@NonNull long forecastId, @NonNull GetSuggestionsCallback callback) {
         //  load data via Cursor Loader //TODO
         checkNotNull(callback);
+
+        String selection = SuggestionTableContract.FORECAST_ID + " LIKE ?";
+        String[] selectionArgs = { Long.toString(forecastId) };
 
         Cursor cursor = mContentResolver.query(
                 SuggestionTableContract.buildUri(),
                 SuggestionTableContract.getInstance().getColumns(),
-                null, null, null);
+                selection, selectionArgs, null);
 
         Suggestion suggestion = null;
         List<Suggestion> suggestionList = new ArrayList<>();
@@ -115,7 +118,6 @@ public class SuggestionLocalDataSource implements SuggestionDataSourceContract  
 
         cursor.close();
         callback.onSuggestionsLoaded(suggestionList);
-
     }
 
     @Override

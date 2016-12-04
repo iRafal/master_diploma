@@ -16,8 +16,13 @@
 
 package com.medvid.andrii.diplomawork.forecasts.item;
 
+import android.support.annotation.NonNull;
+
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
+import com.medvid.andrii.diplomawork.data.suggestion.Suggestion;
+
+import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -26,11 +31,23 @@ public interface ForecastItemContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showListEmptyView(boolean show);
+
+        void refreshList(@NonNull List<Suggestion> suggestionList);
+
+        void setDiseaseName(String disease);
+
+        void setGroupRiskName(String groupRiskName);
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        void setSuggestionsDataOnUi(long forecastId);
+
+        void setForecastDataOnUi(long forecastId);
 
     }
 }

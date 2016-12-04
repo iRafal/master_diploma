@@ -47,12 +47,14 @@
 
         <activity
             android:name=".tasks.item.TaskItemActivity"
+            android:label="@string/task"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".forecasts.item.ForecastItemActivity"
+            android:label="@string/forecast"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
