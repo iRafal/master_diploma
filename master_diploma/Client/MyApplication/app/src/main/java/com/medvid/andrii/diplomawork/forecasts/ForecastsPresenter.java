@@ -19,7 +19,6 @@ import com.medvid.andrii.diplomawork.network.ForecastsResponseObject;
 import com.medvid.andrii.diplomawork.util.RandomUtils;
 import com.medvid.andrii.diplomawork.util.Utils;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
     }
 
     @Override
-    public List<Forecast> getForecasts() {
+    public void getForecastsFromLocalStorage() {
         ForecastLocalDataSource forecastLocalDataSource
                 = ForecastLocalDataSource.getInstance(
                 DiplomaApplication.getInstance().getContentResolver());
@@ -63,8 +62,24 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
                         mView.showListEmptyView(true);
                     }
                 });
+    }
 
-        return new ArrayList<>();
+    @Override
+    public boolean fetchingDataFromServerTimeHasAlreadyCame() {
+        long savedTime = ForecastsCookies.getSavedTime();
+
+        if(savedTime == 0)  {
+            ForecastsCookies.saveCurrentTime(System.currentTimeMillis());
+            return true;
+        }
+
+        long millisecondsInOneDay = 24 * 60 * 60 * 1_000;
+
+        if(Math.abs(savedTime - System.currentTimeMillis()) > millisecondsInOneDay)  {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -161,7 +176,7 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
 
         saveForecastsToDb(parsedForecasts);
 
-        mView.refreshList(parsedForecasts);
+        getForecastsFromLocalStorage();
     }
 
     private void saveForecastsToDb(

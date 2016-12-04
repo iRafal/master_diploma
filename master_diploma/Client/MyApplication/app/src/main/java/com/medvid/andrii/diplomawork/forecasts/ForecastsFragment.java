@@ -53,7 +53,12 @@ public class ForecastsFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
-        mPresenter.fetchForecastsApiCall();
+
+        if (mPresenter.fetchingDataFromServerTimeHasAlreadyCame()) {
+            mPresenter.fetchForecastsApiCall();
+        } else {
+            mPresenter.getForecastsFromLocalStorage();
+        }
     }
 
     /**

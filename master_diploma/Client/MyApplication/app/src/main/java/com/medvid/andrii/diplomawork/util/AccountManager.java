@@ -10,6 +10,7 @@ import com.medvid.andrii.diplomawork.data.training_sample.source.TrainingSamples
 import com.medvid.andrii.diplomawork.data.user.User;
 import com.medvid.andrii.diplomawork.data.user.source.UserDataSourceContract;
 import com.medvid.andrii.diplomawork.data.user.source.UsersLocalDataSource;
+import com.medvid.andrii.diplomawork.forecasts.ForecastsCookies;
 
 import java.util.List;
 
@@ -53,6 +54,7 @@ public class AccountManager {
         mTrainingSamplesLocalDataSource.deleteAllTrainingSamples();
         mSuggestionLocalDataSource.deleteAllSuggestions();
         mForecastLocalDataSource.deleteAllForecastSamples();
+        ForecastsCookies.removeSavedTime();
     }
 
     /**

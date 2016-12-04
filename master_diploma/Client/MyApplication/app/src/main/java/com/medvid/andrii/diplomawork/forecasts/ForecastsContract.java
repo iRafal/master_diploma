@@ -43,8 +43,10 @@ public interface ForecastsContract {
 
     interface Presenter extends BasePresenter {
 
-        List<Forecast> getForecasts();
+        void getForecastsFromLocalStorage();
 
         void fetchForecastsApiCall();
+
+        boolean fetchingDataFromServerTimeHasAlreadyCame();
     }
 }

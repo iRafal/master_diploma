@@ -48,28 +48,24 @@
         <activity
             android:name=".tasks.item.TaskItemActivity"
             android:label="@string/task"
-            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".forecasts.item.ForecastItemActivity"
             android:label="@string/forecast"
-            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".profile.data.EditProfileDataActivity"
             android:label="@string/edit_profile_data"
-            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".profile.account.EditAccountDataActivity"
             android:label="@string/edit_account_data"
-            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
