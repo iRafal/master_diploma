@@ -45,5 +45,7 @@
     <string name="task">Task</string>
     <string name="suggestions">Suggestions:</string>
     <string name="disease_is">Disease: %s</string>
+    <string name="calories_per_hour_training">Calories Per Hour Training</string>
+    <string name="calories_per_hour_training_empty_error">Calories Per Hour Training are empty</string>
 
 </resources>

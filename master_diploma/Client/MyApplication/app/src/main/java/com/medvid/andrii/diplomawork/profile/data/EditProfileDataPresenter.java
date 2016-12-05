@@ -50,10 +50,18 @@ public class EditProfileDataPresenter implements EditProfileDataContract.Present
     }
 
     @Override
+    public boolean areCaloriesPerHourTrainingValid(double caloriesPerHourTraining) {
+        boolean isValid = caloriesPerHourTraining != 0;
+        mView.showCaloriesPerHourTrainingError(!isValid);
+        return isValid;
+    }
+
+    @Override
     public boolean isValidationPassed() {
         return isAgeValid(mView.getAge())
                 && isGrowthValid(mView.getGrowth())
-                && isWeightValid(mView.getWeight());
+                && isWeightValid(mView.getWeight())
+                && areCaloriesPerHourTrainingValid(mView.getCaloriesPerHourTraining());
     }
 
     @Override
@@ -71,12 +79,14 @@ public class EditProfileDataPresenter implements EditProfileDataContract.Present
         double growth = mView.getGrowth();
         double weight = mView.getWeight();
         double bodyMassIndex = Utils.calculateBodyMassIndex(weight, growth);
+        double caloriesPerHourTraining = mView.getCaloriesPerHourTraining();
 
         user.setGender(gender);
         user.setAge(age);
         user.setGrowth(growth);
         user.setWeight(weight);
         user.setBodyMassIndex(bodyMassIndex);
+        user.setCaloriesPerHourTraining(caloriesPerHourTraining);
 
         accountManager.updateUserData(user);
 
@@ -103,5 +113,6 @@ public class EditProfileDataPresenter implements EditProfileDataContract.Present
         mView.setGender(user.getGender());
         mView.setGrowth(user.getGrowth());
         mView.setWeight(user.getWeight());
+        mView.setCaloriesPerHourTraining(user.getCaloriesPerHourTraining());
     }
 }

@@ -41,6 +41,10 @@ public interface EditProfileDataContract {
 
         double getWeight();
 
+        void setCaloriesPerHourTraining(double caloriesPerHourTraining);
+
+        double getCaloriesPerHourTraining();
+
         void setWeight(double weight);
 
         void showAgeError(boolean show);
@@ -48,6 +52,8 @@ public interface EditProfileDataContract {
         void showGrowthError(boolean show);
 
         void showWeightError(boolean show);
+
+        void showCaloriesPerHourTrainingError(boolean show);
 
         void showNetworkError(boolean show);
 
@@ -66,6 +72,8 @@ public interface EditProfileDataContract {
         boolean isGrowthValid(double growth);
 
         boolean isWeightValid(double weight);
+
+        boolean areCaloriesPerHourTrainingValid(double caloriesPerHourTraining);
 
         boolean isValidationPassed();
 

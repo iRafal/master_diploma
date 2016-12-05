@@ -101,7 +101,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
         }
 
         User user = new User(0, mView.getLogin(), mView.getFirstName(), mView.getLastName(),
-                0, User.Gender.MAN, 0, 0, 0);
+                0, User.Gender.MAN, 0, 0, 0, 0);
 
         AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
         accountManager.logoutUser(); // Remove everything from DB.

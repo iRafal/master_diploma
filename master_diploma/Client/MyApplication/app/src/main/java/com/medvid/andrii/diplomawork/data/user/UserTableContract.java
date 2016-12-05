@@ -22,6 +22,7 @@ public class UserTableContract implements TableDefinitionContract<User> {
     public static final String GROWTH = "growth";
     public static final String WEIGHT = "weight";
     public static final String BODY_MASS_INDEX = "body_mass_index";
+    public static final String CALORIES_PER_HOUR_TRAINING = "calories_per_hour_training";
 
     public static final String CREATE_TABLE =
             CREATE_TABLE_IF_NOT_EXISTS + " " + TABLE_NAME + " " + "(" + " "
@@ -33,7 +34,8 @@ public class UserTableContract implements TableDefinitionContract<User> {
                     + GENDER + " " + REAL_TYPE + ", "
                     + GROWTH + " " + REAL_TYPE + ", "
                     + WEIGHT + " " + REAL_TYPE + ", "
-                    + BODY_MASS_INDEX + " " + REAL_TYPE
+                    + BODY_MASS_INDEX + " " + REAL_TYPE + ", "
+                    + CALORIES_PER_HOUR_TRAINING + " " + REAL_TYPE
                     + " )";
 
     public static final String DROP_TABLE = DROP_TABLE_IF_EXISTS + " " + TABLE_NAME;
@@ -75,7 +77,8 @@ public class UserTableContract implements TableDefinitionContract<User> {
                 GENDER,
                 GROWTH,
                 WEIGHT,
-                BODY_MASS_INDEX
+                BODY_MASS_INDEX,
+                CALORIES_PER_HOUR_TRAINING
         };
     }
 
@@ -93,6 +96,7 @@ public class UserTableContract implements TableDefinitionContract<User> {
         values.put(GROWTH, user.getGrowth());
         values.put(WEIGHT, user.getWeight());
         values.put(BODY_MASS_INDEX, user.getBodyMassIndex());
+        values.put(CALORIES_PER_HOUR_TRAINING, user.getCaloriesPerHourTraining());
 
         return values;
     }
@@ -110,6 +114,7 @@ public class UserTableContract implements TableDefinitionContract<User> {
         int growthIndex = cursor.getColumnIndexOrThrow(GROWTH);
         int weightIndex = cursor.getColumnIndexOrThrow(WEIGHT);
         int bodyMassIndexValue = cursor.getColumnIndexOrThrow(BODY_MASS_INDEX);
+        int caloriesPerHourTrainingIndexValue = cursor.getColumnIndexOrThrow(CALORIES_PER_HOUR_TRAINING);
 
         int id = cursor.getInt(idIndex);
         String email = cursor.getString(emailIndex);
@@ -120,8 +125,10 @@ public class UserTableContract implements TableDefinitionContract<User> {
         double growth = cursor.getDouble(growthIndex);
         double weight = cursor.getDouble(weightIndex);
         double bodyMassIndex = cursor.getDouble(bodyMassIndexValue);
+        double caloriesPerHourTraining = cursor.getDouble(caloriesPerHourTrainingIndexValue);
 
 
-        return new User(id, email, firstName, lastName, age, gender, growth, weight, bodyMassIndex);
+        return new User(id, email, firstName, lastName, age, gender,
+                growth, weight, bodyMassIndex, caloriesPerHourTraining);
     }
 }

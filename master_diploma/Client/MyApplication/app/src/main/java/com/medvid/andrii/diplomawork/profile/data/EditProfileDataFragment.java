@@ -42,6 +42,9 @@ public class EditProfileDataFragment extends Fragment implements EditProfileData
     private TextInputLayout mWeightTextInputLayout;
     private EditText mWeightEditText;
 
+    private TextInputLayout mCaloriesPerHourTrainingTextInputLayout;
+    private EditText mCaloriesPerHourTrainingEditText;
+
     private TextView mUpdateTextView;
 
     private ProgressDialog mProgressDialog;
@@ -150,6 +153,17 @@ public class EditProfileDataFragment extends Fragment implements EditProfileData
     }
 
     @Override
+    public void setCaloriesPerHourTraining(double caloriesPerHourTraining) {
+        mCaloriesPerHourTrainingEditText.setText(Double.toString(caloriesPerHourTraining));
+    }
+
+    @Override
+    public double getCaloriesPerHourTraining() {
+        String text = mCaloriesPerHourTrainingEditText.getText().toString();
+        return text.isEmpty() ? 0.0 : Double.parseDouble(text);
+    }
+
+    @Override
     public void setWeight(double weight) {
         mWeightEditText.setText(Double.toString(weight));
     }
@@ -167,6 +181,12 @@ public class EditProfileDataFragment extends Fragment implements EditProfileData
     @Override
     public void showWeightError(boolean show) {
         mWeightTextInputLayout.setError(show ? getString(R.string.weight_error_message) : "");
+    }
+
+    @Override
+    public void showCaloriesPerHourTrainingError(boolean show) {
+        mCaloriesPerHourTrainingTextInputLayout.setError(
+                show ? getString(R.string.calories_per_hour_training_empty_error) : "");
     }
 
     @Override
@@ -222,6 +242,12 @@ public class EditProfileDataFragment extends Fragment implements EditProfileData
         mWeightTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.weightTextInputLayout);
         mWeightEditText = (EditText) rootView.findViewById(R.id.weightEditText);
 
+        mCaloriesPerHourTrainingTextInputLayout
+                = (TextInputLayout) rootView.findViewById(R.id.caloriesPerHourTrainingTextInputLayout);
+
+        mCaloriesPerHourTrainingEditText
+                = (EditText) rootView.findViewById(R.id.caloriesPerHourTrainingEditText);
+
         mUpdateTextView = (TextView) rootView.findViewById(R.id.updateTextView);
         mUpdateTextView.setOnClickListener(this);
 
@@ -235,6 +261,6 @@ public class EditProfileDataFragment extends Fragment implements EditProfileData
             }
         };
 
-        mWeightEditText.setOnEditorActionListener(editorActionListener);
+        mCaloriesPerHourTrainingEditText.setOnEditorActionListener(editorActionListener);
     }
 }

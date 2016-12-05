@@ -29,9 +29,11 @@ public class User implements ModelEntity {
     private double growth; // 1.8
     private double weight; // 75
     private double bodyMassIndex; // 20
+    private double caloriesPerHourTraining;
 
     public User(long id, String email, String firstName, String lastName, double age,
-                @User.Gender int gender, double growth, double weight, double bodyMassIndex) {
+                @User.Gender int gender, double growth, double weight, double bodyMassIndex,
+                double caloriesPerHourTraining) {
 
         this.id = id;
         this.email = email;
@@ -42,6 +44,7 @@ public class User implements ModelEntity {
         this.growth = growth;
         this.weight = weight;
         this.bodyMassIndex = bodyMassIndex;
+        this.caloriesPerHourTraining = caloriesPerHourTraining;
     }
 
     public long getId() {
@@ -116,6 +119,14 @@ public class User implements ModelEntity {
         this.bodyMassIndex = bodyMassIndex;
     }
 
+    public double getCaloriesPerHourTraining() {
+        return caloriesPerHourTraining;
+    }
+
+    public void setCaloriesPerHourTraining(double caloriesPerHourTraining) {
+        this.caloriesPerHourTraining = caloriesPerHourTraining;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -128,6 +139,7 @@ public class User implements ModelEntity {
                 ", growth=" + growth +
                 ", weight=" + weight +
                 ", bodyMassIndex=" + bodyMassIndex +
+                ", caloriesPerHourTraining=" + caloriesPerHourTraining +
                 '}';
     }
 
@@ -144,6 +156,8 @@ public class User implements ModelEntity {
         if (Double.compare(user.growth, growth) != 0) return false;
         if (Double.compare(user.weight, weight) != 0) return false;
         if (Double.compare(user.bodyMassIndex, bodyMassIndex) != 0) return false;
+        if (Double.compare(user.caloriesPerHourTraining, caloriesPerHourTraining) != 0)
+            return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null)
             return false;
@@ -167,6 +181,8 @@ public class User implements ModelEntity {
         temp = Double.doubleToLongBits(weight);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(bodyMassIndex);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(caloriesPerHourTraining);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

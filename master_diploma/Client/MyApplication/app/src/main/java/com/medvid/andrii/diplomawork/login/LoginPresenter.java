@@ -58,7 +58,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             return;
         }
 
-        User user = new User(0, mView.getLogin(), "Andrii", "Medvid", 0, User.Gender.MAN, 0, 0, 0);
+        User user = new User(0, mView.getLogin(), "Andrii", "Medvid", 0, User.Gender.MAN, 0, 0, 0, 0);
 
         AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
         accountManager.logoutUser(); // Remove everything from DB.

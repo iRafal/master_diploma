@@ -22,7 +22,7 @@ public class TrainingSample implements ModelEntity {
     private double distance; // Kilometers //  4
     private Sleep mSleep;
     private Calories mCalories;
-    private double foodMultiplicity; //3
+    private double foodMultiplicity; //3   //Meals per day
     private double fatAmount; // 75
     private double carbohydrateAmount; // 200
     private double proteinAmount; //  85

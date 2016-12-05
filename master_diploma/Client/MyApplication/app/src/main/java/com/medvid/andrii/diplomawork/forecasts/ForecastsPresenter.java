@@ -16,8 +16,8 @@ import com.medvid.andrii.diplomawork.data.training_sample.entities.Sleep;
 import com.medvid.andrii.diplomawork.data.user.User;
 import com.medvid.andrii.diplomawork.network.ForecastService;
 import com.medvid.andrii.diplomawork.network.ForecastsResponseObject;
+import com.medvid.andrii.diplomawork.util.AccountManager;
 import com.medvid.andrii.diplomawork.util.RandomUtils;
-import com.medvid.andrii.diplomawork.util.Utils;
 
 import java.util.Date;
 import java.util.List;
@@ -89,37 +89,44 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
 
     public void apiForecastCallTest() {
 
-        RandomUtils randomUtils = new RandomUtils();
-        int age = randomUtils.nextInt(18, 30);
+        AccountManager accountManager = new AccountManager(DiplomaApplication.getInstance());
+        User user = accountManager.getUserData();
 
-        double growth = randomUtils.nextDouble(1.0, 2.0);
-        double weight = randomUtils.nextDouble(1.0, 2.0);
-        double bodyMassIndex = Utils.calculateBodyMassIndex(weight, growth);
-        double distance = randomUtils.nextDouble(1.0, 4.0);
+        if(user == null)    {
+            return;
+        }
+
+        double age = user.getAge(); // Auto
+        double growth = user.getGrowth();   // Auto
+        double weight = user.getWeight();   // Auto
+        double bodyMassIndex = user.getBodyMassIndex(); // Auto
+
+        RandomUtils randomUtils = new RandomUtils();
+        double distance = randomUtils.nextDouble(1.0, 4.0);  //User input ok
         Sleep mSleep = new Sleep(
-                randomUtils.nextDouble(6.0, 10.0),// SleepHoursCount
-                randomUtils.nextDouble(0.0, 10.0)// SleepQuality
+                randomUtils.nextDouble(6.0, 10.0),// SleepHoursCount   //User input ok
+                randomUtils.nextDouble(0.0, 10.0)// SleepQuality // Separate screen.  //User input ok
         );
 
         Calories mCalories = new Calories(
                 randomUtils.nextDouble(2000.0, 5000.0),   // SpentCalories
                 randomUtils.nextDouble(2000.0, 5000.0)    // EatenCalories
         );
-        final double foodMultiplicity = randomUtils.nextDouble(3.0, 4.0);
+        final double foodMultiplicity = randomUtils.nextDouble(3.0, 4.0);   //User input ok
         double fatAmount = randomUtils.nextDouble(-10.0, 10.0);
         double carbohydrateAmount = weight * 4 + randomUtils.nextDouble(-15.0, 15.0);
         double proteinAmount = weight + randomUtils.nextDouble(-10.0, 10.0);
         double vitaminC = randomUtils.nextDouble(55.0, 65.0);
-        double sugarLevel = randomUtils.nextDouble(3.0, 5.0);
-        double stressLevel = randomUtils.nextDouble(3.0, 5.0);
-        double temperature = 36.6;
+        double sugarLevel = randomUtils.nextDouble(3.0, 5.0);  // Stub
+        double stressLevel = randomUtils.nextDouble(3.0, 5.0);  // Separate screen.  //User input ok
+        double temperature = 36.6;  //User input ok
         Pressure mPressure = new Pressure(
-                randomUtils.nextDouble(115.0, 130.0),
-                randomUtils.nextDouble(75.0, 85.0)
+                randomUtils.nextDouble(115.0, 130.0),     //User input ok
+                randomUtils.nextDouble(75.0, 85.0)    //User input ok
         );
 
-        double pulse = randomUtils.nextDouble(60.0, 80.0);
-        Date timeStamp = new Date();
+        double pulse = randomUtils.nextDouble(60.0, 80.0);    //User input ok
+        Date timeStamp = new Date();    // Auto
 
         TrainingSample trainingSample =
                 TrainingSample.getStatisticsTrainingSample(
