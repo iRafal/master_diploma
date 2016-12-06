@@ -69,7 +69,7 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
     @Override
     public void setStressLevel(double stressLevel) {
         mStressLevelTextView.setText(
-                String.format("%s %s", stressLevel, getString(R.string.points)));
+                String.format("%s %s", stressLevel, getString(R.string.points_s)));
     }
 
     @Override
@@ -99,7 +99,7 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
     @Override
     public void setSleepQuantity(double sleepQuantity) {
         mSleepQuantityTextView.setText(
-                String.format("%s %s", sleepQuantity, getString(R.string.points)));
+                String.format("%s %s", sleepQuantity, getString(R.string.points_s)));
     }
 
     @Override

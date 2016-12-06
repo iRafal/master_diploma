@@ -62,7 +62,7 @@
     <string name="high_pressure_label">High Pressure:</string>
     <string name="stress_level_label">Stress level:</string>
     <string name="temperature_label">Temperature:</string>
-    <string name="points">points</string>
+    <string name="points_s">point(s)</string>
     <string name="mm_hg">mmHg</string>
     <string name="b_p_m">bpm</string>
     <string name="hour_s">hour(s)</string>
