@@ -53,6 +53,11 @@ public class ForecastsFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initUi(view);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         if (mPresenter.fetchingDataFromServerTimeHasAlreadyCame()) {
             mPresenter.fetchForecastsApiCall();

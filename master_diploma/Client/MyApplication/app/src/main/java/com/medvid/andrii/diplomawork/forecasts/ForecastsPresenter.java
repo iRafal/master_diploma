@@ -128,7 +128,7 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
         double pulse = randomUtils.nextDouble(60.0, 80.0);    //User input ok
         Date timeStamp = new Date();    // Auto
 
-        TrainingSample trainingSample =
+        final TrainingSample trainingSample =
                 TrainingSample.getStatisticsTrainingSample(
                         0,
                         age,
@@ -162,12 +162,14 @@ public class ForecastsPresenter implements ForecastsContract.Presenter {
                         if (response.isSuccessful()) {
                             handleForecastsResponse(response.body());
                         } else {
+                            mView.showListEmptyView(true);
                             // TODO error
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ForecastsResponseObject> call, Throwable t) {
+                        mView.showListEmptyView(true);
                         // TODO error
                     }
                 };
