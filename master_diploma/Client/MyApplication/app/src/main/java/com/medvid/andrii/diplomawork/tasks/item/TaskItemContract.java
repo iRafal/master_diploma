@@ -26,11 +26,37 @@ public interface TaskItemContract {
 
     interface View extends BaseView<Presenter> {
 
+        void setTemperature(double temperature);
+
+        void setStressLevel(double stressLevel);
+
+        void setHighPressure(double highPressure);
+
+        void setLowPressure(double lowPressure);
+
+        void setPulse(double pulse);
+
+        void setSleepHours(double sleepHours);
+
+        void setSleepQuantity(double sleepQuantity);
+
+        void setDistance(double distance);
+
+        void setFoodMultiplicity(double foodMultiplicity);
+
+        void setSpentCalories(double spentCalories);
+
+        void setEatenCalories(double eatenCalories);
+
+        void setTitle(String title);
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        void setTrainingSessionDataOnUi(long trainingSessionId);
 
     }
 }

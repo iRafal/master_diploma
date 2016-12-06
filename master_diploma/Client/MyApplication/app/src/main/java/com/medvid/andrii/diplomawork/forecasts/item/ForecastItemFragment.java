@@ -133,7 +133,6 @@ public class ForecastItemFragment extends Fragment implements ForecastItemContra
     }
 
     /**
-     *
      * @return -1 if fail
      */
     private long getForecastId() {

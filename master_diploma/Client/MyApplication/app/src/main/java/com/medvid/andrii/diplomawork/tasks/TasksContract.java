@@ -16,8 +16,12 @@
 
 package com.medvid.andrii.diplomawork.tasks;
 
+import android.support.annotation.NonNull;
+
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
+
+import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
@@ -26,11 +30,19 @@ public interface TasksContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showTaskItemScreen(long trainingSampleId);
+
+        void showListEmptyView(boolean show);
+
+        void refreshList(@NonNull List<Task> forecastList);
+
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
+
+        void setTrainingSamplesFromLocalStorage();
 
     }
 }

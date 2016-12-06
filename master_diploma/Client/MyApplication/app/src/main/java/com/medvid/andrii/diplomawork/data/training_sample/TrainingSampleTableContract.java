@@ -4,7 +4,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
 import com.google.common.base.Preconditions;
@@ -108,11 +107,11 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
         return CONTENT_URI.buildUpon().appendPath(id).build();
     }
 
-
     @Override
     public String[] getColumns() {
         return new String[] {
                 // Static user info
+                _ID,
                 AGE,
                 GENDER,
                 GROWTH,
@@ -188,7 +187,7 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
     public TrainingSample getEntity(@NonNull Cursor cursor) {
         Preconditions.checkNotNull(cursor);
 
-        int idIndex = cursor.getColumnIndexOrThrow(BaseColumns._ID);
+        int idIndex = cursor.getColumnIndexOrThrow(_ID);
         int distanceIndex = cursor.getColumnIndexOrThrow(DISTANCE);
         int ageIndex = cursor.getColumnIndexOrThrow(AGE);
         int genderIndex = cursor.getColumnIndexOrThrow(GENDER);
@@ -247,7 +246,8 @@ public class TrainingSampleTableContract implements TableDefinitionContract<Trai
                 growth,
                 weight,
                 bodyMassIndex,
-                distance, new Sleep(sleepHoursCount, sleepQuality),
+                distance,
+                new Sleep(sleepHoursCount, sleepQuality),
                 new Calories(spentCalories, eatenCalories),
                 foodMultiplicity,
                 fatAmount,

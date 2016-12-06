@@ -33,9 +33,15 @@ public interface TrainingSampleDataSourceContract {
 
     void saveTrainingSample(@NonNull TrainingSample trainingSample);
 
+    long saveTrainingSamples(@NonNull List<TrainingSample> list);
+
     void getTrainingSample(@NonNull String id, @NonNull GetTrainingSampleCallback callback);
 
     void getTrainingSamples(@NonNull GetTrainingSamplesCallback callback);
+
+    void getForecastTrainingSamples(@NonNull GetTrainingSamplesCallback callback);
+
+    void getStatisticsTrainingSamples(@NonNull GetTrainingSamplesCallback callback);
 
     void deleteTrainingSample(@NonNull String id);
 

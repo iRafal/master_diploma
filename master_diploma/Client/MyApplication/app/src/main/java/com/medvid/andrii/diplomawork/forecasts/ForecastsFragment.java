@@ -99,6 +99,16 @@ public class ForecastsFragment extends Fragment
     }
 
     /**
+     * {@link OnListItemClickListener}
+     */
+
+    @Override
+    public void onListItemClick(@NonNull Forecast object) {
+        long forecastId = object.getId();
+        showForecastItemScreen(forecastId);
+    }
+
+    /**
      * Private Methods
      */
 
@@ -111,11 +121,5 @@ public class ForecastsFragment extends Fragment
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
-    }
-
-    @Override
-    public void onListItemClick(@NonNull Forecast object) {
-        long forecastId = object.getId();
-        showForecastItemScreen(forecastId);
     }
 }

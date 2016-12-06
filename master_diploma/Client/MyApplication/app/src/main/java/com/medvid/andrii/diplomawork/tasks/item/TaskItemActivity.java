@@ -15,12 +15,17 @@ import com.medvid.andrii.diplomawork.util.ActivityUtils;
 
 public class TaskItemActivity extends AppCompatActivity {
 
+    public static final String TRAINING_SAMPLE_ID
+            = "com.medvid.andrii.diplomawork.tasks.item.TRAINING_SAMPLE_ID";
+
     private FrameLayout mContentFrame;
     private TaskItemContract.Presenter mPresenter;
 
-    public static Intent getIntent(@NonNull Context context) {
+    public static Intent getIntent(@NonNull Context context, long trainindSampleId) {
         Preconditions.checkNotNull(context);
-        return new Intent(context, TaskItemActivity.class);
+        Intent intent = new Intent(context, TaskItemActivity.class);
+        intent.putExtra(TRAINING_SAMPLE_ID, trainindSampleId);
+        return intent;
     }
 
     /**
@@ -42,7 +47,6 @@ public class TaskItemActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(menuItem);
     }
 
-
     /**
      * Private methods
      */
@@ -62,5 +66,4 @@ public class TaskItemActivity extends AppCompatActivity {
 
         mPresenter = new TaskItemPresenter(fragment);
     }
-
 }

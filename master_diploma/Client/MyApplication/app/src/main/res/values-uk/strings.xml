@@ -26,4 +26,6 @@
     <string name="no_data_available">Дані недоступні</string>
     <string name="edit_account_data">Редагувати дані акаунту</string>
     <string name="edit_profile_data">Редагувати персональні дані</string>
+    <string name="mm_hg"> мм рт.ст.</string>
+    <string name="b_p_m">уд./хв.</string>
 </resources>

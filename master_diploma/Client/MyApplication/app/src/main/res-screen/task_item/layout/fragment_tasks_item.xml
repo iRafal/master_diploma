@@ -1,7 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Temperature -->
+
+        <TextView
+            android:id="@+id/temperatureLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:text="@string/temperature_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/temperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/temperatureLabelTextView"
+            android:text="36.6 C"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Stress Level -->
+
+        <TextView
+            android:id="@+id/stressLevelLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/temperatureLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/stress_level_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/stressLevelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/temperatureTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/stressLevelLabelTextView"
+            android:text="2 / 10 points"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- High Pressure -->
+
+        <TextView
+            android:id="@+id/highPressureLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/stressLevelLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/high_pressure_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/highPressureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/stressLevelTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/highPressureLabelTextView"
+            android:text="180"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Low Pressure -->
+
+        <TextView
+            android:id="@+id/lowPressureLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/highPressureLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/low_pressure_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lowPressureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/highPressureTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/lowPressureLabelTextView"
+            android:text="70"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Pulse -->
+
+        <TextView
+            android:id="@+id/pulseLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/lowPressureLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/pulse_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/pulseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/lowPressureTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/pulseLabelTextView"
+            android:text="90"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Sleep Hours -->
+
+        <TextView
+            android:id="@+id/sleepHoursLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/pulseLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/sleep_hours_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/sleepHoursTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/pulseTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/sleepHoursLabelTextView"
+            android:text="8"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Sleep Quantity -->
+
+        <TextView
+            android:id="@+id/sleepQuantityHoursLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sleepHoursLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/sleep_quantity_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/sleepQuantityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/sleepHoursTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/sleepQuantityHoursLabelTextView"
+            android:text="5"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Distance -->
+
+        <TextView
+            android:id="@+id/distanceHoursLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sleepQuantityHoursLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/distance_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/distanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/sleepQuantityTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/distanceHoursLabelTextView"
+            android:text="1.2 km"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Food Multiplicity -->
+
+        <TextView
+            android:id="@+id/foodMultiplicityLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/distanceHoursLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/food_multiplicity_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/foodMultiplicityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/distanceTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/foodMultiplicityLabelTextView"
+            android:text="1.2 km"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Spent Calories -->
+
+        <TextView
+            android:id="@+id/spentCaloriesLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/foodMultiplicityLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/spent_calories_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/spentCaloriesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/foodMultiplicityTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/spentCaloriesLabelTextView"
+            android:text="400"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+        <!-- Eaten Calories -->
+
+        <TextView
+            android:id="@+id/eatenCaloriesLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spentCaloriesLabelTextView"
+            android:layout_margin="8dp"
+            android:text="@string/eaten_calories_label"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/eatenCaloriesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/spentCaloriesTextView"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/eatenCaloriesLabelTextView"
+            android:text="800"
+            android:textAlignment="viewStart"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"/>
+
+    </RelativeLayout>
+
+</ScrollView>
+
