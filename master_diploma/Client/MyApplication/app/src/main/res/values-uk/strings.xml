@@ -2,10 +2,11 @@
 <resources>
     <string name="registration_camel_style">Реєстрація</string>
 
-    <string name="login_caps">ЛОГІН</string>
+    <string name="login_caps">УВІЙТИ</string>
     <string name="registration_caps">РЕЄСТРАЦІЯ</string>
 
-    <string name="health_control_app_title">Health control application</string>
+    <string name="login_title">Вхід</string>
+    <string name="health_control_app_title">Додаток контролю стану здоров\'я</string>
     <string name="login_camel_style">Логін</string>
     <string name="password_camel_style">Пароль</string>
 
@@ -28,4 +29,64 @@
     <string name="edit_profile_data">Редагувати персональні дані</string>
     <string name="mm_hg"> мм рт.ст.</string>
     <string name="b_p_m">уд./хв.</string>
+    
+   <string name="settings_camel_style">Налаштування</string>
+    <string name="profile_camel_style">Профіль</string>
+    <string name="tasks_camel_style">Завдання</string>
+    <string name="forecasts_camel_style">Прогнозування</string>
+    <string name="update_caps">Оновити</string>
+    <string name="loading">Завантаження</string>
+    <string name="processing">Обробка</string>
+    <string name="gender">Стать</string>
+    <string name="age_prompt">Введіть вік від 15 до 100 років</string>
+    <string name="growth_prompt">Введіть ріст від 1 до 2 метрів</string>
+    <string name="weight_prompt">Введіть вагу від 30 до 150 кг</string>
+    <string name="age_error_message">Вік повинен бути від 15 до 100 років</string>
+    <string name="growth_error_message">Зріст повинен бути від 1 до 2 метрів</string>
+    <string name="weight_error_message">Вага повинен бути від 30 до 150 кг</string>
+    <string name="group_risk_is">Група ризику: %s</string>
+    <string name="disease_risk_is">Назва хвороби: %s</string>
+    <string name="forecast">Прогноз</string>
+    <string name="task">Завдання</string>
+    <string name="suggestions">Пропозиції:</string>
+    <string name="disease_is">Назва хвороби: %s</string>
+    <string name="calories_per_hour_training">Калорії витрачені за годину тренування</string>
+    <string name="calories_per_hour_training_empty_error">Заповніть поле калорій витрачених за годину тренування</string>
+    <string name="passed">Пройдено:</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+    <string name="date_is">Дата: %s</string>
+    <string name="eaten_calories_label">Калорії отримані з їжею:</string>
+    <string name="spent_calories_label">Витрачено калорій:</string>
+    <string name="food_multiplicity_label">Кількість прийомів їжі:</string>
+    <string name="distance_label">Дистанція:</string>
+    <string name="sleep_quantity_label">Якість сну:</string>
+    <string name="sleep_hours_label">Кількість годин сну:</string>
+    <string name="pulse_label">Пульс:</string>
+    <string name="low_pressure_label">Низький тиск:</string>
+    <string name="high_pressure_label">Високий тиск:</string>
+    <string name="stress_level_label">Рівень стресу:</string>
+    <string name="temperature_label">Температура:</string>
+    <string name="points_s">очки</string>
+    <string name="hour_s">годин(у)</string>
+    <string name="km_s">км</string>
+    <string name="kilocalories">кілокаорії(й)</string>
+    <string name="time_s">раз(ів)</string>
+    <string name="date">Дата</string>
+    <string name="temperature_prompt">Температура від 34 до 40 C</string>
+    <string name="stress_level_prompt">Рівень стресу від 1 до 10</string>
+    <string name="high_pressure_prompt">Високий тиск</string>
+    <string name="low_pressure_prompt">Низький тиск</string>
+    <string name="pulse">Пульс</string>
+    <string name="sleep_hours">Кількість годин сну</string>
+    <string name="sleep_quantity_prompt">Якість сну повинна бути від 1 до 10</string>
+    <string name="distance_prompt">Дистанція (кілометри)</string>
+    <string name="sport_activity_time_prompt">Час тренувань (години)</string>
+    <string name="food_multiplicity">Кількість прийомів їжі</string>
+    <string name="eaten_kilocalories">Калорії отримані з їжею</string>
+    <string name="save">Зберегти</string>
+    <string name="saving">Збереження...</string>
+    <string name="new_task">Нове завдання</string>
+    <string name="exit">Вихід</string>
+    <string name="exit_message">Ви ще не завершили. Ви дійсно хочете вийти?</string>
 </resources>

@@ -6,6 +6,7 @@
     <string name="registration_caps">REGISTRATION</string>
 
     <string name="health_control_app_title">Health control application</string>
+    <string name="login_title">Login</string>
     <string name="login_camel_style">Login</string>
     <string name="password_camel_style">Password</string>
 
