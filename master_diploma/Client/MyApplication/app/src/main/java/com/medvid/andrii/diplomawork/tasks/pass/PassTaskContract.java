@@ -19,6 +19,8 @@ package com.medvid.andrii.diplomawork.tasks.pass;
 import com.medvid.andrii.diplomawork.BasePresenter;
 import com.medvid.andrii.diplomawork.BaseView;
 
+import java.util.List;
+
 /**
  * This specifies the contract between the view and the presenter.
  */
@@ -26,27 +28,41 @@ public interface PassTaskContract {
 
     interface View extends BaseView<Presenter> {
 
-//        void setTemperature(double temperature);
-//
-//        void setStressLevel(double stressLevel);
-//
-//        void setHighPressure(double highPressure);
-//
-//        void setLowPressure(double lowPressure);
-//
-//        void setPulse(double pulse);
-//
-//        void setSleepHours(double sleepHours);
-//
-//        void setSleepQuantity(double sleepQuantity);
-//
-//        void setDistance(double distance);
-//
-//        void setFoodMultiplicity(double foodMultiplicity);
-//
-//        void setSpentCalories(double spentCalories);
-//
-//        void setEatenCalories(double eatenCalories);
+        String getTemperature();
+        String getStressLevel();
+        String getHighPressure();
+        String getLowPressure();
+        String getPulse();
+        String getSleepHours();
+        String getSleepQuantity();
+        String getDistance();
+        String getSportActivityTime();
+        int getFoodMultiplicity();
+        List<String> getEatenKilocalories();
+
+        void showTemperatureError();
+        void showStressLevelError();
+        void showHighPressureError();
+        void showLowPressureError();
+        void showPulseError();
+        void showSleepHoursError();
+        void showSleepQuantityError();
+        void showDistanceError();
+        void showSportActivityTimeError();
+        void showEatenKilocaloriesError(int position);
+
+        void hideTemperatureError();
+        void hideStressLevelError();
+        void hideHighPressureError();
+        void hideLowPressureError();
+        void hidePulseError();
+        void hideSleepHoursError();
+        void hideSleepQuantityError();
+        void hideDistanceError();
+        void hideSportActivityTimeError();
+        void hideEatenKilocaloriesError(int position);
+
+        void finish();
 
         void showProgressDialog(boolean show);
 

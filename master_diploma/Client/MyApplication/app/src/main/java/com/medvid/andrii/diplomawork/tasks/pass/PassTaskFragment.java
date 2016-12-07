@@ -113,7 +113,7 @@ public class PassTaskFragment extends Fragment implements PassTaskContract.View,
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getActivity().finish();
+                        finish();
                     }
                 }, 1_500);
 
@@ -148,6 +148,167 @@ public class PassTaskFragment extends Fragment implements PassTaskContract.View,
     @Override
     public void setPresenter(PassTaskContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
+    }
+
+    @Override
+    public String getTemperature() {
+        return mTemperatureEditText.getText().toString();
+    }
+
+    @Override
+    public String getStressLevel() {
+        return mStressLevelEditText.getText().toString();
+    }
+
+    @Override
+    public String getHighPressure() {
+        return mHighPressureEditText.getText().toString();
+    }
+
+    @Override
+    public String getLowPressure() {
+        return mLowPressureEditText.getText().toString();
+    }
+
+    @Override
+    public String getPulse() {
+        return mPulseEditText.getText().toString();
+    }
+
+    @Override
+    public String getSleepHours() {
+        return mSleepHoursEditText.getText().toString();
+    }
+
+    @Override
+    public String getSleepQuantity() {
+        return mSleepQuantityEditText.getText().toString();
+    }
+
+    @Override
+    public String getDistance() {
+        return mDistanceEditText.getText().toString();
+    }
+
+    @Override
+    public String getSportActivityTime() {
+        return mSportActivityTimeEditText.getText().toString();
+    }
+
+    @Override
+    public int getFoodMultiplicity() {
+        return mFoodMultiplicityLayout.getValue();
+    }
+
+    @Override
+    public List<String> getEatenKilocalories() {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public void showTemperatureError() {
+        mTemperatureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showStressLevelError() {
+        mStressLevelTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showHighPressureError() {
+        mHighPressureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showLowPressureError() {
+        mLowPressureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showPulseError() {
+        mPulseTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showSleepHoursError() {
+        mSleepHoursTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showSleepQuantityError() {
+        mSleepQuantityTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showDistanceError() {
+        mDistanceTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showSportActivityTimeError() {
+        mSportActivityTimeTextInputLayout.setError("");
+    }
+
+    @Override
+    public void showEatenKilocaloriesError(int position) {
+        // TODO
+    }
+
+    @Override
+    public void hideTemperatureError() {
+        mTemperatureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideStressLevelError() {
+        mStressLevelTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideHighPressureError() {
+        mHighPressureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideLowPressureError() {
+        mLowPressureTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hidePulseError() {
+        mPulseTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideSleepHoursError() {
+        mSleepQuantityTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideSleepQuantityError() {
+        mSleepQuantityTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideDistanceError() {
+        mDistanceTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideSportActivityTimeError() {
+        mSportActivityTimeTextInputLayout.setError("");
+    }
+
+    @Override
+    public void hideEatenKilocaloriesError(int position) {
+        // TODO
+    }
+
+    @Override
+    public void finish() {
+        getActivity().finish();
     }
 
     @Override
