@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
 import com.medvid.andrii.diplomawork.tasks.item.TaskItemActivity;
+import com.medvid.andrii.diplomawork.tasks.pass.PassTaskActivity;
 import com.medvid.andrii.diplomawork.util.OnListItemClickListener;
 
 import java.util.List;
@@ -79,6 +80,11 @@ public class TasksFragment extends Fragment
         getActivity().startActivity(TaskItemActivity.getIntent(getActivity(), trainingSampleId));
     }
 
+//    @Override
+    public void showPassTaskScreen() {
+        getActivity().startActivity(PassTaskActivity.getIntent(getActivity()));
+    }
+
     @Override
     public void showListEmptyView(boolean show)    {
         mEmptyListLayout.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -103,8 +109,15 @@ public class TasksFragment extends Fragment
 
     @Override
     public void onListItemClick(@NonNull Task object) {
-        long trainingSampleId = object.getTrainingSample().getId();
-        showTaskItemScreen(trainingSampleId);
+        Preconditions.checkNotNull(object);
+
+        if(object.isPassed()) {
+            long trainingSampleId = object.getTrainingSample().getId();
+            showTaskItemScreen(trainingSampleId);
+            return;
+        }
+
+        showPassTaskScreen();
     }
 
     /**

@@ -70,5 +70,23 @@
     <string name="kilocalories">kilocalories</string>
     <string name="time_s">time(s)</string>
     <string name="date">Date</string>
+    <string name="temperature_prompt">Temperature from 34 to 40 C</string>
+    <string name="stress_level_prompt">Stress level from 1 to 10 points</string>
+    <string name="high_pressure_prompt">High pressure</string>
+    <string name="low_pressure_prompt">Low pressure</string>
+    <string name="pulse">Pulse</string>
+    <string name="sleep_hours">Sleep hours</string>
+    <string name="sleep_quantity_prompt">Sleep quantity from 1 to 10 points</string>
+    <string name="distance_prompt">Distance (kilometers)</string>
+    <string name="sport_activity_time_prompt">Sport activity time (hours)</string>
+    <string name="plus_symbol">+</string>
+    <string name="minus_symbol">-</string>
+    <string name="food_multiplicity">Food multiplicity</string>
+    <string name="eaten_kilocalories">Eaten kilocalories</string>
+    <string name="save">Save</string>
+    <string name="saving">Saving...</string>
+    <string name="new_task">New task</string>
+    <string name="exit">Exit</string>
+    <string name="exit_message">You still didn\'t finish. Do you want to exit?</string>
 
 </resources>

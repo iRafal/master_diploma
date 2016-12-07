@@ -15,7 +15,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            // Uses new built-in shrinker @link{http://tools.android.com/tech-docs/new-build-system/built-in-shrinker}
+            // Uses pass built-in shrinker @link{http://tools.android.com/tech-docs/new-build-system/built-in-shrinker}
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
@@ -41,9 +41,10 @@ android {
                     'src/main/res-screen/profile-account-edit',
                     'src/main/res-screen/profile-data-edit',
                     'src/main/res-screen/tasks',
-                    'src/main/res-screen/task_item',
+                    'src/main/res-screen/task-item',
+                    'src/main/res-screen/task-pass',
                     'src/main/res-screen/forecasts',
-                    'src/main/res-screen/forecast_item'
+                    'src/main/res-screen/forecast-item'
             ]
         }
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/foodMultiplicityTextInputLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp">
+
+    <EditText
+        android:id="@+id/foodMultiplicityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789."
+        android:ems="10"
+        android:hint="@string/eaten_kilocalories"
+        android:inputType="numberDecimal"
+        android:maxLines="1"
+        android:textAppearance="?android:textAppearanceSmall"/>
+</android.support.design.widget.TextInputLayout>
+
+
+

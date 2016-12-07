@@ -31,7 +31,7 @@ public class UsersRepository implements UserDataSourceContract {
     }
 
     /**
-     * Used to force {@link #getInstance(UserDataSourceContract, UserDataSourceContract)} to create a new instance
+     * Used to force {@link #getInstance(UserDataSourceContract, UserDataSourceContract)} to create a pass instance
      * next time it's called.
      */
     public static void destroyInstance() {
