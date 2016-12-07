@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.chart.line.LineChartActivity;
 import com.medvid.andrii.diplomawork.data.suggestion.Suggestion;
 import com.medvid.andrii.diplomawork.util.OnListItemClickListener;
 
@@ -62,6 +63,11 @@ public class ForecastItemFragment extends Fragment implements ForecastItemContra
         mPresenter.setForecastDataOnUi(forecastId);
     }
 
+    /**
+     * {@link ForecastItemContract.View} methods
+     */
+
+
     @Override
     public void refreshList(@NonNull List<Suggestion> suggestionList) {
         Preconditions.checkNotNull(suggestionList);
@@ -84,9 +90,11 @@ public class ForecastItemFragment extends Fragment implements ForecastItemContra
         mGroupRiskTextView.setText(getString(R.string.group_risk_is, groupRiskName));
     }
 
-    /**
-     * {@link ForecastItemContract.View} methods
-     */
+    @Override
+    public void showLineChartScreen(String parameterDescription) {
+        Intent intent = LineChartActivity.getIntent(getActivity(), parameterDescription);
+        getActivity().startActivity(intent);
+    }
 
     @Override
     public boolean isActive() {
@@ -110,9 +118,9 @@ public class ForecastItemFragment extends Fragment implements ForecastItemContra
 
     @Override
     public void onListItemClick(@NonNull Suggestion object) {
-        // TODO
+        String parameterName = object.getParameterDescription();
+        showLineChartScreen(parameterName);
     }
-
 
     /**
      * Private Methods

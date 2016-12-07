@@ -39,6 +39,8 @@ public interface ForecastItemContract {
 
         void setGroupRiskName(String groupRiskName);
 
+        void showLineChartScreen(String parameterDescription);
+
         boolean isActive();
 
     }
