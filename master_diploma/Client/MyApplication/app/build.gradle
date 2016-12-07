@@ -44,9 +44,20 @@ android {
                     'src/main/res-screen/task-item',
                     'src/main/res-screen/task-pass',
                     'src/main/res-screen/forecasts',
-                    'src/main/res-screen/forecast-item'
+                    'src/main/res-screen/forecast-item',
+                    'src/main/res-screen/chart-line'
             ]
         }
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+
+    //MPAndroidChart
+    repositories {
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -62,6 +73,7 @@ dependencies {
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "com.github.PhilJay:MPAndroidChart:$rootProject.MPAndroidChartVersion"
 
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     compile "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttpVersion"

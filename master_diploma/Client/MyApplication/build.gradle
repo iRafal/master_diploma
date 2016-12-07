@@ -41,5 +41,6 @@ ext {
     retrofitVersion = '2.1.0'
     okhttpVersion = '3.4.2'
     gsonVersion = '2.8.0'
+    MPAndroidChartVersion = 'v3.0.1'
 }
 
