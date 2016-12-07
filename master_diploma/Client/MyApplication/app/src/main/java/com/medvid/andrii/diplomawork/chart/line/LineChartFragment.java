@@ -24,6 +24,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.common.base.Preconditions;
 import com.medvid.andrii.diplomawork.R;
+import com.medvid.andrii.diplomawork.util.RandomUtils;
 
 import java.util.ArrayList;
 
@@ -137,7 +138,7 @@ public class LineChartFragment extends Fragment
         mLineChart.setPinchZoom(true);
 
         // set an alternative background color
-        mLineChart.setBackgroundColor(Color.WHITE);
+        mLineChart.setBackgroundColor(Color.LTGRAY);
 
         // add data
         setData(20, 30);
@@ -171,57 +172,73 @@ public class LineChartFragment extends Fragment
         YAxis leftAxis = mLineChart.getAxisLeft();
         leftAxis.setTypeface(tf);
         leftAxis.setTextColor(ColorTemplate.getHoloBlue());
-        leftAxis.setAxisMaximum(200f);
+//        leftAxis.setAxisMaximum(200f);
         leftAxis.setDrawGridLines(true);
 
         YAxis rightAxis = mLineChart.getAxisRight();
         rightAxis.setTypeface(tf);
         rightAxis.setTextColor(ColorTemplate.getHoloBlue());
-        rightAxis.setAxisMinimum(200f);
+//        rightAxis.setAxisMinimum(200f);
         rightAxis.setDrawGridLines(true);
     }
 
     private void setData(int count, float range) {
 
-        ArrayList<String> xVals = new ArrayList<String>();
+        RandomUtils randomUtils = new RandomUtils();
+
+        ArrayList<Entry> yForecast = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            xVals.add((i) + "");
+//            float mult = range / 2f;
+//            float val = (float) (Math.random() * mult) + 50;
+            float val = (float) randomUtils.nextDouble(2000.0, 5000.0); // Eaten calories generating.
+            yForecast.add(new Entry(i, val));
         }
 
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+        ArrayList<Entry> yUserInput = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            float mult = range / 2f;
-            float val = (float) (Math.random() * mult) + 50;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals1.add(new Entry(val, i));
+//            float mult = range;
+//            float val = (float) (Math.random() * mult) + 450;
+            float val = (float) randomUtils.nextDouble(2000.0, 5000.0); // Eaten calories generating.
+            yUserInput.add(new Entry(i, val));
         }
 
-        // create a data set and give it a type
-        LineDataSet set1 = new LineDataSet(yVals1, "DataSet 1");
+        LineDataSet set1, set2;
+
+        // create a dataset and give it a type
+        set1 = new LineDataSet(yForecast, "Forecast");
+
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
         set1.setColor(ColorTemplate.getHoloBlue());
         set1.setCircleColor(Color.WHITE);
+        set1.setLineWidth(2f);
+        set1.setCircleRadius(3f);
         set1.setFillAlpha(65);
         set1.setFillColor(ColorTemplate.getHoloBlue());
-
-        set1.setLineWidth(2.5f);
-        set1.setCircleRadius(4.5f);
         set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setDrawCircleHole(false);
+        //set1.setFillFormatter(new MyFillFormatter(0f));
+        //set1.setDrawHorizontalHighlightIndicator(false);
+        //set1.setVisible(false);
+        //set1.setCircleHoleColor(Color.WHITE);
 
-        set1.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        set1.setDrawCircleHole(true);
-        set1.setCircleColorHole(Color.WHITE);
+        // create a dataset and give it a type
+        set2 = new LineDataSet(yUserInput, "User Input");
+        set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
+        set2.setColor(Color.RED);
+        set2.setCircleColor(Color.WHITE);
+        set2.setLineWidth(2f);
+        set2.setCircleRadius(3f);
+        set2.setFillAlpha(65);
+        set2.setFillColor(Color.RED);
+        set2.setDrawCircleHole(false);
+        set2.setHighLightColor(Color.rgb(244, 117, 117));
+        //set2.setFillFormatter(new MyFillFormatter(900f));
 
-        set1.setDrawValues(true);
 
-
-
-
-        // create a data object with the data sets
-        LineData data = new LineData(set1);
-        data.setValueTextColor(Color.BLACK);
+        // create a data object with the datasets
+        LineData data = new LineData(set1, set2);
+        data.setValueTextColor(Color.WHITE);
         data.setValueTextSize(9f);
 
         // set data
