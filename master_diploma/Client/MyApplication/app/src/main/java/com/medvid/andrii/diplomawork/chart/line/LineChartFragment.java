@@ -187,7 +187,7 @@ public class LineChartFragment extends Fragment
         RandomUtils randomUtils = new RandomUtils();
 
         ArrayList<Entry> yForecast = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count + 10; i++) {
 //            float mult = range / 2f;
 //            float val = (float) (Math.random() * mult) + 50;
             float val = (float) randomUtils.nextDouble(2000.0, 5000.0); // Eaten calories generating.
@@ -206,7 +206,7 @@ public class LineChartFragment extends Fragment
         LineDataSet set1, set2;
 
         // create a dataset and give it a type
-        set1 = new LineDataSet(yForecast, "Forecast");
+        set1 = new LineDataSet(yForecast, getActivity().getString(R.string.forecast));
 
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
         set1.setColor(ColorTemplate.getHoloBlue());
@@ -223,7 +223,7 @@ public class LineChartFragment extends Fragment
         //set1.setCircleHoleColor(Color.WHITE);
 
         // create a dataset and give it a type
-        set2 = new LineDataSet(yUserInput, "User Input");
+        set2 = new LineDataSet(yUserInput, getActivity().getString(R.string.user_input));
         set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
         set2.setColor(Color.RED);
         set2.setCircleColor(Color.WHITE);

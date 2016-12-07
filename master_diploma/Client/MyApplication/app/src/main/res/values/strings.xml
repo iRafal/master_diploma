@@ -89,5 +89,6 @@
     <string name="new_task">New task</string>
     <string name="exit">Exit</string>
     <string name="exit_message">You still didn\'t finish. Do you want to exit?</string>
+    <string name="user_input">User input</string>
 
 </resources>
