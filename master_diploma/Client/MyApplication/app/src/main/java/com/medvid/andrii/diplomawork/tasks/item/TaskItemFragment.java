@@ -92,8 +92,8 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
 
     @Override
     public void setSleepHours(double sleepHours) {
-        mSleepHoursTextView.setText(
-                String.format("%s %s", sleepHours, getString(R.string.hour_s)));
+        mSleepHoursTextView.setText(Double.toString(sleepHours)/*
+                String.format("%s %s", sleepHours, getString(R.string.hour_s))*/);
     }
 
     @Override
@@ -116,14 +116,14 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
 
     @Override
     public void setSpentCalories(double spentCalories) {
-        mSpentCaloriesTextView.setText(
-                String.format("%s %s", spentCalories, getString(R.string.kilocalories)));
+        mSpentCaloriesTextView.setText(Double.toString(spentCalories)/*
+                String.format("%s %s", spentCalories, getString(R.string.kilocalories))*/);
     }
 
     @Override
     public void setEatenCalories(double eatenCalories) {
-        mEatenCaloriesTextView.setText(
-                String.format("%s %s", eatenCalories, getString(R.string.kilocalories)));
+        mEatenCaloriesTextView.setText(Double.toString(eatenCalories)/*
+                String.format("%s %s", eatenCalories, getString(R.string.kilocalories))*/);
     }
 
     @Override

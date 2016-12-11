@@ -34,9 +34,9 @@
     <string name="loading">Loading</string>
     <string name="processing">Processing</string>
     <string name="gender">Gender</string>
-    <string name="age_prompt">Age from 15 to 100 years</string>
-    <string name="growth_prompt">Growth from 1 to 2 meters</string>
-    <string name="weight_prompt">Weight from 30 to 150 kilograms</string>
+    <string name="age_prompt">Age</string>
+    <string name="growth_prompt">Growth</string>
+    <string name="weight_prompt">Weight</string>
     <string name="age_error_message">Age should be from 15 to 100 years</string>
     <string name="growth_error_message">Growth should be from 1 to 2 meters</string>
     <string name="weight_error_message">Weight should be from 30 to 150 kilograms</string>
@@ -71,7 +71,8 @@
     <string name="kilocalories">kilocalories</string>
     <string name="time_s">time(s)</string>
     <string name="date">Date</string>
-    <string name="temperature_prompt">Temperature from 34 to 40 C</string>
+    <string name="temperature_prompt">Temperature</string>
+    <string name="temperature_err">Temperature from 34 to 40 C</string>
     <string name="stress_level_prompt">Stress level from 1 to 10 points</string>
     <string name="high_pressure_prompt">High pressure</string>
     <string name="low_pressure_prompt">Low pressure</string>
