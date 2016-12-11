@@ -110,8 +110,8 @@ public class TaskItemFragment extends Fragment implements TaskItemContract.View 
 
     @Override
     public void setFoodMultiplicity(double foodMultiplicity) {
-        mFoodMultiplicityTextView.setText(
-                String.format("%s %s", foodMultiplicity, getString(R.string.time_s)));
+        mFoodMultiplicityTextView.setText(Double.toString(foodMultiplicity)/*
+                String.format("%s %s", foodMultiplicity, getString(R.string.time_s))*/);
     }
 
     @Override
