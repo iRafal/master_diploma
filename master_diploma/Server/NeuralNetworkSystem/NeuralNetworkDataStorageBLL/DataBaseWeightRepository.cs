@@ -152,7 +152,7 @@ namespace NeuralNetworkDataStorageBLL
                     command.Parameters.Add("@WeightTypeID", SqlDbType.Float).Value = (int)_weightType;
 
                     connection.Open();
-                    command.ExecuteNonQuery();
+                    int result = command.ExecuteNonQuery();
                 }
             }
         }

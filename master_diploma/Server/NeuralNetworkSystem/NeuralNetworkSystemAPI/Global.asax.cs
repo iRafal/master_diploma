@@ -24,7 +24,7 @@ namespace NeuralNetworkSystemAPI
         protected void Application_Start()
         {
             MapperConfigurate();
-           // CreateDiseaseNetowrk();
+            //CreateDiseaseNetowrk();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

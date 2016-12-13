@@ -1,0 +1,9 @@
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkDataStorageBLL.pdb
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\NeuralNetworkSystemBLL.pdb
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkSystemDataStorageBLL.csprojResolveAssemblyReference.cache
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkDataStorageBLL\obj\Debug\NeuralNetworkDataStorageBLL.pdb

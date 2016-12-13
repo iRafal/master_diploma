@@ -1,0 +1,5 @@
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkSystemBLL\bin\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkSystemBLL\bin\Debug\NeuralNetworkSystemBLL.pdb
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkBLL.csprojResolveAssemblyReference.cache
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkSystemBLL.dll
+C:\Users\dmytr\Desktop\диплом\master_diploma\master_diploma\Server\NeuralNetworkSystem\NeuralNetworkSystemBLL\obj\Debug\NeuralNetworkSystemBLL.pdb
